@@ -11,7 +11,10 @@ import { ShoppingCart } from "@mui/icons-material";
 import { FC } from "react";
 import logo from "../assets/companyLogo.png";
 import SearchBar from "../UI/navbar/SearchBar";
-import DropDownList from "../UI/navbar/NavDropDownButton";
+
+import CategoriesDropDown from "../UI/navbar/CategoriesDropDown";
+import TeachDropDown from "../UI/navbar/TeachDropDown";
+import MyCoursesDropDown from "../UI/navbar/MyCoursesDropDown";
 
 type MainNavigationBarProps = {};
 
@@ -29,15 +32,16 @@ const MainNavigationBar: FC<MainNavigationBarProps> = (props) => {
           >
             WebAcademy
           </Typography>
-          <DropDownList title="Categories" />
+          {/* Query By Category */}
+          <CategoriesDropDown />
         </Stack>
 
         <SearchBar />
         <Stack direction="row" spacing={2} className="items-center text-white">
           {/* Teach on WebAcademy */}
-          <DropDownList title="Teach on WebAcademy" />
+          <TeachDropDown />
           {/* My courses */}
-          <DropDownList title="My Courses" />
+          <MyCoursesDropDown />
           {/* Shopping Cart */}
           <IconButton aria-label="Shopping Cart">
             <Badge
