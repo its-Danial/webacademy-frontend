@@ -1,7 +1,10 @@
 import Layout from "./components/layout/Layout";
 
-function App() {
-  return <Layout />;
+export default function App() {
+  return (
+    <>
+      <Layout />
+      <h1>Hello world</h1>
+    </>
+  );
 }
-
-export default App;
