@@ -8,7 +8,11 @@ module.exports = {
     preflight: false,
   },
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        black: "rgb(28 29 31)",
+      },
+    },
   },
   plugins: [],
 };
