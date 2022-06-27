@@ -1,4 +1,5 @@
 import { FC } from "react";
+import Footer from "./Footer";
 import MainNavigationBar from "./MainNavigationBar";
 
 type LayoutProps = {
@@ -14,6 +15,7 @@ const Layout: FC<LayoutProps> = (props) => {
       <main className="mt-12 mx-auto" style={{ width: "90%" }}>
         {props.children}
       </main>
+      <Footer />
     </>
   );
 };

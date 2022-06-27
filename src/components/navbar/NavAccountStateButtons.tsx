@@ -7,7 +7,7 @@ type NavAccountStateButtonsProps = {};
 
 const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
   // TODO: need to maintain login state in global store
-  const [isLoggedIn, setIsLogggedIn] = useState<Boolean>(false);
+  const [isLoggedIn, setIsLogggedIn] = useState<Boolean>(true);
 
   const loggedInStateButtons = (
     <>
