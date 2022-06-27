@@ -7,7 +7,7 @@ type NavAccountStateButtonsProps = {};
 
 const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
   // TODO: need to maintain login state in global store
-  const [isLoggedIn, setIsLogggedIn] = useState<Boolean>(true);
+  const [isLoggedIn, setIsLogggedIn] = useState<Boolean>(false);
 
   const loggedInStateButtons = (
     <>
@@ -47,14 +47,14 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
       </IconButton>
       <Button
         variant="outlined"
-        className="normal-case text-black border-black"
+        className="normal-case text-black border-black dark:bg-white"
         disableElevation
       >
         Log In
       </Button>
       <Button
         variant="contained"
-        className="bg-black normal-case"
+        className="bg-black dark:bg-blue-600 normal-case"
         disableElevation
       >
         Sign Up

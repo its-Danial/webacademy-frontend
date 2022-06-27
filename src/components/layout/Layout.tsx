@@ -10,13 +10,13 @@ type LayoutProps = {
 
 const Layout: FC<LayoutProps> = (props) => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <MainNavigationBar />
-      <main className="mt-12 mx-auto" style={{ width: "90%" }}>
+      <main className="mt-12 mx-auto flex-grow" style={{ width: "90%" }}>
         {props.children}
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
 export default Layout;

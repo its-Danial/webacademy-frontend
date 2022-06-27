@@ -12,7 +12,7 @@ type MainNavigationBarProps = {};
 
 const MainNavigationBar: FC<MainNavigationBarProps> = (props) => {
   return (
-    <AppBar className="bg-white dark:bg-gray-800" position="sticky">
+    <AppBar className="bg-white dark:bg-gray-800 shadow-md" position="sticky">
       <Toolbar className="flex justify-between text-slate-900">
         {/* Logo  */}
         <Stack direction="row" spacing={2} className="items-center">
