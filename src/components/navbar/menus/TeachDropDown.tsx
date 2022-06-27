@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { Button, Menu, Typography } from "@mui/material";
-import BlackButton from "./BlackButton";
+import BlackButton from "../../UI/BlackButton";
 
 type TeachDropDownProps = {};
 

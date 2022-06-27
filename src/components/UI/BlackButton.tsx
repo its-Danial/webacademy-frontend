@@ -19,14 +19,14 @@ const BlackButton: FC<BlackButtonProps> = (props) => {
     fontFamily: [
       "-apple-system",
       "BlinkMacSystemFont",
-      '"Segoe UI"',
+      '"Segoe navbar"',
       "Roboto",
       '"Helvetica Neue"',
       "Arial",
       "sans-serif",
       '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
+      '"Segoe navbar Emoji"',
+      '"Segoe navbar Symbol"',
     ].join(","),
     "&:hover": {
       backgroundColor: "#393534",

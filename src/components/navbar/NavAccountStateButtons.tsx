@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { IconButton, Badge, Avatar, Button } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 
-import MyCoursesDropDown from "../navbar/MyCoursesDropDown";
+import MyCoursesDropDown from "./menus/MyCoursesDropDown";
 type NavAccountStateButtonsProps = {};
 
 const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {

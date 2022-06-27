@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { AppBar, Toolbar, Typography, Stack } from "@mui/material";
-import logo from "../assets/companyLogo.png";
-import SearchBar from "../UI/navbar/SearchBar";
+import logo from "../../assets/companyLogo.png";
+import SearchBar from "../navbar/SearchBar";
 
-import CategoriesDropDown from "../UI/navbar/CategoriesDropDown";
-import TeachDropDown from "../UI/navbar/TeachDropDown";
+import CategoriesDropDown from "../navbar/menus/CategoriesDropDown";
+import TeachDropDown from "../navbar/menus/TeachDropDown";
 
-import NavAccountStateButtons from "../UI/navbar/NavAccountStateButtons";
+import NavAccountStateButtons from "../navbar/NavAccountStateButtons";
 
 type MainNavigationBarProps = {};
 
