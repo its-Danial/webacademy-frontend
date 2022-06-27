@@ -55,6 +55,7 @@ const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
         transformOrigin={{ horizontal: "left", vertical: "top" }}
         anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
       >
+        {/* TODO: Need to make a list of courses with progression */}
         <MenuItem>one</MenuItem>
         <MenuItem>two</MenuItem>
         <Divider />

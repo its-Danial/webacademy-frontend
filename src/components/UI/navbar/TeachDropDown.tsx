@@ -1,5 +1,7 @@
 import { FC, useState } from "react";
-import { Button, Menu, MenuItem, Divider } from "@mui/material";
+import { Button, Menu, Typography } from "@mui/material";
+import BlackButton from "./BlackButton";
+
 type TeachDropDownProps = {};
 
 const TeachDropDown: FC<TeachDropDownProps> = (props) => {
@@ -21,7 +23,7 @@ const TeachDropDown: FC<TeachDropDownProps> = (props) => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        className="hidden sm:block normal-case text-gray-900 hover:text-blue-600 dark:text-gray-300 
+        className="normal-case text-gray-900 hover:text-blue-600 dark:text-gray-300
     dark:hover:text-blue-500"
       >
         Teach on WebAcademy
@@ -37,6 +39,9 @@ const TeachDropDown: FC<TeachDropDownProps> = (props) => {
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
             mt: 3.5,
+            p: 2.0,
+            // textAlign:"center",
+
             // for the arrow
             "&:before": {
               content: '""',
@@ -55,12 +60,16 @@ const TeachDropDown: FC<TeachDropDownProps> = (props) => {
         transformOrigin={{ horizontal: "left", vertical: "top" }}
         anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
       >
-        <MenuItem>one</MenuItem>
-        <MenuItem>two</MenuItem>
-        <Divider />
-        <MenuItem>Add another account</MenuItem>
-        <MenuItem>Settings</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        {/*<p>Turn what you know into an <br/> opportunity*/}
+        {/*    and reach millions <br/> around the world.</p>*/}
+        <Typography
+          sx={{ fontWeight: "bold", marginBottom: 2 }}
+          align={"center"}
+        >
+          Turn what you know into an <br /> opportunity and reach <br />{" "}
+          millions around the world.
+        </Typography>
+        <BlackButton title={"Learn More"} />
       </Menu>
     </>
   );

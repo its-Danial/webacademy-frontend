@@ -31,7 +31,7 @@ const CategoriesDropDown: FC<CategoriesDropDownProps> = (props) => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        className="hidden sm:block normal-case text-gray-900 hover:text-blue-600 dark:text-gray-300 
+        className="hidden sm:block normal-case text-gray-900 hover:text-blue-600 dark:text-gray-300
       dark:hover:text-blue-500"
       >
         Categories
@@ -68,7 +68,7 @@ const CategoriesDropDown: FC<CategoriesDropDownProps> = (props) => {
         transformOrigin={{ horizontal: "left", vertical: "top" }}
         anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
       >
-        {/* TODO: Change this into a its own list Item Component */}
+        {/* TODO: Change this into its own list Item Component */}
         <Stack direction={"row"}>
           <MenuList>
             <MenuItem>
