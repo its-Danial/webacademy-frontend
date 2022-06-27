@@ -21,6 +21,7 @@ const SearchBar: FC<SearchBarProps> = (props) => {
             ></path>
           </svg>
         </div>
+        {/* TODO: will make a fetch request to for search input*/}
         <input
           type="search"
           className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
