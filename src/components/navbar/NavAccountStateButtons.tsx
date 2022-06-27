@@ -54,7 +54,7 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
       </Button>
       <Button
         variant="contained"
-        className="bg-black dark:bg-blue-600 normal-case"
+        className="bg-black dark:bg-blue-700 normal-case"
         disableElevation
       >
         Sign Up
