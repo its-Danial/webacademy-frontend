@@ -3,7 +3,8 @@ import { Stack } from "@mui/material";
 import HomeCourseSelectionButton from "../UI/HomeCourseSelectionButton";
 import BorderCard from "../UI/BorderCard";
 import { courses } from "../../helper/homeCourseSelectionList";
-import CardCarousel from "./CardCarousel";
+
+import HomeCarousel from "./HomeCarousel";
 
 type CourseSelectionProps = {};
 
@@ -23,6 +24,9 @@ const CourseSelection: FC<CourseSelectionProps> = (props) => {
         Choose from 185,000 online video courses with new additions published
         every month
       </p>
+
+      {/* NOTE : Topic Buttons */}
+
       <Stack direction="row" spacing={4}>
         {courses.map((course, index) => (
           <HomeCourseSelectionButton
@@ -33,7 +37,8 @@ const CourseSelection: FC<CourseSelectionProps> = (props) => {
           />
         ))}
       </Stack>
-      {/* The box area with border */}
+
+      {/* NOTE: The box area with border */}
       <BorderCard>
         <div className="w-2/3">
           <h1 className="text-2xl text-gray-800 font-semibold dark:text-gray-100">
@@ -53,7 +58,10 @@ const CourseSelection: FC<CourseSelectionProps> = (props) => {
             Explore {topicDesc.topic}
           </button>
         </div>
-        <CardCarousel />
+
+        {/* NOTE: car selection for courses */}
+        {/* TODO: pass down courses to display when onSelectTopicClickHandler is called */}
+        <HomeCarousel />
       </BorderCard>
     </div>
   );

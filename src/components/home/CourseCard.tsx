@@ -5,20 +5,24 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
-type CourseCardProps = {};
+// TODO: This should take in all the details that need to be fixed
+type CourseCardProps = {
+  img: string;
+};
 
+// UGLY: make it look better, add the star ratings feature
 const CourseCard: FC<CourseCardProps> = (props) => {
   return (
     <Card
-      sx={{ maxWidth: 250, maxHeight: 300 }}
-      className="shadow-none text-base"
+      sx={{ maxWidth: 250, maxHeight: 300, margin: 0 }}
+      className="shadow-none border-solid border-1 border-slate-200 text-base"
     >
       <CardActionArea>
         <CardMedia
           height="150"
           component="img"
           className="object-fill"
-          image="https://www.singaporecodingclub.com/wp-content/uploads/2022/05/Unofficial_JavaScript_logo_2.svg_.png"
+          image={props.img}
           alt="green iguana"
         />
         <CardContent>

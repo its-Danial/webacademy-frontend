@@ -7,3 +7,37 @@
   font-family: "Roboto", sans-serif;
   margin: 0;
 }
+
+/* square buttons */
+.rec.rec-arrow {
+  background-color: black;
+  color: aliceblue;
+  margin: 0;
+  padding: 0;
+}
+.rec.rec-arrow:hover {
+  background-color: rgb(63, 62, 62);
+}
+.rec.rec-arrow:active {
+  background-color: rgb(63, 62, 62);
+}
+.rec.rec-arrow:focus:enabled:hover {
+  background-color: rgb(63, 62, 62);
+}
+
+.rec.rec-arrow:hover:enabled,
+.rec.rec-arrow:focus:enabled {
+  background-color: rgb(63, 62, 62);
+}
+
+.rec.rec-item-wrapper {
+  overflow: visible;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+.rec.rec-dot_active {
+  color: black;
+  background-color: black;
+  box-shadow: none;
+}
