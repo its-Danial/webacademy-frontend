@@ -2,10 +2,8 @@ import { FC } from "react";
 import { AppBar, Toolbar, Typography, Stack } from "@mui/material";
 import logo from "../../assets/companyLogo.png";
 import SearchBar from "../navbar/SearchBar";
-
 import CategoriesDropDown from "../navbar/menus/CategoriesDropDown";
 import TeachDropDown from "../navbar/menus/TeachDropDown";
-
 import NavAccountStateButtons from "../navbar/NavAccountStateButtons";
 
 type MainNavigationBarProps = {};
@@ -29,6 +27,7 @@ const MainNavigationBar: FC<MainNavigationBarProps> = (props) => {
           {/* Query By Category */}
           <CategoriesDropDown />
         </Stack>
+        {/* TODO: Implement search */}
         <SearchBar />
         {/* Right side */}
         <Stack
