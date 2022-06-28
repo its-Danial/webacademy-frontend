@@ -40,7 +40,7 @@ const CourseSelection: FC<CourseSelectionProps> = (props) => {
 
       {/* NOTE: The box area with border */}
       <BorderCard>
-        <div className="w-2/3">
+        <div className="md:w-2/3 w-full">
           <h1 className="text-2xl text-gray-800 font-semibold dark:text-gray-100">
             {topicDesc.heading}
           </h1>

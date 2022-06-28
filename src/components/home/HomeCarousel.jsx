@@ -14,7 +14,7 @@ var items = [
   },
 
   {
-    link: "https://www.netsolutions.com/insights/wp-content/uploads/2021/12/11-most-popular-programming-languages.webp",
+    link: "http://i3.ytimg.com/vi/7sDY4m8KNLc/hqdefault.jpg",
   },
   {
     link: "https://www.netsolutions.com/insights/wp-content/uploads/2021/12/11-most-popular-programming-languages.webp",
@@ -35,8 +35,15 @@ function HomeCarousel() {
       renderPagination={false}
       itemsToShow={4}
       className="mt-6"
-      enableAutoPlay
-      autoPlaySpeed={3000}
+      breakPoints={[
+        { width: 1, itemsToShow: 1 },
+        { width: 550, itemsToShow: 2, itemsToScroll: 2, pagination: false },
+        { width: 650, itemsToShow: 3 },
+        { width: 950, itemsToShow: 4 },
+        { width: 1150, itemsToShow: 4, itemsToScroll: 2 },
+        { width: 1450, itemsToShow: 5 },
+        { width: 1750, itemsToShow: 6 },
+      ]}
     >
       {items.map((item) => (
         <CourseCard img={item.link} />

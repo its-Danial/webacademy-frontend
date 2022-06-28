@@ -1,38 +1,43 @@
 import { FC } from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { Card, CardContent, Rating, CardActionArea } from "@mui/material";
+
+import ReactPlayer from "react-player/youtube";
+import PlayCircleOutlinedIcon from "@mui/icons-material/PlayCircleOutlined";
 
 // TODO: This should take in all the details that need to be fixed
 type CourseCardProps = {
-  img: string;
+  img: React.ReactNode;
 };
 
-// UGLY: make it look better, add the star ratings feature
 const CourseCard: FC<CourseCardProps> = (props) => {
   return (
     <Card
       sx={{ maxWidth: 250, maxHeight: 300, margin: 0 }}
-      className="shadow-none border-solid border-1 border-slate-200 text-base"
+      className="shadow-none border-solid border-1 border-slate-200
+       text-base dark:bg-gray-700 dark:text-gray-200
+       dark:border-gray-600 dark:shadow-gray-900"
     >
       <CardActionArea>
-        <CardMedia
-          height="150"
-          component="img"
-          className="object-fill"
-          image={props.img}
-          alt="green iguana"
+        <ReactPlayer
+          height="150px"
+          width="250px"
+          light
+          playIcon={
+            <PlayCircleOutlinedIcon className="text-white" fontSize="large" />
+          }
+          url="https://www.youtube.com/watch?v=7sDY4m8KNLc&t=171s"
         />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
+        {/* NOTE: Things under the video picture */}
+        <CardContent className="p-1">
+          <h5 className="text-lg">Course Name</h5>
+          <p className="text-xs text-gray-500 dark:text-gray-300">
+            Teacher name
+          </p>
+          <div className="my-2 flex items-center">
+            <span className="text-amber-600 mr-1 font-bold">2.5</span>
+            <Rating defaultValue={2.5} precision={0.5} size="small" readOnly />
+          </div>
+          <h5 className="text-lg">S$21.98</h5>
         </CardContent>
       </CardActionArea>
     </Card>
