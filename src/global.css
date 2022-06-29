@@ -21,6 +21,10 @@
 .rec.rec-arrow:active {
   background-color: rgb(63, 62, 62);
 }
+
+.rec.rec-arrow:disabled {
+  visibility: hidden;
+}
 .rec.rec-arrow:focus:enabled:hover {
   background-color: rgb(63, 62, 62);
 }
@@ -40,4 +44,29 @@
   color: black;
   background-color: black;
   box-shadow: none;
+}
+
+/* .rec.rec-carousel-item.rec-carousel-item-0.rec-carousel-item-visible {
+  margin: 0px;
+  padding: 0px;
+} */
+
+.rec.rec-slider-container {
+  margin: 0px;
+  position: relative;
+}
+.rec.rec-carousel-wrapper {
+  position: relative;
+}
+
+.rec.rec-arrow-left {
+  z-index: 3;
+  position: absolute;
+}
+.rec-arrow-right {
+  z-index: 3;
+  position: absolute;
+
+  right: 0;
+  /* position: absolute; */
 }

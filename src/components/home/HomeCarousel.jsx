@@ -35,12 +35,13 @@ function HomeCarousel() {
       renderPagination={false}
       itemsToShow={4}
       className="mt-6"
+      itemPadding={[0, 5]}
       breakPoints={[
         { width: 1, itemsToShow: 1 },
         { width: 550, itemsToShow: 2, itemsToScroll: 2, pagination: false },
         { width: 650, itemsToShow: 3 },
         { width: 950, itemsToShow: 4 },
-        { width: 1150, itemsToShow: 4, itemsToScroll: 2 },
+        { width: 1150, itemsToShow: 5, itemsToScroll: 2 },
         { width: 1450, itemsToShow: 5 },
         { width: 1750, itemsToShow: 6 },
       ]}
