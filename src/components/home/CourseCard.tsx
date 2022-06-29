@@ -18,14 +18,19 @@ const CourseCard: FC<CourseCardProps> = (props) => {
        dark:border-gray-600 dark:shadow-gray-900"
     >
       <CardActionArea>
-        <ReactPlayer
+        {/* <ReactPlayer
           height="150px"
           width="250px"
-          light
+          light="https://i3.ytimg.com/vi/aYtrnxYsIYg/maxresdefault.jpg"
           playIcon={
             <PlayCircleOutlinedIcon className="text-white" fontSize="large" />
           }
           url="https://www.youtube.com/watch?v=7sDY4m8KNLc&t=171s"
+        /> */}
+        <img
+          src="https://i3.ytimg.com/vi/aYtrnxYsIYg/maxresdefault.jpg"
+          alt=""
+          className="w-60 h-36"
         />
         {/* NOTE: Things under the video picture */}
         <CardContent className="p-1">
