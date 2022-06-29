@@ -32,9 +32,11 @@ var items = [
 function HomeCarousel() {
   return (
     <Carousel
-      renderPagination={false}
+      // NOTE: using this to remove pagination on the bottom
+      renderPagination={({ pages, activePage, onClick }) => {
+        return <p></p>;
+      }}
       itemsToShow={4}
-      className="mt-6"
       itemPadding={[0, 5]}
       breakPoints={[
         { width: 1, itemsToShow: 1 },

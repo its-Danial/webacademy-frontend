@@ -16,7 +16,7 @@ const CourseSelection: FC<CourseSelectionProps> = (props) => {
   };
 
   return (
-    <div className="px-8">
+    <div className="px-8  mb-12">
       <h1 className="mb-2 text-4xl font-serif tracking-tight text-gray-900 dark:text-white">
         A broad selection of courses
       </h1>
@@ -27,7 +27,7 @@ const CourseSelection: FC<CourseSelectionProps> = (props) => {
 
       {/* NOTE : Topic Buttons */}
 
-      <Stack direction="row" spacing={4}>
+      <Stack direction={{ xs: "column", md: "row" }} spacing={{ xs: 0, md: 2 }}>
         {courses.map((course, index) => (
           <HomeCourseSelectionButton
             key={index}
@@ -40,7 +40,7 @@ const CourseSelection: FC<CourseSelectionProps> = (props) => {
 
       {/* NOTE: The box area with border */}
       <BorderCard>
-        <div className="md:w-2/3 w-full">
+        <div className="md:w-2/3 w-full mb-6">
           <h1 className="text-2xl text-gray-800 font-semibold dark:text-gray-100">
             {topicDesc.heading}
           </h1>
