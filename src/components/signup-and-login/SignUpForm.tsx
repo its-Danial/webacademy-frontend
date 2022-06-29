@@ -17,7 +17,7 @@ const SignUpForm: FC<SignUpFormProps> = (props) => {
       password: passwordRef.current?.value,
     };
 
-    // TODO: send this data to the SignUp page from where it will be sent to backend using api
+    // TODO: send this data to the SignUp page from where it will be sent to backend api
     console.log(newStudentAccountDetails);
   };
 
@@ -29,10 +29,10 @@ const SignUpForm: FC<SignUpFormProps> = (props) => {
       }}
     >
       <h1 className="text-lg font-bold text-center dark:text-gray-200">
-        Sign up
+        Sign up and start learning
       </h1>
       <p className="my-2 text-center text-sm dark:text-gray-300">
-        And Begin Your Journey
+        Begin Your Journey Today
       </p>
       <form onSubmit={onSignUpFormSubmitHandler} className="flex flex-col mt-4">
         <input
@@ -84,7 +84,7 @@ const SignUpForm: FC<SignUpFormProps> = (props) => {
               href="www.google.com"
               className="ml-1 font-medium text-slate-800 dark:text-blue-400"
             >
-              Sign in now
+              Log In now
             </a>
           </p>
         </div>

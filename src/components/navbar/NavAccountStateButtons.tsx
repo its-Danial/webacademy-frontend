@@ -1,51 +1,40 @@
 import { FC, useState } from "react";
-import { IconButton, Badge, Avatar, Button } from "@mui/material";
-import { ShoppingCart } from "@mui/icons-material";
-
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import MyCoursesDropDown from "./menus/MyCoursesDropDown";
+import ShoppingCartIcon from "./ShoppingCartIcon";
+import UserAvatar from "./menus/UserAvatar";
+
 type NavAccountStateButtonsProps = {};
 
 const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
+  const navigate = useNavigate();
+
   // TODO: need to maintain login state in global store
   const [isLoggedIn, setIsLogggedIn] = useState<Boolean>(false);
+
+  const onLogInClickHandler = () => {
+    navigate("/login");
+  };
+  const onSignUpClickHandler = () => {
+    navigate("/signup");
+  };
 
   const loggedInStateButtons = (
     <>
       <MyCoursesDropDown />
       {/* Shopping Cart */}
-      <IconButton aria-label="Shopping Cart">
-        <Badge
-          badgeContent={4}
-          componentsProps={{
-            badge: { className: "bg-black text-white dark:bg-blue-600" },
-          }}
-        >
-          <ShoppingCart className="dark:text-gray-300 hover:text-gray-400" />
-        </Badge>
-      </IconButton>
-      <Avatar
-        className="bg-black hover:bg-slate-600 dark:bg-blue-900 dark:hover:bg-blue-800"
-        sx={{ width: 35, height: 35 }}
-      >
-        D
-      </Avatar>
+      <ShoppingCartIcon numberOfItems={4} />
+      <UserAvatar username={"Danial"} />
     </>
   );
 
   const notLoggedInStateButtons = (
     <>
       {/* Shopping Cart */}
-      <IconButton aria-label="Shopping Cart">
-        <Badge
-          badgeContent={0}
-          componentsProps={{
-            badge: { className: "bg-black text-white dark:bg-blue-600" },
-          }}
-        >
-          <ShoppingCart className="dark:text-gray-300 hover:text-gray-400" />
-        </Badge>
-      </IconButton>
+      <ShoppingCartIcon numberOfItems={0} />
       <Button
+        onClick={onLogInClickHandler}
         variant="outlined"
         className="normal-case text-black border-black dark:bg-white"
         disableElevation
@@ -53,6 +42,7 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
         Log In
       </Button>
       <Button
+        onClick={onSignUpClickHandler}
         variant="contained"
         className="bg-black dark:bg-blue-700 normal-case"
         disableElevation
