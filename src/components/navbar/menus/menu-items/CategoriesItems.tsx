@@ -1,10 +1,6 @@
 import { FC, useState } from "react";
 import { Divider, MenuList, Stack } from "@mui/material";
-import {
-  categoryItemInterface,
-  categoryItemsInterface,
-  categories,
-} from "../../../../helper/categoriesList";
+import { categories } from "../../../../helper/categoriesList";
 import CategoriesItem from "./CategoriesItem";
 import TopicsItem from "./TopicsItem";
 

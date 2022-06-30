@@ -5,6 +5,7 @@ import LogInPage from "./pages/LogInPage";
 import SignUpPage from "./pages/SignUpPage";
 import ShoppingCart from "./pages/ShoppingCart";
 import EmptyCart from "./components/cart/EmptyCart";
+import CheckOutPage from "./pages/CheckOutPage";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="/login" element={<LogInPage />} />
         <Route path="/cart" element={<EmptyCart />} />
         <Route path="/cart/:studentId" element={<ShoppingCart />} />
+        <Route path="/checkout/:studentId" element={<CheckOutPage />} />
       </Routes>
     </Layout>
   );

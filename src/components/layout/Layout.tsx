@@ -20,9 +20,3 @@ const Layout: FC<LayoutProps> = (props) => {
   );
 };
 export default Layout;
-
-// .main {
-//     margin: 3rem auto;
-//     width: 90%;
-//     max-width: 40rem;
-//   }
