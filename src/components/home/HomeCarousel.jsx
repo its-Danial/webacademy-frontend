@@ -48,8 +48,8 @@ function HomeCarousel() {
         { width: 1750, itemsToShow: 6 },
       ]}
     >
-      {items.map((item) => (
-        <CourseCard img={item.link} />
+      {items.map((item, index) => (
+        <CourseCard key={index} img={item.link} />
       ))}
     </Carousel>
   );

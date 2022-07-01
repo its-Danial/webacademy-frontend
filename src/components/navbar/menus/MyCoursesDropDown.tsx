@@ -1,5 +1,8 @@
 import { FC, useState } from "react";
-import { Button, Menu, MenuItem, Divider } from "@mui/material";
+import { Button, Menu, Divider } from "@mui/material";
+
+import MyCoursesProgressItem from "./menu-items/MyCoursesProgressItem";
+
 type MyCoursesDropDownProps = {};
 
 const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
@@ -31,6 +34,7 @@ const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
         open={open}
         onClose={handleClose}
         onClick={handleClose}
+        // Note: this is for the little triangle on top
         PaperProps={{
           elevation: 0,
           sx: {
@@ -43,7 +47,7 @@ const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
               display: "block",
               position: "absolute",
               top: 0.5,
-              left: 14,
+              right: 14,
               width: 15,
               height: 15,
               bgcolor: "background.paper",
@@ -52,16 +56,14 @@ const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
             },
           },
         }}
-        transformOrigin={{ horizontal: "left", vertical: "top" }}
-        anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {/* TODO: Need to make a list of courses with progression */}
-        <MenuItem>one</MenuItem>
-        <MenuItem>two</MenuItem>
+        {/* Note: This needs to be mapped out based on the current courses */}
+
+        <MyCoursesProgressItem />
         <Divider />
-        <MenuItem>Add another account</MenuItem>
-        <MenuItem>Settings</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MyCoursesProgressItem />
       </Menu>
     </>
   );

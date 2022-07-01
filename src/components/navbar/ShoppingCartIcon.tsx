@@ -4,11 +4,16 @@ import { ShoppingCart } from "@mui/icons-material";
 
 type ShoppingCartIconProps = {
   numberOfItems: number;
+  onCartClick: () => void;
 };
 
 const ShoppingCartIcon: FC<ShoppingCartIconProps> = (props) => {
+  const onClickHandler = () => {
+    props.onCartClick();
+  };
+
   return (
-    <IconButton aria-label="Shopping Cart">
+    <IconButton aria-label="Shopping Cart" onClick={onClickHandler}>
       <Badge
         badgeContent={props.numberOfItems}
         componentsProps={{

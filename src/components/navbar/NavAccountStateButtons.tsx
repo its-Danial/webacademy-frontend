@@ -11,7 +11,7 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
   const navigate = useNavigate();
 
   // TODO: need to maintain login state in global store
-  const [isLoggedIn, setIsLogggedIn] = useState<Boolean>(false);
+  const [isLoggedIn, setIsLogggedIn] = useState<Boolean>(true);
 
   const onLogInClickHandler = () => {
     navigate("/login");
@@ -20,19 +20,23 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
     navigate("/signup");
   };
 
+  // TODO: This should check if the user is logged in if so then navigate to "/cart:studentId"
+  // FIX: Need to change where to redirect and what to display on account state
+  const onCartClickHandler = () => {
+    navigate("/cart");
+  };
+
   const loggedInStateButtons = (
     <>
       <MyCoursesDropDown />
-      {/* Shopping Cart */}
-      <ShoppingCartIcon numberOfItems={4} />
+      <ShoppingCartIcon onCartClick={onCartClickHandler} numberOfItems={4} />
       <UserAvatar username={"Danial"} />
     </>
   );
 
   const notLoggedInStateButtons = (
     <>
-      {/* Shopping Cart */}
-      <ShoppingCartIcon numberOfItems={0} />
+      <ShoppingCartIcon onCartClick={onCartClickHandler} numberOfItems={0} />
       <Button
         onClick={onLogInClickHandler}
         variant="outlined"
