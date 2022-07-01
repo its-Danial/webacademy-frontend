@@ -3,12 +3,15 @@ import { Outlet } from "react-router-dom";
 import CourseSelection from "../components/home/CourseSelection";
 import HomeCarousel from "../components/home/HomeCarousel";
 import Billboard from "../components/UI/Billboard";
+import Testimonials from "../components/UI/Testimonials";
+import CustomerFooter from "../components/UI/CustomerFooter";
+import MainContainer from "../components/layout/MainContainer";
 
 type HomePageProps = {};
 
 const HomePage: FC<HomePageProps> = (props) => {
   return (
-    <>
+    <MainContainer>
       <Outlet /> {/* Note: This is the alert after purchase */}
       <Billboard />
       {/* Todo: Implement a my current courses section here and render it if student has courses */}
@@ -21,7 +24,9 @@ const HomePage: FC<HomePageProps> = (props) => {
         </h1>
         <HomeCarousel />
       </div>
-    </>
+      <Testimonials />
+      <CustomerFooter />
+    </MainContainer>
   );
 };
 export default HomePage;
