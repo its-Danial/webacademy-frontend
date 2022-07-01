@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Button, Menu, Divider, MenuItem } from "@mui/material";
+import { Button, Menu, Divider } from "@mui/material";
 
 import MyCoursesProgressItem from "./menu-items/MyCoursesProgressItem";
 

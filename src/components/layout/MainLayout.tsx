@@ -1,22 +1,25 @@
 import { FC } from "react";
 import Footer from "./Footer";
 import MainNavigationBar from "./MainNavigationBar";
+import { Outlet } from "react-router-dom";
+import CustomerFooter from "../UI/CustomerFooter";
+import Testimonials from "../UI/Testimonials";
 
-type LayoutProps = {
-  children?: React.ReactNode;
-};
+type MainLayoutProps = {};
 
 // TODO: add padding for body and children
 
-const Layout: FC<LayoutProps> = (props) => {
+const MainLayout: FC<MainLayoutProps> = (props) => {
   return (
     <div className="flex flex-col min-h-screen dark:bg-gray-800">
       <MainNavigationBar />
       <main className="mx-auto flex-grow" style={{ width: "90%" }}>
-        {props.children}
+        <Outlet />
       </main>
+      <Testimonials />
+      <CustomerFooter />
       <Footer />
     </div>
   );
 };
-export default Layout;
+export default MainLayout;

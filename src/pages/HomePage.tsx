@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Outlet } from "react-router-dom";
 import CourseSelection from "../components/home/CourseSelection";
 import HomeCarousel from "../components/home/HomeCarousel";
 import Billboard from "../components/UI/Billboard";
@@ -8,7 +9,9 @@ type HomePageProps = {};
 const HomePage: FC<HomePageProps> = (props) => {
   return (
     <>
+      <Outlet /> {/* Note: This is the alert after purchase */}
       <Billboard />
+      {/* Todo: Implement a my current courses section here and render it if student has courses */}
       {/* NOTE: This will carousel courses will change based on different topic selected*/}
       <CourseSelection />
       {/* NOTE: This will carousel will have fixed courses */}
