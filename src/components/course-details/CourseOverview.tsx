@@ -1,16 +1,17 @@
 import { FC } from "react";
 import { OndemandVideo } from "@mui/icons-material";
-import { Button } from "@mui/material";
+
+import LoadingButton from "@mui/lab/LoadingButton";
 import BorderCard from "../UI/BorderCard";
 import certificateIcon from "../../assets/certificateIcon.png";
-import CourseOverViewItem from "./CourseOverviewItem";
+import CourseOverViewItem from "./list-tems/CourseOverviewItem";
 
 type CourseOverviewProps = {};
 
 const CourseOverview: FC<CourseOverviewProps> = (props) => {
   return (
     <div className="mx-auto w-2/3 p-9">
-      <h2>Course overview</h2>
+      <h2 className="text-gray-800">Course overview</h2>
       <div className="flex flex-row justify-between my-5">
         <div className="flex flex-col basis-1/2">
           <div className="flex flex-col">
@@ -21,12 +22,14 @@ const CourseOverview: FC<CourseOverviewProps> = (props) => {
             />
             <CourseOverViewItem title="Make REAL web applications using cutting-edge technologies" />
           </div>
-          <Button
+          <LoadingButton
+            loading={true}
+            loadingPosition="start"
             className="rounded-none normal-case py-2 bg-black text-gray-100"
             variant="contained"
           >
             Show details and course curriculum
-          </Button>
+          </LoadingButton>
         </div>
         <div className="basis-1/3">
           <BorderCard>

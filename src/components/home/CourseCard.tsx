@@ -1,9 +1,6 @@
 import { FC } from "react";
 import { Card, CardContent, Rating, CardActionArea } from "@mui/material";
 
-import ReactPlayer from "react-player/youtube";
-import PlayCircleOutlinedIcon from "@mui/icons-material/PlayCircleOutlined";
-
 // TODO: This should take in all the details that need to be fixed
 type CourseCardProps = {
   img: React.ReactNode;

@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { Button, IconButton } from "@mui/material";
+
 import { PlayArrow, FavoriteBorder, Star } from "@mui/icons-material";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 type CourseInfoHeaderProps = {};
 
@@ -66,13 +68,16 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
             <div className="flex flex-col justify-center basis-1/2">
               <h2 className="mr-5">S$118.98</h2>
             </div>
-            <Button
-              className="w-full normal-case h-14 rounded-none bg-blue-700"
+            <LoadingButton
+              loading={false}
+              loadingPosition="start"
+              className="w-full normal-case h-14 rounded-none 
+              bg-blue-700 disabled:text-gray-100 disabled:bg-gray-600"
               variant="contained"
               disableElevation
             >
               Add to cart
-            </Button>
+            </LoadingButton>
           </div>
         </div>
       </div>
