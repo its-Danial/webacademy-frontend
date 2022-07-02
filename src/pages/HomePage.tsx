@@ -25,7 +25,7 @@ const HomePage: FC<HomePageProps> = (props) => {
         <HomeCarousel />
       </div>
       <Testimonials />
-      <CustomerFooter />
+      <CustomerFooter showHeading={true} />
     </MainContainer>
   );
 };
