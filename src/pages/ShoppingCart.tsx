@@ -13,7 +13,7 @@ const ShoppingCart: FC<ShoppingCartProps> = (props) => {
 
   return (
     <MainContainer>
-      <div className=" m-12">
+      <div className="m-12">
         <CartHeader itemCount={2} />
         <div className="flex row shrink-1">
           <div className="w-8/12">

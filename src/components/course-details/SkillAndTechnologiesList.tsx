@@ -1,5 +1,5 @@
 import { FC } from "react";
-import SkillIPillItem from "./list-tems/SkillIPillItem";
+import SkillIPillItem from "./list-items/SkillIPillItem";
 
 type SkillAndTechnologiesListProps = {};
 

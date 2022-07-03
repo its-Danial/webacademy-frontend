@@ -8,6 +8,8 @@ import EmptyCart from "./components/cart/EmptyCart";
 import CheckOutPage from "./pages/CheckOutPage";
 import PurchasedAlert from "./components/UI/PurchasedAlert";
 import CourseDetailsPage from "./pages/CourseDetailsPage";
+import SearchCoursesPage from "./pages/SearchCoursesPage";
+import SearchTopicPage from "./pages/SearchTopicPage";
 
 export default function App() {
   return (
@@ -24,6 +26,9 @@ export default function App() {
         <Route path="/checkout/:studentId" element={<CheckOutPage />} />
         {/* Details page */}
         <Route path="/course/:courseId" element={<CourseDetailsPage />} />
+        {/* Searching */}
+        <Route path="/courses/:categoryName" element={<SearchCoursesPage />} />
+        <Route path="/topic/:topicName" element={<SearchTopicPage />} />
       </Route>
       {/* Note: Teacher */}
       <Route path="/teacher" element={<h1>Teacher</h1>}></Route>

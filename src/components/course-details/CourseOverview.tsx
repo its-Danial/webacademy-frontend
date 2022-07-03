@@ -4,7 +4,7 @@ import { Box, Modal } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import BorderCard from "../UI/BorderCard";
 import certificateIcon from "../../assets/certificateIcon.png";
-import CourseOverViewItem from "./list-tems/CourseOverviewItem";
+import CourseOverViewItem from "./list-items/CourseOverviewItem";
 import LectureAccordion from "./LectureAccordion";
 import DescriptionAccordion from "./DescriptionAccordion";
 

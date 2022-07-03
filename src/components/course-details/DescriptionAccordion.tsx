@@ -1,5 +1,4 @@
-import { FC } from "react";
-import * as React from "react";
+import { FC, useState } from "react";
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
@@ -12,7 +11,7 @@ import Typography from "@mui/material/Typography";
 type DescriptionAccordionProps = {};
 
 const DescriptionAccordion: FC<DescriptionAccordionProps> = (props) => {
-  const [expanded, setExpanded] = React.useState<string | false>("panel1");
+  const [expanded, setExpanded] = useState<string | false>("panel1");
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
@@ -40,6 +39,7 @@ const DescriptionAccordion: FC<DescriptionAccordionProps> = (props) => {
 };
 export default DescriptionAccordion;
 
+// Note: styles
 const Accordion = styled((props: AccordionProps) => (
   <MuiAccordion disableGutters elevation={0} square {...props} />
 ))(({ theme }) => ({
