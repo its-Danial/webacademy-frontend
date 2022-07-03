@@ -22,21 +22,32 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
 
   // TODO: This should check if the user is logged in if so then navigate to "/cart:studentId"
   // FIX: Need to change where to redirect and what to display on account state
-  const onCartClickHandler = () => {
+  const onEmptyCartClickHandler = () => {
     navigate("/cart");
+  };
+
+  const onLoggedInCartClickHandler = () => {
+    // Todo: student Id will be passed down to here
+    navigate("/cart/123");
   };
 
   const loggedInStateButtons = (
     <>
       <MyCoursesDropDown />
-      <ShoppingCartIcon onCartClick={onCartClickHandler} numberOfItems={4} />
+      <ShoppingCartIcon
+        onCartClick={onLoggedInCartClickHandler}
+        numberOfItems={4}
+      />
       <UserAvatar username={"Danial"} />
     </>
   );
 
   const notLoggedInStateButtons = (
     <>
-      <ShoppingCartIcon onCartClick={onCartClickHandler} numberOfItems={0} />
+      <ShoppingCartIcon
+        onCartClick={onEmptyCartClickHandler}
+        numberOfItems={0}
+      />
       <Button
         onClick={onLogInClickHandler}
         variant="outlined"
