@@ -10,6 +10,7 @@ import PurchasedAlert from "./components/UI/PurchasedAlert";
 import CourseDetailsPage from "./pages/CourseDetailsPage";
 import SearchCoursesPage from "./pages/SearchCoursesPage";
 import SearchTopicPage from "./pages/SearchTopicPage";
+import LearnCoursePage from "./pages/LearnCoursePage";
 
 export default function App() {
   return (
@@ -26,10 +27,15 @@ export default function App() {
         <Route path="/checkout/:studentId" element={<CheckOutPage />} />
         {/* Details page */}
         <Route path="/course/:courseId" element={<CourseDetailsPage />} />
+        {/* Learning Page for watching videos */}
         {/* Searching */}
         <Route path="/courses/:categoryName" element={<SearchCoursesPage />} />
         <Route path="/topic/:topicName" element={<SearchTopicPage />} />
       </Route>
+      <Route
+        path="/course/:courseId/learn/lecture/:lectureId"
+        element={<LearnCoursePage />}
+      />
       {/* Note: Teacher */}
       <Route path="/teacher" element={<h1>Teacher</h1>}></Route>
     </Routes>
