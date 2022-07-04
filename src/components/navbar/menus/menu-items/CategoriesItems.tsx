@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Divider, MenuList, Stack } from "@mui/material";
 import { categories } from "../../../../helper/categoriesList";
 import CategoriesItem from "./CategoriesItem";
@@ -7,9 +8,11 @@ import TopicsItem from "./TopicsItem";
 type CategoriesItemsProps = {};
 
 const CategoriesItems: FC<CategoriesItemsProps> = (props) => {
+  const navigate = useNavigate();
+
   const [topicsList, setTopicsList] = useState<string[] | null>(null);
 
-  const onCategoryClickHandler = (categoryName: String) => {
+  const onCategoryMouseEnterHandler = (categoryName: String) => {
     // Finding the topics in a category and set it to state
     categories.forEach((category) => {
       if (Object.keys(category)[0] === categoryName) {
@@ -17,12 +20,21 @@ const CategoriesItems: FC<CategoriesItemsProps> = (props) => {
       }
     });
   };
+
+  const onSearchSelectClickHandler = (searchParam: string) => {
+    navigate(searchParam);
+  };
+
   const topicMenu = (
     <>
       <Divider orientation="vertical" flexItem />
       <MenuList>
         {topicsList?.map((topic) => (
-          <TopicsItem key={topic} topic={topic} />
+          <TopicsItem
+            onSearchSelect={onSearchSelectClickHandler}
+            key={topic}
+            topic={topic}
+          />
         ))}
       </MenuList>
     </>
@@ -33,7 +45,8 @@ const CategoriesItems: FC<CategoriesItemsProps> = (props) => {
       <MenuList>
         {categories.map((category): any => (
           <CategoriesItem
-            onCategoryClick={onCategoryClickHandler}
+            onSearchSelect={onSearchSelectClickHandler}
+            onCategoryMouseEnter={onCategoryMouseEnterHandler}
             key={Object.keys(category)[0]}
             categoryName={Object.keys(category)[0]}
           />
