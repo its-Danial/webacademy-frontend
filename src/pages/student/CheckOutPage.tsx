@@ -1,6 +1,6 @@
 import { FC } from "react";
-import CheckoutForm from "../components/cart/CheckoutForm";
-import MainContainer from "../components/layout/MainContainer";
+import CheckoutForm from "../../components/cart/CheckoutForm";
+import MainContainer from "../../components/layout/MainContainer";
 
 type CheckOutPageProps = {};
 

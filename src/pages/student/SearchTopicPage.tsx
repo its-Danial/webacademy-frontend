@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useParams } from "react-router-dom";
-import MainContainer from "../components/layout/MainContainer";
-import SearchView from "../components/searching/SearchView";
+import MainContainer from "../../components/layout/MainContainer";
+import SearchView from "../../components/searching/SearchView";
 import { Pagination } from "@mui/material";
 
 type SearchTopicPageProps = {};

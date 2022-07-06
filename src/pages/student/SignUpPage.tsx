@@ -1,6 +1,6 @@
 import { FC } from "react";
-import MainContainer from "../components/layout/MainContainer";
-import SignUpForm from "../components/signup-and-login/SignUpForm";
+import MainContainer from "../../components/layout/MainContainer";
+import SignUpForm from "../../components/signup-and-login/SignUpForm";
 
 type SignUpPageProps = {};
 

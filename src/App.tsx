@@ -1,16 +1,17 @@
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
-import HomePage from "./pages/HomePage";
-import LogInPage from "./pages/LogInPage";
-import SignUpPage from "./pages/SignUpPage";
-import ShoppingCart from "./pages/ShoppingCart";
+import HomePage from "./pages/student/HomePage";
+import LogInPage from "./pages/student/LogInPage";
+import SignUpPage from "./pages/student/SignUpPage";
+import ShoppingCart from "./pages/student/ShoppingCart";
 import EmptyCart from "./components/cart/EmptyCart";
-import CheckOutPage from "./pages/CheckOutPage";
+import CheckOutPage from "./pages/student/CheckOutPage";
 import PurchasedAlert from "./components/UI/PurchasedAlert";
-import CourseDetailsPage from "./pages/CourseDetailsPage";
-import SearchCoursesPage from "./pages/SearchCoursesPage";
-import SearchTopicPage from "./pages/SearchTopicPage";
-import LearnCoursePage from "./pages/LearnCoursePage";
+import CourseDetailsPage from "./pages/student/CourseDetailsPage";
+import SearchCoursesPage from "./pages/student/SearchCoursesPage";
+import SearchTopicPage from "./pages/student/SearchTopicPage";
+import LearnCoursePage from "./pages/student/LearnCoursePage";
+import TeacherLayout from "./components/layout/TeacherLayout";
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
       />
       {/* Note: Teacher */}
       <Route path="/teacher" element={<h1>Teacher</h1>}></Route>
+      <Route path="/teacher/courses" element={<TeacherLayout />}></Route>
     </Routes>
   );
 }

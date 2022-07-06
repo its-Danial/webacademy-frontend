@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { Outlet } from "react-router-dom";
-import CourseSelection from "../components/home/CourseSelection";
-import HomeCarousel from "../components/home/HomeCarousel";
-import Billboard from "../components/UI/Billboard";
-import Testimonials from "../components/UI/Testimonials";
-import CustomerFooter from "../components/UI/CustomerFooter";
-import MainContainer from "../components/layout/MainContainer";
+import CourseSelection from "../../components/home/CourseSelection";
+import HomeCarousel from "../../components/home/HomeCarousel";
+import Billboard from "../../components/UI/Billboard";
+import Testimonials from "../../components/UI/Testimonials";
+import CustomerFooter from "../../components/UI/CustomerFooter";
+import MainContainer from "../../components/layout/MainContainer";
 
 type HomePageProps = {};
 

@@ -1,9 +1,9 @@
 import { FC } from "react";
-import CartHeader from "../components/cart/CartHeader";
+import CartHeader from "../../components/cart/CartHeader";
 import { useParams } from "react-router-dom";
-import CartCourseCard from "../components/UI/CartCourseCard";
-import CheckOutBox from "../components/UI/CheckOutBox";
-import MainContainer from "../components/layout/MainContainer";
+import CartCourseCard from "../../components/UI/CartCourseCard";
+import CheckOutBox from "../../components/UI/CheckOutBox";
+import MainContainer from "../../components/layout/MainContainer";
 
 type ShoppingCartProps = {};
 

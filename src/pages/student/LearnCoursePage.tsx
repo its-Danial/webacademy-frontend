@@ -1,9 +1,9 @@
 import { FC } from "react";
-import Footer from "../components/layout/Footer";
-import LectureNavBar from "../components/layout/LectureNavBar";
+import Footer from "../../components/layout/Footer";
+import LectureNavBar from "../../components/layout/LectureNavBar";
 import ReactPlayer from "react-player/youtube";
-import WatchLectureAccordion from "../components/learn-course-lecture/WatchLectureAccordion";
-import AboutCourseSection from "../components/learn-course-lecture/AboutCourseSection";
+import WatchLectureAccordion from "../../components/learn-course-lecture/WatchLectureAccordion";
+import AboutCourseSection from "../../components/learn-course-lecture/AboutCourseSection";
 
 type LearnCoursePageProps = {};
 
