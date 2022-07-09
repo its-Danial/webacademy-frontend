@@ -1,13 +1,6 @@
 import { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  AppBar,
-  Divider,
-  Box,
-  Toolbar,
-  Typography,
-  CircularProgress,
-} from "@mui/material";
+import { AppBar, Divider, Toolbar } from "@mui/material";
 import logo from "../../assets/companyLogo.png";
 
 import ProgressMenu from "../learn-course-lecture/ProgressMenu";

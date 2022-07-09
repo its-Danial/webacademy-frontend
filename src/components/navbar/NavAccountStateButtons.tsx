@@ -1,17 +1,16 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MyCoursesDropDown from "./menus/MyCoursesDropDown";
 import ShoppingCartIcon from "./ShoppingCartIcon";
 import UserAvatar from "./menus/UserAvatar";
+import { useSelector } from "react-redux";
 
 type NavAccountStateButtonsProps = {};
 
 const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
   const navigate = useNavigate();
-
-  // TODO: need to maintain login state in global store
-  const [isLoggedIn, setIsLogggedIn] = useState<Boolean>(true);
+  const authUserInfo = useSelector((state: any) => state.auth);
 
   const onLogInClickHandler = () => {
     navigate("/login");
@@ -20,15 +19,14 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
     navigate("/signup");
   };
 
-  // TODO: This should check if the user is logged in if so then navigate to "/cart:studentId"
-  // FIX: Need to change where to redirect and what to display on account state
   const onEmptyCartClickHandler = () => {
     navigate("/cart");
   };
 
   const onLoggedInCartClickHandler = () => {
-    // Todo: student Id will be passed down to here
-    navigate("/cart/123");
+    if (authUserInfo.id) {
+      navigate(`/cart/${authUserInfo.id}`);
+    }
   };
 
   const loggedInStateButtons = (
@@ -38,7 +36,7 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
         onCartClick={onLoggedInCartClickHandler}
         numberOfItems={4}
       />
-      <UserAvatar username={"Danial"} />
+      <UserAvatar username={authUserInfo.user.fullName} />
     </>
   );
 
@@ -67,6 +65,10 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
     </>
   );
 
-  return <>{isLoggedIn ? loggedInStateButtons : notLoggedInStateButtons}</>;
+  return (
+    <>
+      {authUserInfo.isLoggedIn ? loggedInStateButtons : notLoggedInStateButtons}
+    </>
+  );
 };
 export default NavAccountStateButtons;

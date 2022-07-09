@@ -1,6 +1,9 @@
 import { FC, useRef } from "react";
+import { logInCredentials } from "../../model/logInCredentials";
 
-type LogInFormProps = {};
+type LogInFormProps = {
+  onLoginSubmit: (credentials: logInCredentials) => void;
+};
 
 const LogInForm: FC<LogInFormProps> = (props) => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -13,8 +16,7 @@ const LogInForm: FC<LogInFormProps> = (props) => {
       password: passwordRef.current?.value,
     };
 
-    // TODO: send this data to the LogIn page from where it will be sent to backend api
-    console.log(newStudentAccountDetails);
+    props.onLoginSubmit(newStudentAccountDetails);
   };
 
   return (

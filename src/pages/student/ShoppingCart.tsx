@@ -10,6 +10,7 @@ type ShoppingCartProps = {};
 const ShoppingCart: FC<ShoppingCartProps> = (props) => {
   // Note: this will be the student id which will be used to get car items
   const { studentId } = useParams();
+  console.log(studentId);
 
   return (
     <MainContainer>

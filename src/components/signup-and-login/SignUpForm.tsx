@@ -1,6 +1,9 @@
-import React, { FC, useRef } from "react";
+import { FC, useRef } from "react";
+import { studentRegisterInfo } from "../../model/studentRegisterInfo";
 
-type SignUpFormProps = {};
+type SignUpFormProps = {
+  onSignUpSubmit: (userDetails: studentRegisterInfo) => void;
+};
 
 const SignUpForm: FC<SignUpFormProps> = (props) => {
   const usernameRef = useRef<HTMLInputElement>(null);
@@ -8,7 +11,7 @@ const SignUpForm: FC<SignUpFormProps> = (props) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const onSignUpFormSubmitHandler = (event: React.FormEvent) => {
+  const onSignUpFormSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     const newStudentAccountDetails = {
       username: usernameRef.current?.value,
@@ -17,8 +20,7 @@ const SignUpForm: FC<SignUpFormProps> = (props) => {
       password: passwordRef.current?.value,
     };
 
-    // TODO: send this data to the SignUp page from where it will be sent to backend api
-    console.log(newStudentAccountDetails);
+    props.onSignUpSubmit(newStudentAccountDetails);
   };
 
   return (
