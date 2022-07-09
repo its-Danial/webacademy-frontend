@@ -8,8 +8,12 @@ import {
   AddShoppingCart,
 } from "@mui/icons-material";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { courseType } from "../../model/course";
 
-type CourseInfoHeaderProps = {};
+type CourseInfoHeaderProps = {
+  course: courseType | undefined;
+  isLoading: boolean;
+};
 
 const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
   const [open, setOpen] = useState(false);
@@ -19,16 +23,14 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
   return (
     <>
       <div className="bg-black h-[32rem] flex sm:flex-row flex-col justify-between">
-        <div className="text-white w-1/2">
-          <div className="my-24 mx-32 flex flex-col">
-            <h1 className="font-serif text-4xl">
-              The Web Developer Bootcamp 2022
-            </h1>
+        <div className="text-white w-1/2 flex  items-center">
+          <div className="my-24 mx-32 flex flex-col ">
+            <h1 className="font-serif text-4xl">{props.course?.title}</h1>
             <div className="flex justify-between border-0 border-b-[1px] border-gray-600 border-solid pb-4">
               <div className="flex flex-col justify-between mt-3">
                 <p className="text-gray-300 font-bold underline underline-offset-4 ">
+                  {props.course?.teacher.fullName}
                   {/* TODO: teacher name */}
-                  Colt Steele
                 </p>
                 <Button
                   onClick={handleOpen}
@@ -42,7 +44,7 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
               <div>
                 <img
                   className="rounded-full w-20 my-2"
-                  src="https://s.udemycdn.com/premium-clp/instructors/colt-steele/ColtSteele-1x.jpg"
+                  src={props.course?.teacher.avatarPictureUrl}
                   alt=""
                 />
               </div>
@@ -53,7 +55,7 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
             >
               <div className="flex flex-col">
                 <div className="mr-10 flex flex-row justify-center">
-                  <h2 className="text-2xl">4.7</h2>
+                  <h2 className="text-2xl">{props.course?.courseRating}</h2>
                   <Star className="m-1 text-amber-300" />
                 </div>
                 <p className="text-sm font-bold text-gray-300 underline underline-offset-4">
@@ -77,7 +79,9 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
             </div>
             <div className="flex flex-row mt-5 justify-center">
               <div className="flex flex-col justify-center basis-1/2">
-                <h2 className="mr-5">S$118.98</h2>
+                <h2 className="mr-5 text-4xl font-serif">
+                  ${props.course?.courseInformation.price}
+                </h2>
               </div>
               <LoadingButton
                 loading={false}
@@ -96,8 +100,8 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
         <div className="text-white w-1/2">
           <img
             // Note: can also try object-fill
-            className="object-cover w-full h-full"
-            src="https://s.udemycdn.com/premium-clp/625204/CourseImage-2x.jpg"
+            className="object-fill w-full h-full"
+            src={props.course?.courseInformation.coverImageUrl}
             alt=""
           />
         </div>
@@ -109,7 +113,11 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <ReactPlayer url="https://www.youtube.com/watch?v=ysz5S6PUM-U" />
+          <ReactPlayer
+            width={750}
+            height={450}
+            url={props.course?.courseInformation.previewVideoUrl}
+          />
         </Box>
       </Modal>
     </>

@@ -13,13 +13,7 @@ import SearchTopicPage from "./pages/student/SearchTopicPage";
 import LearnCoursePage from "./pages/student/LearnCoursePage";
 import TeacherLayout from "./components/layout/TeacherLayout";
 
-import { getAll } from "./network/api/student";
-
 export default function App() {
-  const data = getAll();
-
-  console.log(data);
-
   return (
     <Routes>
       {/* Note: Main Student */}
@@ -39,10 +33,7 @@ export default function App() {
         <Route path="/courses/:categoryName" element={<SearchCoursesPage />} />
         <Route path="/topic/:topicName" element={<SearchTopicPage />} />
       </Route>
-      <Route
-        path="/course/:courseId/learn/lecture/:lectureId"
-        element={<LearnCoursePage />}
-      />
+      <Route path="/course/:courseId/learn/lecture/:lectureId" element={<LearnCoursePage />} />
       {/* Note: Teacher */}
       <Route path="/teacher" element={<h1>Teacher</h1>}></Route>
       <Route path="/teacher/courses" element={<TeacherLayout />} />

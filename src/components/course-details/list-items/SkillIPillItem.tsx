@@ -10,7 +10,7 @@ const SkillItemPill: FC<SkillItemPillProps> = (props) => {
       className="px-3 py-1 mr-2 mt-2 text-base font-semibold rounded-full border border-solid
  border-gray-400 text-gray-700"
     >
-      CSS Grid
+      {props.title}
     </li>
   );
 };
