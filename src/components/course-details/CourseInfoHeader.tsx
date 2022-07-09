@@ -1,12 +1,7 @@
 import { FC, useState } from "react";
-import { Button, IconButton, Box, Modal } from "@mui/material";
+import { Button, IconButton, Box, Modal, Skeleton, Avatar } from "@mui/material";
 import ReactPlayer from "react-player/youtube";
-import {
-  PlayArrow,
-  FavoriteBorder,
-  Star,
-  AddShoppingCart,
-} from "@mui/icons-material";
+import { PlayArrow, FavoriteBorder, Star, AddShoppingCart } from "@mui/icons-material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { courseType } from "../../model/course";
 
@@ -25,66 +20,95 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
       <div className="bg-black h-[32rem] flex sm:flex-row flex-col justify-between">
         <div className="text-white w-1/2 flex  items-center">
           <div className="my-24 mx-32 flex flex-col ">
-            <h1 className="font-serif text-4xl">{props.course?.title}</h1>
+            {props.isLoading ? (
+              <Skeleton variant="text" className="bg-gray-500 h-20 w-full " />
+            ) : (
+              <h1 className="font-serif text-4xl">{props.course?.title}</h1>
+            )}
+
             <div className="flex justify-between border-0 border-b-[1px] border-gray-600 border-solid pb-4">
               <div className="flex flex-col justify-between mt-3">
-                <p className="text-gray-300 font-bold underline underline-offset-4 ">
-                  {props.course?.teacher.fullName}
-                  {/* TODO: teacher name */}
-                </p>
-                <Button
-                  onClick={handleOpen}
-                  startIcon={<PlayArrow />}
-                  variant="outlined"
-                  className="text-white normal-case border-white hover:bg-gray-700 rounded-none "
-                >
-                  Preview
-                </Button>
+                {props.isLoading ? (
+                  <Skeleton variant="text" className="bg-gray-500 w-[400px] h-7 mr-4" />
+                ) : (
+                  <p className="text-gray-300 font-bold underline underline-offset-4 ">
+                    {props.course?.teacher.fullName}
+                  </p>
+                )}
+
+                {props.isLoading ? (
+                  <Skeleton variant="text" className="bg-gray-500  w-[300px] h-7" />
+                ) : (
+                  <Button
+                    onClick={handleOpen}
+                    startIcon={<PlayArrow />}
+                    variant="outlined"
+                    className="text-white normal-case border-white hover:bg-gray-700 rounded-none "
+                  >
+                    Preview
+                  </Button>
+                )}
               </div>
               <div>
-                <img
-                  className="rounded-full w-20 my-2"
-                  src={props.course?.teacher.avatarPictureUrl}
-                  alt=""
-                />
+                {props.isLoading ? (
+                  <Skeleton className="bg-gray-500" animation="pulse" variant="circular">
+                    <Avatar className="w-20 h-20 my-2" />
+                  </Skeleton>
+                ) : (
+                  <img
+                    className="rounded-full w-20 my-2"
+                    src={props.course?.teacher.avatarPictureUrl}
+                    alt=""
+                  />
+                )}
               </div>
             </div>
-            <div
-              className="flex flex-row relative py-5 items-center border-0 border-b-[1px] 
+            {props.isLoading ? (
+              <Skeleton variant="text" className="bg-gray-500  w-[300px] h-7 my-3" />
+            ) : (
+              <div
+                className="flex flex-row relative py-5 items-center border-0 border-b-[1px] 
       border-gray-600 border-solid"
-            >
-              <div className="flex flex-col">
-                <div className="mr-10 flex flex-row justify-center">
-                  <h2 className="text-2xl">{props.course?.courseRating}</h2>
-                  <Star className="m-1 text-amber-300" />
+              >
+                <div className="flex flex-col">
+                  <div className="mr-10 flex flex-row justify-center">
+                    <h2 className="text-2xl">{props.course?.courseRating}</h2>
+                    <Star className="m-1 text-amber-300" />
+                  </div>
+                  <p className="text-sm font-bold text-gray-300 underline underline-offset-4">
+                    ratings
+                  </p>
                 </div>
-                <p className="text-sm font-bold text-gray-300 underline underline-offset-4">
-                  ratings
-                </p>
+                <div>
+                  <h2 className="text-2xl">63hr</h2>
+                  <p className="text-sm font-bold text-gray-300">total content</p>
+                </div>
+                <div className="absolute right-0">
+                  <IconButton
+                    className="border-solid border-2 border-gray-200 "
+                    color="primary"
+                    aria-label="heart"
+                    size="small"
+                  >
+                    <FavoriteBorder className="text-gray-200" />
+                  </IconButton>
+                </div>
               </div>
-              <div>
-                <h2 className="text-2xl">63hr</h2>
-                <p className="text-sm font-bold text-gray-300">total content</p>
-              </div>
-              <div className="absolute right-0">
-                <IconButton
-                  className="border-solid border-2 border-gray-200 "
-                  color="primary"
-                  aria-label="heart"
-                  size="small"
-                >
-                  <FavoriteBorder className="text-gray-200" />
-                </IconButton>
-              </div>
-            </div>
+            )}
             <div className="flex flex-row mt-5 justify-center">
               <div className="flex flex-col justify-center basis-1/2">
-                <h2 className="mr-5 text-4xl font-serif">
-                  ${props.course?.courseInformation.price}
-                </h2>
+                {props.isLoading ? (
+                  <Skeleton variant="text" className="bg-gray-500  w-[80px] h-10" />
+                ) : (
+                  <h2 className="mr-5 text-4xl font-serif">
+                    ${props.course?.courseInformation.price}
+                  </h2>
+                )}
               </div>
+
+              {/* Todo: this needs to change based on if the student has bought this course or not */}
               <LoadingButton
-                loading={false}
+                loading={props.isLoading}
                 startIcon={<AddShoppingCart />}
                 loadingPosition="start"
                 className=" w-full normal-case h-14 rounded-none 
