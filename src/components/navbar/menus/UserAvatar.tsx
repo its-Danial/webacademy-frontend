@@ -1,18 +1,11 @@
 import { FC, useState } from "react";
-import {
-  Avatar,
-  IconButton,
-  Tooltip,
-  Menu,
-  MenuItem,
-  ListItemIcon,
-  Divider,
-  Badge,
-  ListItemText,
-} from "@mui/material";
+import { Avatar, IconButton, Tooltip, Menu, MenuItem, ListItemIcon, Divider, Badge, ListItemText } from "@mui/material";
 import { Logout, ShoppingCart } from "@mui/icons-material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { authSliceActions } from "../../../store/authSlice";
+import { shoppingCartType } from "../../../model/shoppingCart";
+import { useQuery } from "react-query";
+import { getCartByStudentId } from "../../../network/api/shoppingCart";
 
 type UserAvatarProps = {
   username: string;
@@ -21,7 +14,12 @@ type UserAvatarProps = {
 };
 
 const UserAvatar: FC<UserAvatarProps> = (props) => {
+  const authUserId = useSelector((state: any) => state.auth.id);
   const dispatch = useDispatch();
+
+  const { data: cartItems } = useQuery<shoppingCartType, Error>(["cart-items", authUserId], () =>
+    getCartByStudentId(authUserId)
+  );
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -69,6 +67,7 @@ const UserAvatar: FC<UserAvatarProps> = (props) => {
         PaperProps={{
           elevation: 0,
           sx: {
+            minWidth: 170,
             px: 1,
             overflow: "visible",
             filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
@@ -97,10 +96,7 @@ const UserAvatar: FC<UserAvatarProps> = (props) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar
-            className="bg-black hover:bg-slate-600 dark:bg-blue-900 dark:hover:bg-blue-800"
-            sx={{ width: 35, height: 35 }}
-          >
+          <Avatar sx={{ width: 35, height: 35, backgroundColor: "black", color: "white" }}>
             {usernameFirstLetter}
           </Avatar>
           {props.username}
@@ -114,7 +110,8 @@ const UserAvatar: FC<UserAvatarProps> = (props) => {
           </ListItemIcon>
           <ListItemText>My Cart</ListItemText>
           <Badge
-            badgeContent={4}
+            badgeContent={cartItems?.courses.length}
+            showZero
             componentsProps={{
               badge: { style: { backgroundColor: "black", color: "white" } },
             }}

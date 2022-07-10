@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Button, Menu } from "@mui/material";
+import { Button, Menu, Typography } from "@mui/material";
 import MyCoursesProgressItem from "./menu-items/MyCoursesProgressItem";
 import { useQuery } from "react-query";
 import { progressType } from "../../../model/studentProgress";
@@ -34,6 +34,18 @@ const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const noCoursesMenu = <Typography sx={{ p: 3 }}>No current courses</Typography>;
+
+  const menuWithCourses = studentCourses?.map((course, index) => (
+    <MyCoursesProgressItem
+      key={uuidv4()}
+      img={course.courseInformation.coverImageUrl}
+      title={course.title}
+      progress={progressPerCourseList[index].progress}
+      showDivider={index !== studentCourses.length - 1}
+    />
+  ));
 
   return (
     <>
@@ -79,7 +91,10 @@ const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         {/* BUG: this mapping for progress and course might not be correct, check later */}
-        {studentCourses?.map((course, index) => (
+
+        {studentCourses?.length === 0 ? noCoursesMenu : menuWithCourses}
+
+        {/* {studentCourses?.map((course, index) => (
           <MyCoursesProgressItem
             key={uuidv4()}
             img={course.courseInformation.coverImageUrl}
@@ -87,7 +102,7 @@ const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
             progress={progressPerCourseList[index].progress}
             showDivider={index !== studentCourses.length - 1}
           />
-        ))}
+        ))} */}
       </Menu>
     </>
   );
