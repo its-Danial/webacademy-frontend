@@ -3,6 +3,7 @@ import { logInCredentials } from "../../model/logInCredentials";
 
 type LogInFormProps = {
   onLoginSubmit: (credentials: logInCredentials) => void;
+  isError: boolean;
 };
 
 const LogInForm: FC<LogInFormProps> = (props) => {
@@ -47,6 +48,11 @@ const LogInForm: FC<LogInFormProps> = (props) => {
           ref={passwordRef}
           required
         />
+        {props.isError && (
+          <div className="flex justify-center">
+            <p className="text-red-500 mt-4 text-sm">Invalid Username or password, try again</p>
+          </div>
+        )}
         <button
           type="submit"
           className="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent  text-slate-100
@@ -58,10 +64,7 @@ const LogInForm: FC<LogInFormProps> = (props) => {
         <div className="flex flex-col items-center mt-5">
           <p className="mt-1 text-sm font-light text-gray-500">
             Don't Have an account?
-            <a
-              href="www.google.com"
-              className="ml-1 font-medium text-slate-800 dark:text-blue-400"
-            >
+            <a href="www.google.com" className="ml-1 font-medium text-slate-800 dark:text-blue-400">
               Sign up now
             </a>
           </p>

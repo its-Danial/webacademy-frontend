@@ -59,7 +59,7 @@ const CategoriesDropDown: FC<CategoriesDropDownProps> = (props) => {
         transformOrigin={{ horizontal: "left", vertical: "top" }}
         anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
       >
-        <CategoriesItems />
+        <CategoriesItems onItemClick={handleClose} />
       </Menu>
     </>
   );

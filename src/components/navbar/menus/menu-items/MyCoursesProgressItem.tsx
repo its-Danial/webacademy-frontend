@@ -1,20 +1,15 @@
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  CardMedia,
-  CardActionArea,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
-import LinearProgress, {
-  linearProgressClasses,
-} from "@mui/material/LinearProgress";
-
 import { FC } from "react";
+import { Box, Typography, Card, CardContent, CardMedia, CardActionArea, Divider } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 
 // Note: it will take in course information
-type MyCoursesProgressItemProps = {};
+type MyCoursesProgressItemProps = {
+  img: string;
+  title: string;
+  progress: number;
+  showDivider: boolean;
+};
 
 const MyCoursesProgressItem: FC<MyCoursesProgressItemProps> = (props) => {
   return (
@@ -29,8 +24,8 @@ const MyCoursesProgressItem: FC<MyCoursesProgressItemProps> = (props) => {
             marginBottom: "auto",
             padding: 1,
           }}
-          image="https://i3.ytimg.com/vi/VPBsE4ul_uw/maxresdefault.jpg"
-          alt="Live from space album cover"
+          image={props.img}
+          alt={props.title}
         />
         <Box
           sx={{
@@ -40,14 +35,14 @@ const MyCoursesProgressItem: FC<MyCoursesProgressItemProps> = (props) => {
         >
           <CardContent sx={{ padding: 1 }}>
             <Typography component="p" variant="body2">
-              {/* Note: Course topic title here */}
-              Live From Space basdad asd dasdas adss
+              {props.title}
             </Typography>
             {/* Note: Course progress here */}
-            <BorderLinearProgress variant="determinate" value={50} />
+            <BorderLinearProgress variant="determinate" value={props.progress} />
           </CardContent>
         </Box>
       </Card>
+      {props.showDivider && <Divider />}
     </CardActionArea>
   );
 };
@@ -59,8 +54,7 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   height: 8,
   borderRadius: 5,
   [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor:
-      theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
+    backgroundColor: theme.palette.grey[theme.palette.mode === "light" ? 200 : 800],
   },
   [`& .${linearProgressClasses.bar}`]: {
     borderRadius: 5,

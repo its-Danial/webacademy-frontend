@@ -18,6 +18,8 @@ export const authSlice = createSlice({
     },
     setLogOut: (state) => {
       state.isLoggedIn = false;
+      state.id = "";
+      state.user = {};
     },
     setSignIn: (state) => {
       state.isLoggedIn = true;

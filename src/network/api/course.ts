@@ -15,3 +15,8 @@ export const getCourseById = async (courseId: string | undefined): Promise<cours
   const response = await axiosClient.get(`/course/get-by-id/${courseId}`);
   return response.data;
 };
+
+export const getStudentCoursesByStudentId = async (studentId: string): Promise<courseType[]> => {
+  const response = await axiosClient.get(`/course/get-by-student-id/${studentId}`);
+  return response.data;
+};

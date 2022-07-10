@@ -1,11 +1,30 @@
 import { FC, useState } from "react";
-import { Button, Menu, Divider } from "@mui/material";
-
+import { Button, Menu } from "@mui/material";
 import MyCoursesProgressItem from "./menu-items/MyCoursesProgressItem";
+import { useQuery } from "react-query";
+import { progressType } from "../../../model/studentProgress";
+import { courseType } from "../../../model/course";
+import { getProgressByStudentId } from "../../../network/api/studentProgress";
+import { getStudentCoursesByStudentId } from "../../../network/api/course";
+import { useSelector } from "react-redux";
+import { calculateProgress } from "../../../helper/progressCalculator";
+import { v4 as uuidv4 } from "uuid";
 
 type MyCoursesDropDownProps = {};
 
 const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
+  const authUserId = useSelector((state: any) => state.auth.id);
+
+  const { data: studentProgresses } = useQuery<progressType[], Error>(["student-progresses", authUserId], () =>
+    getProgressByStudentId(authUserId)
+  );
+
+  const { data: studentCourses } = useQuery<courseType[], Error>(["student-courses", authUserId], () =>
+    getStudentCoursesByStudentId(authUserId)
+  );
+
+  const progressPerCourseList = calculateProgress(studentProgresses);
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -59,11 +78,16 @@ const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {/* Note: This needs to be mapped out based on the current courses */}
-
-        <MyCoursesProgressItem />
-        <Divider />
-        <MyCoursesProgressItem />
+        {/* BUG: this mapping for progress and course might not be correct, check later */}
+        {studentCourses?.map((course, index) => (
+          <MyCoursesProgressItem
+            key={uuidv4()}
+            img={course.courseInformation.coverImageUrl}
+            title={course.title}
+            progress={progressPerCourseList[index].progress}
+            showDivider={index !== studentCourses.length - 1}
+          />
+        ))}
       </Menu>
     </>
   );

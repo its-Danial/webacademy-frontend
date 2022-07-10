@@ -32,20 +32,18 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
   const loggedInStateButtons = (
     <>
       <MyCoursesDropDown />
-      <ShoppingCartIcon
+      <ShoppingCartIcon onCartClick={onLoggedInCartClickHandler} numberOfItems={4} />
+      <UserAvatar
         onCartClick={onLoggedInCartClickHandler}
-        numberOfItems={4}
+        username={authUserInfo.user.fullName}
+        userId={authUserInfo.id}
       />
-      <UserAvatar username={authUserInfo.user.fullName} />
     </>
   );
 
   const notLoggedInStateButtons = (
     <>
-      <ShoppingCartIcon
-        onCartClick={onEmptyCartClickHandler}
-        numberOfItems={0}
-      />
+      <ShoppingCartIcon onCartClick={onEmptyCartClickHandler} numberOfItems={0} />
       <Button
         onClick={onLogInClickHandler}
         variant="outlined"
@@ -65,10 +63,6 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
     </>
   );
 
-  return (
-    <>
-      {authUserInfo.isLoggedIn ? loggedInStateButtons : notLoggedInStateButtons}
-    </>
-  );
+  return <>{authUserInfo.isLoggedIn ? loggedInStateButtons : notLoggedInStateButtons}</>;
 };
 export default NavAccountStateButtons;

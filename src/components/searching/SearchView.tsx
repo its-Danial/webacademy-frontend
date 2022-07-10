@@ -6,7 +6,7 @@ import SearchCourseList from "./SearchCourseList";
 import { courseType } from "../../model/course";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { ThreeDots } from "react-loader-spinner";
-
+import { v4 as uuidv4 } from "uuid";
 type SearchViewProps = {
   searchParam: string | undefined;
   courses: courseType[] | undefined;
@@ -43,9 +43,8 @@ const SearchView: FC<SearchViewProps> = (props) => {
             </div>
           )}
           {props.courses?.map((course) => (
-            <Fragment key={course.courseId}>
+            <Fragment key={uuidv4()}>
               <SearchCourseList course={course} />
-
               <Divider className="my-3" />
             </Fragment>
           ))}

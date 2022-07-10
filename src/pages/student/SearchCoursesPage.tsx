@@ -13,8 +13,6 @@ type SearchCoursesPageProps = {};
 const SearchCoursesPage: FC<SearchCoursesPageProps> = (props) => {
   const { categoryName } = useParams<string>();
 
-  console.log(categoryName);
-
   const { data: courses, isLoading } = useQuery<courseType[], Error>(
     ["category-courses", categoryName],
     () => getAllCoursesByCategory(categoryName)
@@ -24,11 +22,7 @@ const SearchCoursesPage: FC<SearchCoursesPageProps> = (props) => {
   return (
     <MainContainer>
       <div className="m-12">
-        <SearchView
-          isLoading={isLoading}
-          searchParam={categoryName}
-          courses={courses}
-        />
+        <SearchView isLoading={isLoading} searchParam={categoryName} courses={courses} />
         <div className="flex justify-center">
           <Pagination count={5} variant="outlined" color="secondary" />
         </div>

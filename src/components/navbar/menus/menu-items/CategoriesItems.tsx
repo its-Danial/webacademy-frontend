@@ -5,7 +5,9 @@ import { categories } from "../../../../helper/categoriesList";
 import CategoriesItem from "./CategoriesItem";
 import TopicsItem from "./TopicsItem";
 
-type CategoriesItemsProps = {};
+type CategoriesItemsProps = {
+  onItemClick: () => void;
+};
 
 const CategoriesItems: FC<CategoriesItemsProps> = (props) => {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ const CategoriesItems: FC<CategoriesItemsProps> = (props) => {
 
   const onSearchSelectClickHandler = (searchParam: string) => {
     navigate(searchParam);
+    props.onItemClick();
   };
 
   const topicMenu = (
@@ -30,11 +33,7 @@ const CategoriesItems: FC<CategoriesItemsProps> = (props) => {
       <Divider orientation="vertical" flexItem />
       <MenuList>
         {topicsList?.map((topic) => (
-          <TopicsItem
-            onSearchSelect={onSearchSelectClickHandler}
-            key={topic}
-            topic={topic}
-          />
+          <TopicsItem onSearchSelect={onSearchSelectClickHandler} key={topic} topic={topic} />
         ))}
       </MenuList>
     </>
