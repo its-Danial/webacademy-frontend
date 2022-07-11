@@ -24,8 +24,6 @@ const CourseOverview: FC<CourseOverviewProps> = (props) => {
 
   const whatToLearn: string[] | undefined = props.course?.courseInformation.whatYouLearn.split(",");
 
-  console.log(whatToLearn);
-
   return (
     <>
       <div className="mx-auto w-2/3 p-9">

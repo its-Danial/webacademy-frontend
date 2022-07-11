@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from "uuid";
 type MyCoursesDropDownProps = {};
 
 const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
-  const authUserId = useSelector((state: any) => state.auth.id);
+  const authUserId: number = useSelector((state: any) => state.auth.id);
 
   const { data: studentProgresses } = useQuery<progressType[], Error>(["student-progresses", authUserId], () =>
     getProgressByStudentId(authUserId)
@@ -42,7 +42,7 @@ const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
       key={uuidv4()}
       img={course.courseInformation.coverImageUrl}
       title={course.title}
-      progress={progressPerCourseList[index].progress}
+      progress={progressPerCourseList[index]?.progress}
       showDivider={index !== studentCourses.length - 1}
     />
   ));

@@ -31,26 +31,15 @@ const SearchCourseList: FC<SearchCourseListProps> = (props) => {
         <h5 className="mb-2 text-base font-bold tracking-tight text-gray-900 dark:text-white  w-[80%]">
           {props.course?.title}
         </h5>
-        <p className="text-sm text-gray-700 mb-2 w-[80%]">
-          {props.course?.courseInformation.summary}
-        </p>
+        <p className="text-sm text-gray-700 mb-2 w-[80%]">{props.course?.courseInformation.summary}</p>
         <p className="mb-3 text-xs font-normal text-gray-600 dark:text-gray-400">
           Created by {props.course?.teacher.fullName}
         </p>
         <div className="flex items-center">
-          <span className="text-amber-600 mr-1 font-bold">
-            {props.course?.courseRating}
-          </span>
-          <Rating
-            defaultValue={props.course?.courseRating}
-            precision={0.5}
-            size="small"
-            readOnly
-          />
+          <span className="text-amber-600 mr-1 font-bold">{props.course?.courseRating}</span>
+          <Rating value={props.course?.courseRating} precision={0.5} size="small" readOnly />
         </div>
-        <p className="text-xs font-normal text-gray-700 dark:text-gray-400">
-          2.5 total hours - 84 lectures
-        </p>
+        <p className="text-xs font-normal text-gray-700 dark:text-gray-400">2.5 total hours - 84 lectures</p>
       </div>
 
       <h5 className="absolute right-2 top-1 text-xl dark:text-gray-100 text-violet-600">

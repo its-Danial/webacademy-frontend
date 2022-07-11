@@ -6,26 +6,35 @@ import { courses } from "../../helper/homeCourseSelectionList";
 import { useQuery } from "react-query";
 import { courseType } from "../../model/course";
 import { getAllCoursesByCategory, getAllCoursesByTopic } from "../../network/api/course";
+import { useNavigate } from "react-router-dom";
 
 import HomeCarousel from "./HomeCarousel";
 
 type CourseSelectionProps = {};
 
 const CourseSelection: FC<CourseSelectionProps> = (props) => {
+  const navigate = useNavigate();
+
   const [topicDesc, setTopicDesc] = useState(courses[0]);
 
-  const { data: categoryCourses } = useQuery<courseType[], Error>(
-    ["category-courses", topicDesc.text],
-    () => getAllCoursesByCategory(topicDesc.text)
+  const { data: categoryCourses } = useQuery<courseType[], Error>(["category-courses", topicDesc.text], () =>
+    getAllCoursesByCategory(topicDesc.text)
   );
 
-  const { data: topicCourses } = useQuery<courseType[], Error>(
-    ["topic-courses", topicDesc.text],
-    () => getAllCoursesByTopic(topicDesc.text)
+  const { data: topicCourses } = useQuery<courseType[], Error>(["topic-courses", topicDesc.text], () =>
+    getAllCoursesByTopic(topicDesc.text)
   );
 
   const onSelectTopicClickHandler = (courseIndex: number) => {
     setTopicDesc((prevState) => courses[courseIndex]);
+  };
+
+  const onExploreClickHandler = () => {
+    if (topicDesc.type === "category") {
+      navigate(`/courses/${topicDesc.text}`);
+    } else {
+      navigate(`/topic/${topicDesc.text}`);
+    }
   };
 
   return (
@@ -53,11 +62,10 @@ const CourseSelection: FC<CourseSelectionProps> = (props) => {
       {/* NOTE: The box area with border */}
       <BorderCard>
         <div className="md:w-2/3 w-full mb-6">
-          <h1 className="text-2xl text-gray-800 font-semibold dark:text-gray-100">
-            {topicDesc.heading}
-          </h1>
+          <h1 className="text-2xl text-gray-800 font-semibold dark:text-gray-100">{topicDesc.heading}</h1>
           <p className="mt-2 mb-4 text-gray-500 dark:text-gray-400">{topicDesc.paragraph}</p>
           <button
+            onClick={onExploreClickHandler}
             type="button"
             className="bg-gray-50 text-gray-900 hover:text-white border border-gray-800 
             hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 

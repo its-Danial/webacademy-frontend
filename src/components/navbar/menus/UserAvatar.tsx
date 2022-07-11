@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { Avatar, IconButton, Tooltip, Menu, MenuItem, ListItemIcon, Divider, Badge, ListItemText } from "@mui/material";
 import { Logout, ShoppingCart } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { authSliceActions } from "../../../store/authSlice";
 import { shoppingCartType } from "../../../model/shoppingCart";
 import { useQuery } from "react-query";
@@ -16,8 +17,9 @@ type UserAvatarProps = {
 const UserAvatar: FC<UserAvatarProps> = (props) => {
   const authUserId = useSelector((state: any) => state.auth.id);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const { data: cartItems } = useQuery<shoppingCartType, Error>(["cart-items", authUserId], () =>
+  const { data: cartItems } = useQuery<shoppingCartType, Error>(["cart-items", Number(authUserId)], () =>
     getCartByStudentId(authUserId)
   );
 
@@ -32,6 +34,7 @@ const UserAvatar: FC<UserAvatarProps> = (props) => {
 
   const onLogOutClickHandler = () => {
     dispatch(authSliceActions.setLogOut());
+    navigate("/");
   };
 
   const onCartClickHandler = () => {

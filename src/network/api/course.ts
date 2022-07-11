@@ -11,12 +11,12 @@ export const getAllCoursesByTopic = async (topic: string | undefined): Promise<c
   return response.data;
 };
 
-export const getCourseById = async (courseId: string | undefined): Promise<courseType> => {
+export const getCourseById = async (courseId: number | undefined): Promise<courseType> => {
   const response = await axiosClient.get(`/course/get-by-id/${courseId}`);
   return response.data;
 };
 
-export const getStudentCoursesByStudentId = async (studentId: string): Promise<courseType[]> => {
+export const getStudentCoursesByStudentId = async (studentId: number): Promise<courseType[]> => {
   const response = await axiosClient.get(`/course/get-by-student-id/${studentId}`);
   return response.data;
 };

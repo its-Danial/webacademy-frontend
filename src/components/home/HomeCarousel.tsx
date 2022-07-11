@@ -30,6 +30,7 @@ const HomeCarousel: FC<HomeCarouselProps> = (props) => {
       {props.courses?.map((item, index) => (
         <CourseCard
           key={index}
+          courseId={item.courseId}
           img={item.courseInformation.coverImageUrl}
           courseName={item.title}
           teacherName={item.teacher.fullName}

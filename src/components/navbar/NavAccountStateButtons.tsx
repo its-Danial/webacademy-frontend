@@ -1,8 +1,9 @@
 import { FC } from "react";
-import { Button } from "@mui/material";
+import { Button, IconButton } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import MyCoursesDropDown from "./menus/MyCoursesDropDown";
 import ShoppingCartIcon from "./ShoppingCartIcon";
+import { ShoppingCart } from "@mui/icons-material";
 import UserAvatar from "./menus/UserAvatar";
 import { useSelector } from "react-redux";
 
@@ -32,7 +33,7 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
   const loggedInStateButtons = (
     <>
       <MyCoursesDropDown />
-      <ShoppingCartIcon onCartClick={onLoggedInCartClickHandler} showBadge={true} />
+      <ShoppingCartIcon onCartClick={onLoggedInCartClickHandler} />
       <UserAvatar
         onCartClick={onLoggedInCartClickHandler}
         username={authUserInfo.user.fullName}
@@ -43,7 +44,10 @@ const NavAccountStateButtons: FC<NavAccountStateButtonsProps> = (props) => {
 
   const notLoggedInStateButtons = (
     <>
-      <ShoppingCartIcon onCartClick={onEmptyCartClickHandler} showBadge={false} />
+      <IconButton aria-label="Shopping Cart" onClick={onEmptyCartClickHandler}>
+        <ShoppingCart className="dark:text-gray-300 hover:text-gray-400" />
+      </IconButton>
+
       <Button
         onClick={onLogInClickHandler}
         variant="outlined"

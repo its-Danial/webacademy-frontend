@@ -1,19 +1,46 @@
 import { FC, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, IconButton, Box, Modal, Skeleton, Avatar } from "@mui/material";
 import ReactPlayer from "react-player/youtube";
-import { PlayArrow, FavoriteBorder, Star, AddShoppingCart } from "@mui/icons-material";
+import {
+  PlayArrow,
+  FavoriteBorder,
+  Star,
+  AddShoppingCart,
+  ShoppingCartCheckout,
+  OndemandVideo,
+} from "@mui/icons-material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { courseType } from "../../model/course";
 
 type CourseInfoHeaderProps = {
   course: courseType | undefined;
   isLoading: boolean;
+  mutationIsLoading: boolean;
+  headerButtonType: string;
+  showLoginAlter: boolean;
+  authUserId: number;
+  firstLectureId: number | undefined;
+  onAddToCartClick: () => void;
 };
 
 const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const navigate = useNavigate();
+
+  const onAddToCartClickHandler = () => {
+    props.onAddToCartClick();
+  };
+
+  const onGoToCartClickHandler = () => {
+    navigate(`/cart/${props.authUserId}`);
+  };
+  const onGoToCourseClickHandler = () => {
+    navigate(`/course/${props.course?.courseId}/learn/lecture/${props.firstLectureId}`);
+  };
 
   return (
     <>
@@ -25,7 +52,6 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
             ) : (
               <h1 className="font-serif text-4xl">{props.course?.title}</h1>
             )}
-
             <div className="flex justify-between border-0 border-b-[1px] border-gray-600 border-solid pb-4">
               <div className="flex flex-col justify-between mt-3">
                 {props.isLoading ? (
@@ -55,11 +81,7 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
                     <Avatar className="w-20 h-20 my-2" />
                   </Skeleton>
                 ) : (
-                  <img
-                    className="rounded-full w-20 my-2"
-                    src={props.course?.teacher.avatarPictureUrl}
-                    alt=""
-                  />
+                  <img className="rounded-full w-20 my-2" src={props.course?.teacher.avatarPictureUrl} alt="" />
                 )}
               </div>
             </div>
@@ -75,9 +97,7 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
                     <h2 className="text-2xl">{props.course?.courseRating}</h2>
                     <Star className="m-1 text-amber-300" />
                   </div>
-                  <p className="text-sm font-bold text-gray-300 underline underline-offset-4">
-                    ratings
-                  </p>
+                  <p className="text-sm font-bold text-gray-300 underline underline-offset-4">ratings</p>
                 </div>
                 <div>
                   <h2 className="text-2xl">63hr</h2>
@@ -96,29 +116,68 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
               </div>
             )}
             <div className="flex flex-row mt-5 justify-center">
-              <div className="flex flex-col justify-center basis-1/2">
-                {props.isLoading ? (
-                  <Skeleton variant="text" className="bg-gray-500  w-[80px] h-10" />
-                ) : (
-                  <h2 className="mr-5 text-4xl font-serif">
-                    ${props.course?.courseInformation.price}
-                  </h2>
-                )}
-              </div>
+              {props.headerButtonType === "add-to-cart" && (
+                <div className="flex flex-col justify-center basis-1/2">
+                  {props.isLoading ? (
+                    <Skeleton variant="text" className="bg-gray-500  w-[80px] h-10" />
+                  ) : (
+                    <h2 className="mr-5 text-4xl font-serif">${props.course?.courseInformation.price}</h2>
+                  )}
+                </div>
+              )}
 
               {/* Todo: this needs to change based on if the student has bought this course or not */}
-              <LoadingButton
-                loading={props.isLoading}
-                startIcon={<AddShoppingCart />}
-                loadingPosition="start"
-                className=" w-full normal-case h-14 rounded-none 
+
+              {props.headerButtonType === "add-to-cart" && (
+                <LoadingButton
+                  loading={props.mutationIsLoading}
+                  onClick={onAddToCartClickHandler}
+                  startIcon={<AddShoppingCart />}
+                  loadingPosition="start"
+                  className=" w-full normal-case h-14 rounded-none 
               bg-blue-700 disabled:text-gray-100 disabled:bg-gray-600"
-                variant="contained"
-                disableElevation
-              >
-                Add to cart
-              </LoadingButton>
+                  variant="contained"
+                  disableElevation
+                >
+                  Add to cart
+                </LoadingButton>
+              )}
+
+              {props.headerButtonType === "go-to-course" && (
+                <LoadingButton
+                  onClick={onGoToCourseClickHandler}
+                  loading={props.isLoading}
+                  startIcon={<OndemandVideo />}
+                  loadingPosition="start"
+                  className=" w-full normal-case h-14 rounded-none 
+                  bg-blue-700 disabled:text-gray-100 disabled:bg-gray-600"
+                  variant="contained"
+                  disableElevation
+                >
+                  Go to course
+                </LoadingButton>
+              )}
+
+              {props.headerButtonType === "go-to-cart" && (
+                <LoadingButton
+                  onClick={onGoToCartClickHandler}
+                  loading={props.isLoading}
+                  startIcon={<ShoppingCartCheckout />}
+                  loadingPosition="start"
+                  className=" w-full normal-case h-14 rounded-none 
+                  bg-blue-700 disabled:text-gray-100 disabled:bg-gray-600"
+                  variant="contained"
+                  disableElevation
+                >
+                  Go to cart
+                </LoadingButton>
+              )}
             </div>
+            {props.showLoginAlter && (
+              <div className="flex justify-end">
+                <p className="text-red-500 text-xs mt-2">Please register or login to an existing account</p>
+              </div>
+            )}
           </div>
         </div>
         <div className="text-white w-1/2">
@@ -137,11 +196,7 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <ReactPlayer
-            width={750}
-            height={450}
-            url={props.course?.courseInformation.previewVideoUrl}
-          />
+          <ReactPlayer width={750} height={450} url={props.course?.courseInformation.previewVideoUrl} />
         </Box>
       </Modal>
     </>

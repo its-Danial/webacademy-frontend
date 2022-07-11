@@ -1,4 +1,5 @@
 import { FC, useRef } from "react";
+import { Link } from "react-router-dom";
 import { studentRegisterInfo } from "../../model/studentRegisterInfo";
 
 type SignUpFormProps = {
@@ -30,12 +31,8 @@ const SignUpForm: FC<SignUpFormProps> = (props) => {
         boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
       }}
     >
-      <h1 className="text-lg font-bold text-center dark:text-gray-200">
-        Sign up and start learning
-      </h1>
-      <p className="my-2 text-center text-sm dark:text-gray-300">
-        Begin Your Journey Today
-      </p>
+      <h1 className="text-lg font-bold text-center dark:text-gray-200">Sign up and start learning</h1>
+      <p className="my-2 text-center text-sm dark:text-gray-300">Begin Your Journey Today</p>
       <form onSubmit={onSignUpFormSubmitHandler} className="flex flex-col mt-4">
         <input
           type="text"
@@ -82,12 +79,9 @@ const SignUpForm: FC<SignUpFormProps> = (props) => {
         <div className="flex flex-col items-center mt-5">
           <p className="mt-1 text-sm font-light text-gray-500">
             Register already?
-            <a
-              href="www.google.com"
-              className="ml-1 font-medium text-slate-800 dark:text-blue-400"
-            >
+            <Link to="/login" className="ml-1 font-medium text-slate-800 dark:text-blue-400">
               Log In now
-            </a>
+            </Link>
           </p>
         </div>
       </form>

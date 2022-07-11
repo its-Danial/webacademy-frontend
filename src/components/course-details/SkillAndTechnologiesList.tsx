@@ -14,8 +14,6 @@ const SkillAndTechnologiesList: FC<SkillAndTechnologiesListProps> = (props) => {
     skillsAndTechnologies.push(item.categoryName);
   });
 
-  console.log(skillsAndTechnologies);
-
   return (
     <div className="mx-auto w-2/3 p-9">
       <h2 className="text-gray-800">Skills and technologies</h2>
