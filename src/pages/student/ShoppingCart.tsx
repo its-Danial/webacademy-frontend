@@ -1,24 +1,30 @@
 import { FC } from "react";
-import CartHeader from "../../components/cart/CartHeader";
-import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import CartHeader from "../../components/cart/CartHeader";
+import { useQuery, useQueryClient, useMutation } from "react-query";
 import CartCourseCard from "../../components/UI/CartCourseCard";
 import CheckOutBox from "../../components/UI/CheckOutBox";
 import MainContainer from "../../components/layout/MainContainer";
-import { useQuery, useQueryClient, useMutation } from "react-query";
 import { shoppingCartType } from "../../model/shoppingCart";
 import { getCartByStudentId } from "../../network/api/shoppingCart";
 import EmptyCart from "../../components/cart/EmptyCart";
 import { deleteCourseFromCart } from "../../network/api/shoppingCart";
+import { shoppingCartTotalCalculator } from "../../helper/cartTotalCalculator";
 
 type ShoppingCartProps = {};
 
 const ShoppingCart: FC<ShoppingCartProps> = (props) => {
   const queryClient = useQueryClient();
   const { studentId } = useParams();
+  const authUserId: number = useSelector((state: any) => state.auth.id);
 
-  const { data: cartItems } = useQuery<shoppingCartType, Error>(["cart-items", Number(studentId)], () =>
-    getCartByStudentId(Number(studentId))
+  // Note: will only run if user is logged in
+  const { data: cartItems } = useQuery<shoppingCartType, Error>(
+    ["cart-items", Number(studentId)],
+    () => getCartByStudentId(Number(studentId)),
+    { enabled: !!authUserId }
   );
 
   const deleteCourseFromCartMutation = useMutation(deleteCourseFromCart, {
@@ -33,6 +39,8 @@ const ShoppingCart: FC<ShoppingCartProps> = (props) => {
       courseId: courseId,
     });
   };
+
+  const cartTotal = shoppingCartTotalCalculator(cartItems);
 
   return (
     <>
@@ -57,7 +65,7 @@ const ShoppingCart: FC<ShoppingCartProps> = (props) => {
                   />
                 ))}
               </div>
-              <CheckOutBox />
+              <CheckOutBox cartTotal={cartTotal} />
             </div>
           </div>
         </MainContainer>
