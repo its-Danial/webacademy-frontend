@@ -39,7 +39,7 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
     navigate(`/cart/${props.authUserId}`);
   };
   const onGoToCourseClickHandler = () => {
-    navigate(`/course/${props.course?.courseId}/learn/lecture/${props.firstLectureId}`);
+    navigate(`/course/${props.course?.courseId}/learn/lecture/`);
   };
 
   return (

@@ -15,12 +15,16 @@ type MyCoursesDropDownProps = {};
 const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
   const authUserId: number = useSelector((state: any) => state.auth.id);
 
-  const { data: studentProgresses } = useQuery<progressType[], Error>(["student-progresses", authUserId], () =>
-    getProgressByStudentId(authUserId)
+  const { data: studentProgresses } = useQuery<progressType[], Error>(
+    ["student-progresses", authUserId],
+    () => getProgressByStudentId(authUserId),
+    { enabled: !!authUserId }
   );
 
-  const { data: studentCourses } = useQuery<courseType[], Error>(["student-courses", authUserId], () =>
-    getStudentCoursesByStudentId(authUserId)
+  const { data: studentCourses } = useQuery<courseType[], Error>(
+    ["student-courses", authUserId],
+    () => getStudentCoursesByStudentId(authUserId),
+    { enabled: !!authUserId }
   );
 
   const progressPerCourseList = calculateProgress(studentProgresses);
@@ -39,6 +43,7 @@ const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
 
   const menuWithCourses = studentCourses?.map((course, index) => (
     <MyCoursesProgressItem
+      courseId={course.courseId}
       key={uuidv4()}
       img={course.courseInformation.coverImageUrl}
       title={course.title}

@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, Typography, Card, CardContent, CardMedia, CardActionArea, Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
@@ -9,11 +10,18 @@ type MyCoursesProgressItemProps = {
   title: string;
   progress: number;
   showDivider: boolean;
+  courseId: number;
 };
 
 const MyCoursesProgressItem: FC<MyCoursesProgressItemProps> = (props) => {
+  const navigate = useNavigate();
+
+  const onMyCourseCardClickHandler = () => {
+    navigate(`/course/${props.courseId}/learn/lecture`);
+  };
+
   return (
-    <CardActionArea onClick={() => console.log("hello")}>
+    <CardActionArea onClick={onMyCourseCardClickHandler}>
       <Card elevation={0} sx={{ display: "flex", maxWidth: 300 }}>
         <CardMedia
           component="img"

@@ -18,9 +18,9 @@ import { getCartByStudentId, addCourseToCart } from "../../network/api/shoppingC
 type CourseDetailsPageProps = {};
 
 const CourseDetailsPage: FC<CourseDetailsPageProps> = (props) => {
+  const { courseId } = useParams();
   const [headerDisplayButton, setHeaderDisplayButton] = useState<string>("add-to-cart");
   const [showLoginAlter, setShowLoginAlter] = useState<boolean>(false);
-  const { courseId } = useParams();
   const queryClient = useQueryClient();
   const authUserId: number = useSelector((state: any) => state.auth.id);
 

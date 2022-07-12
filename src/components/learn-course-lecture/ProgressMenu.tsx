@@ -1,14 +1,12 @@
 import { FC, useState } from "react";
-import {
-  Menu,
-  IconButton,
-  Typography,
-  Box,
-  CircularProgress,
-} from "@mui/material";
+import { Menu, IconButton, Typography, Box, CircularProgress } from "@mui/material";
 import EmojiEventsOutlinedIcon from "@mui/icons-material/EmojiEventsOutlined";
+import { progressType } from "../../model/studentProgress";
+import { calculateSingleProgress } from "../../helper/progressCalculator";
 
-type ProgressMenuProps = {};
+type ProgressMenuProps = {
+  progress: progressType | undefined;
+};
 
 const ProgressMenu: FC<ProgressMenuProps> = (props) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -19,6 +17,8 @@ const ProgressMenu: FC<ProgressMenuProps> = (props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const courseProgress = calculateSingleProgress(props.progress?.completedLectures, props.progress?.totalLectures);
 
   return (
     <div>
@@ -31,7 +31,7 @@ const ProgressMenu: FC<ProgressMenuProps> = (props) => {
         <Box sx={{ position: "relative", display: "inline-flex" }}>
           {/* TODO: update progress here */}
           <CircularProgress
-            value={50}
+            value={courseProgress}
             size={48}
             className="text-purple-600"
             variant="determinate"
@@ -85,16 +85,11 @@ const ProgressMenu: FC<ProgressMenuProps> = (props) => {
       >
         {/*<p>Turn what you know into an <br/> opportunity*/}
         {/*    and reach millions <br/> around the world.</p>*/}
-        <Typography
-          sx={{ fontWeight: "bold", marginBottom: 2 }}
-          align={"center"}
-        >
+        <Typography sx={{ fontWeight: "bold", marginBottom: 2 }} align={"center"}>
           {/* TODO: make this dynamic */}
-          39 of 64 complete.
+          {props.progress?.completedLectures} of {props.progress?.totalLectures} complete.
         </Typography>
-        <Typography variant="body2">
-          Finish course to get your certificate
-        </Typography>
+        <Typography variant="body2">Finish course to get your certificate</Typography>
       </Menu>
     </div>
   );

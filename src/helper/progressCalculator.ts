@@ -18,3 +18,11 @@ export const calculateProgress = (studentProgress: progressType[] | undefined) =
 
   return progressPerCourseList;
 };
+
+export const calculateSingleProgress = (completedLectures: number | undefined, totalLectures: number | undefined) => {
+  if (completedLectures && totalLectures) {
+    return (completedLectures / totalLectures) * 100;
+  } else {
+    return 0;
+  }
+};

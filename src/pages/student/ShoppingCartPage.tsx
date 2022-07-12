@@ -13,9 +13,9 @@ import EmptyCart from "../../components/cart/EmptyCart";
 import { deleteCourseFromCart } from "../../network/api/shoppingCart";
 import { shoppingCartTotalCalculator } from "../../helper/cartTotalCalculator";
 
-type ShoppingCartProps = {};
+type ShoppingCartPageProps = {};
 
-const ShoppingCart: FC<ShoppingCartProps> = (props) => {
+const ShoppingCartPage: FC<ShoppingCartPageProps> = (props) => {
   const queryClient = useQueryClient();
   const { studentId } = useParams();
   const authUserId: number = useSelector((state: any) => state.auth.id);
@@ -44,7 +44,7 @@ const ShoppingCart: FC<ShoppingCartProps> = (props) => {
 
   return (
     <>
-      {cartItems?.courses.length === 0 ? (
+      {cartItems?.courses.length === 0 || !authUserId ? (
         <EmptyCart />
       ) : (
         <MainContainer>
@@ -73,4 +73,4 @@ const ShoppingCart: FC<ShoppingCartProps> = (props) => {
     </>
   );
 };
-export default ShoppingCart;
+export default ShoppingCartPage;

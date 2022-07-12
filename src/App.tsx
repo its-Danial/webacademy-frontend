@@ -3,7 +3,7 @@ import MainLayout from "./components/layout/MainLayout";
 import HomePage from "./pages/student/HomePage";
 import LogInPage from "./pages/student/LogInPage";
 import SignUpPage from "./pages/student/SignUpPage";
-import ShoppingCart from "./pages/student/ShoppingCart";
+import ShoppingCartPage from "./pages/student/ShoppingCartPage";
 import EmptyCart from "./components/cart/EmptyCart";
 import CheckOutPage from "./pages/student/CheckOutPage";
 import PurchasedAlert from "./components/UI/PurchasedAlert";
@@ -26,7 +26,7 @@ export default function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LogInPage />} />
           <Route path="/cart" element={<EmptyCart />} />
-          <Route path="/cart/:studentId" element={<ShoppingCart />} />
+          <Route path="/cart/:studentId" element={<ShoppingCartPage />} />
           <Route path="/checkout/:studentId" element={<CheckOutPage />} />
           {/* Details page */}
           <Route path="/course/:courseId" element={<CourseDetailsPage />} />
@@ -35,7 +35,7 @@ export default function App() {
           <Route path="/topic/:topicName" element={<SearchTopicPage />} />
         </Route>
         {/* Learning Page for watching videos */}
-        <Route path="/course/:courseId/learn/lecture/:lectureId" element={<LearnCoursePage />} />
+        <Route path="/course/:courseId/learn/lecture" element={<LearnCoursePage />} />
         {/* Note: Teacher */}
         <Route path="/teacher" element={<h1>Teacher</h1>}></Route>
         <Route path="/teacher/courses" element={<TeacherLayout />} />
