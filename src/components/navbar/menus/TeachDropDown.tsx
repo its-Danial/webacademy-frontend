@@ -1,10 +1,17 @@
 import { FC, useState } from "react";
 import { Button, Menu, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import BlackButton from "../../UI/BlackButton";
 
 type TeachDropDownProps = {};
 
 const TeachDropDown: FC<TeachDropDownProps> = (props) => {
+  const navigate = useNavigate();
+
+  const onLearnMoreClickHandler = () => {
+    navigate("/teacher");
+  };
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -62,14 +69,10 @@ const TeachDropDown: FC<TeachDropDownProps> = (props) => {
       >
         {/*<p>Turn what you know into an <br/> opportunity*/}
         {/*    and reach millions <br/> around the world.</p>*/}
-        <Typography
-          sx={{ fontWeight: "bold", marginBottom: 2 }}
-          align={"center"}
-        >
-          Turn what you know into an <br /> opportunity and reach <br />{" "}
-          millions around the world.
+        <Typography sx={{ fontWeight: "bold", marginBottom: 2 }} align={"center"}>
+          Turn what you know into an <br /> opportunity and reach <br /> millions around the world.
         </Typography>
-        <BlackButton title={"Learn More"} />
+        <BlackButton onClick={onLearnMoreClickHandler} title={"Learn More"} />
       </Menu>
     </>
   );
