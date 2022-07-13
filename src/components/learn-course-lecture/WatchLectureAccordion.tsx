@@ -5,11 +5,7 @@ import { ArrowForwardIosSharp, PlayCircle } from "@mui/icons-material";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionSummary, { AccordionSummaryProps } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import Checkbox from "@mui/material/Checkbox";
-
 import { lectureType } from "../../model/lecture";
-import { bgcolor } from "@mui/system";
 
 type LectureAccordionProps = {
   lectures: lectureType[] | undefined;

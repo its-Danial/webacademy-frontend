@@ -27,6 +27,7 @@ const CourseDetailsPage: FC<CourseDetailsPageProps> = (props) => {
   const { data: course, isLoading } = useQuery<courseType, Error>(["course", Number(courseId)], () =>
     getCourseById(Number(courseId))
   );
+
   const { data: lectures, isLoading: lectureIsLoading } = useQuery<lectureType[], Error>(
     ["lecture", Number(courseId)],
     () => getLecturesByCourseId(Number(courseId))

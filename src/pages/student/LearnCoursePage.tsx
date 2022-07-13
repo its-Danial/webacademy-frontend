@@ -22,13 +22,12 @@ const LearnCoursePage: FC<LearnCoursePageProps> = (props) => {
   const authUserId: number = useSelector((state: any) => state.auth.id);
 
   // fetch the course
-  const { data: course, isLoading } = useQuery<courseType, Error>(["course", Number(courseId)], () =>
+  const { data: course } = useQuery<courseType, Error>(["course", Number(courseId)], () =>
     getCourseById(Number(courseId))
   );
   // fetch its lectures
-  const { data: lectures, isLoading: lectureIsLoading } = useQuery<lectureType[], Error>(
-    ["lecture", Number(courseId)],
-    () => getLecturesByCourseId(Number(courseId))
+  const { data: lectures } = useQuery<lectureType[], Error>(["lecture", Number(courseId)], () =>
+    getLecturesByCourseId(Number(courseId))
   );
 
   // fetch student progress for the current course
@@ -79,7 +78,7 @@ const LearnCoursePage: FC<LearnCoursePageProps> = (props) => {
           <AboutCourseSection />
         </div>
         {/* h-[calc(100vh-5.75rem)] */}
-        <div className="basis-1/3 h-screen sticky top-0 overflow-y-scroll overscroll-contain">
+        <div className="basis-1/3 h-screen sticky top-0 overflow-y-auto overscroll-contain">
           <WatchLectureAccordion onWatchLecture={onWatchLectureClickHandler} lectures={lectures} />
         </div>
       </main>

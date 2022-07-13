@@ -98,16 +98,6 @@ const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
         {/* BUG: this mapping for progress and course might not be correct, check later */}
 
         {studentCourses?.length === 0 ? noCoursesMenu : menuWithCourses}
-
-        {/* {studentCourses?.map((course, index) => (
-          <MyCoursesProgressItem
-            key={uuidv4()}
-            img={course.courseInformation.coverImageUrl}
-            title={course.title}
-            progress={progressPerCourseList[index].progress}
-            showDivider={index !== studentCourses.length - 1}
-          />
-        ))} */}
       </Menu>
     </>
   );
