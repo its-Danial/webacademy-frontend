@@ -1,6 +1,11 @@
 import { FC, useRef } from "react";
+import { Link } from "react-router-dom";
+import { logInCredentials } from "../../model/logInCredentials";
 
-type LogInFormProps = {};
+type LogInFormProps = {
+  onLoginSubmit: (credentials: logInCredentials) => void;
+  isError: boolean;
+};
 
 const LogInForm: FC<LogInFormProps> = (props) => {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -13,8 +18,7 @@ const LogInForm: FC<LogInFormProps> = (props) => {
       password: passwordRef.current?.value,
     };
 
-    // TODO: send this data to the LogIn page from where it will be sent to backend api
-    console.log(newStudentAccountDetails);
+    props.onLoginSubmit(newStudentAccountDetails);
   };
 
   return (
@@ -24,9 +28,7 @@ const LogInForm: FC<LogInFormProps> = (props) => {
         boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px",
       }}
     >
-      <h1 className="text-lg font-bold text-center dark:text-gray-200">
-        Log In to Your WebAcademy Account!
-      </h1>
+      <h1 className="text-lg font-bold text-center dark:text-gray-200">Log In to Your WebAcademy Account!</h1>
       <hr className="border-gray-50 sm:mx-auto dark:border-gray-700 lg:my-8" />
       <form onSubmit={onLogInFormSubmitHandler} className="flex flex-col mt-4">
         <input
@@ -45,23 +47,25 @@ const LogInForm: FC<LogInFormProps> = (props) => {
           ref={passwordRef}
           required
         />
+        {props.isError && (
+          <div className="flex justify-center">
+            <p className="text-red-500 mt-4 text-sm">Invalid Username or password, try again</p>
+          </div>
+        )}
         <button
           type="submit"
           className="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent  text-slate-100
             dark:text-slate-300 hover:text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer inline-flex
             w-full justify-center items-center font-medium focus:outline-none dark:bg-blue-700 dark:hover:bg-blue-600 bg-black hover:bg-slate-700"
         >
-          Sign up
+          Log in
         </button>
         <div className="flex flex-col items-center mt-5">
           <p className="mt-1 text-sm font-light text-gray-500">
             Don't Have an account?
-            <a
-              href="www.google.com"
-              className="ml-1 font-medium text-slate-800 dark:text-blue-400"
-            >
+            <Link to="/signup" className="ml-1 font-medium text-slate-800 dark:text-blue-400">
               Sign up now
-            </a>
+            </Link>
           </p>
         </div>
       </form>

@@ -46,11 +46,6 @@
   box-shadow: none;
 }
 
-/* .rec.rec-carousel-item.rec-carousel-item-0.rec-carousel-item-visible {
-  margin: 0px;
-  padding: 0px;
-} */
-
 .rec.rec-slider-container {
   margin: 0px;
   position: relative;
@@ -70,7 +65,3 @@
   right: 0;
   /* position: absolute; */
 }
-
-/* .css-z9uefa-MuiButtonBase-root-MuiAccordionSummary-root {
-  padding: 0px 0px;
-} */

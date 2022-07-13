@@ -2,9 +2,13 @@ import { FC } from "react";
 import { styled, Button } from "@mui/material";
 type BlackButtonProps = {
   title: String;
+  onClick: () => void;
 };
 
 const BlackButton: FC<BlackButtonProps> = (props) => {
+  const onClickHandler = () => {
+    props.onClick();
+  };
   const NavBlackButton = styled(Button)({
     color: "white",
     width: "100%",
@@ -38,6 +42,6 @@ const BlackButton: FC<BlackButtonProps> = (props) => {
     },
   });
 
-  return <NavBlackButton>{props.title}</NavBlackButton>;
+  return <NavBlackButton onClick={onClickHandler}>{props.title}</NavBlackButton>;
 };
 export default BlackButton;

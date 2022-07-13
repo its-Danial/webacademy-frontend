@@ -29,7 +29,7 @@ const categories: categoryItemsInterface = [
     ],
   },
   {
-    "Programming Languages": [
+    "Programming Language": [
       "Python",
       "Java",
       "C#",

@@ -1,11 +1,16 @@
-import { FC, useState } from "react";
+import { FC, Fragment, useState } from "react";
 import { Button, Collapse, Divider } from "@mui/material";
 import FilterListIcon from "@mui/icons-material/FilterList";
 import FilterAccordion from "./FilterAccordion";
 import SearchCourseList from "./SearchCourseList";
-
+import { courseType } from "../../model/course";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { ThreeDots } from "react-loader-spinner";
+import { v4 as uuidv4 } from "uuid";
 type SearchViewProps = {
   searchParam: string | undefined;
+  courses: courseType[] | undefined;
+  isLoading: boolean;
 };
 
 const SearchView: FC<SearchViewProps> = (props) => {
@@ -32,18 +37,17 @@ const SearchView: FC<SearchViewProps> = (props) => {
           </Collapse>
         </div>
         <div className="flex flex-col w-full">
-          <SearchCourseList imgUrl="https://i3.ytimg.com/vi/VPBsE4ul_uw/maxresdefault.jpg" />
-          <Divider className="my-3" />
-          <SearchCourseList imgUrl="https://i3.ytimg.com/vi/VPBsE4ul_uw/maxresdefault.jpg" />
-          <Divider className="my-3" />
-          <SearchCourseList imgUrl="https://i3.ytimg.com/vi/VPBsE4ul_uw/maxresdefault.jpg" />
-          <Divider className="my-3" />
-          <SearchCourseList imgUrl="https://i3.ytimg.com/vi/VPBsE4ul_uw/maxresdefault.jpg" />
-          <Divider className="my-3" />
-          <SearchCourseList imgUrl="https://i3.ytimg.com/vi/VPBsE4ul_uw/maxresdefault.jpg" />
-          <Divider className="my-3" />
-          <SearchCourseList imgUrl="https://i3.ytimg.com/vi/VPBsE4ul_uw/maxresdefault.jpg" />
-          <Divider className="my-3" />
+          {props.isLoading && (
+            <div className="flex justify-center">
+              <ThreeDots color="#1c1d1f" height={150} width={150} />
+            </div>
+          )}
+          {props.courses?.map((course) => (
+            <Fragment key={uuidv4()}>
+              <SearchCourseList course={course} />
+              <Divider className="my-3" />
+            </Fragment>
+          ))}
         </div>
       </div>
     </>

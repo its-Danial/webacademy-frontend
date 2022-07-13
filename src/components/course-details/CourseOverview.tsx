@@ -7,13 +7,22 @@ import certificateIcon from "../../assets/certificateIcon.png";
 import CourseOverViewItem from "./list-items/CourseOverviewItem";
 import LectureAccordion from "./LectureAccordion";
 import DescriptionAccordion from "./DescriptionAccordion";
+import { courseType } from "../../model/course";
+import { lectureType } from "../../model/lecture";
 
-type CourseOverviewProps = {};
+type CourseOverviewProps = {
+  course: courseType | undefined;
+  isLoading: boolean;
+  lectures: lectureType[] | undefined;
+  lectureIsLoading: boolean;
+};
 
 const CourseOverview: FC<CourseOverviewProps> = (props) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const whatToLearn: string[] | undefined = props.course?.courseInformation.whatYouLearn.split(",");
 
   return (
     <>
@@ -23,11 +32,10 @@ const CourseOverview: FC<CourseOverviewProps> = (props) => {
           <div className="flex flex-col basis-1/2">
             <div className="flex flex-col">
               {/* TODO: This will need to be mapped out */}
-              <CourseOverViewItem
-                title="The ins and outs of HTML5, CSS3, and Modern JavaScript for
-              2021"
-              />
-              <CourseOverViewItem title="Make REAL web applications using cutting-edge technologies" />
+
+              {whatToLearn?.map((item) => (
+                <CourseOverViewItem key={item} title={item} />
+              ))}
             </div>
             <LoadingButton
               onClick={handleOpen}
@@ -50,11 +58,7 @@ const CourseOverview: FC<CourseOverviewProps> = (props) => {
                   </div>
                 </div>
                 <div className="flex flex-row">
-                  <img
-                    src={certificateIcon}
-                    className="w-12 h-10 ml-1"
-                    alt=""
-                  />
+                  <img src={certificateIcon} className="w-12 h-10 ml-1" alt="" />
                   <div className="flex items-center ml-3">
                     <h4 className="text-base">Certificate of completion</h4>
                   </div>
@@ -72,11 +76,9 @@ const CourseOverview: FC<CourseOverviewProps> = (props) => {
       >
         {/* TODO: will need to pass course information to them */}
         <Box sx={style}>
-          <DescriptionAccordion />
-          <h2 style={{ marginBottom: "1rem", marginTop: "2rem" }}>
-            Course content
-          </h2>
-          <LectureAccordion />
+          <DescriptionAccordion description={props.course?.courseInformation.description} />
+          <h2 style={{ marginBottom: "1rem", marginTop: "2rem" }}>Course content</h2>
+          <LectureAccordion lectures={props.lectures} lectureIsLoading={props.lectureIsLoading} />
         </Box>
       </Modal>
     </>
@@ -90,6 +92,8 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "auto",
+  maxHeight: "90%",
+  overflowY: "auto",
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,

@@ -1,7 +1,6 @@
 import { FC } from "react";
 import BorderCard from "./BorderCard";
 import CustomerFooter from "./CustomerFooter";
-import Testimonials from "./Testimonials";
 
 type TopCompaniesFooterProps = {};
 
