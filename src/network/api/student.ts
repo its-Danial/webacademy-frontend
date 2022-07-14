@@ -1,8 +1,8 @@
 import axiosClient from "../axiosClient";
-import { studentRegisterInfo } from "../../model/studentRegisterInfo";
+import { accountRegisterInfo } from "../../model/accountRegisterInfo";
 import { logInCredentials } from "../../model/logInCredentials";
 
-export const registerStudent = async (studentInfo: studentRegisterInfo) => {
+export const registerStudent = async (studentInfo: accountRegisterInfo) => {
   const response = await axiosClient.post("/student/register", studentInfo);
   return response.data;
 };

@@ -1,10 +1,15 @@
 import { FC, useState, useRef } from "react";
 import { Box, Typography, Modal, IconButton, TextField, Checkbox, Button, Divider } from "@mui/material";
 import { Close } from "@mui/icons-material";
+import { accountRegisterInfo } from "../../model/accountRegisterInfo";
+import { logInCredentials } from "../../model/logInCredentials";
 
 type TeacherAuthModalProps = {
   authModalOpenState: boolean;
+  isError: boolean;
   authModalHandleClose: () => void;
+  onSignUpSubmit: (userDetails: accountRegisterInfo) => void;
+  onLoginSubmit: (credentials: logInCredentials) => void;
 };
 
 const TeacherAuthModal: FC<TeacherAuthModalProps> = (props) => {
@@ -24,7 +29,7 @@ const TeacherAuthModal: FC<TeacherAuthModalProps> = (props) => {
       password: passwordRef.current?.value,
     };
 
-    console.log(newTeacherAccountDetails);
+    props.onSignUpSubmit(newTeacherAccountDetails);
   };
 
   const onLogInFormSubmitHandler = (event: React.FormEvent) => {
@@ -33,7 +38,7 @@ const TeacherAuthModal: FC<TeacherAuthModalProps> = (props) => {
       email: emailRef.current?.value,
       password: passwordRef.current?.value,
     };
-    console.log(teacherAccountDetails);
+    props.onLoginSubmit(teacherAccountDetails);
   };
 
   //   NOTE: = Sign up Form
@@ -60,10 +65,32 @@ const TeacherAuthModal: FC<TeacherAuthModalProps> = (props) => {
         <Typography variant="body2" sx={{ mt: 2 }}>
           Discover a supportive community of online instructors. Get instant access to all course creation resources.
         </Typography>
-        <TextField inputRef={fullNameRef} required sx={textFiledStyle} label="Full Name" variant="outlined" />
-        <TextField inputRef={emailRef} required sx={textFiledStyle} label="Email" variant="outlined" />
-        <TextField inputRef={usernameRef} required sx={textFiledStyle} label="Username" variant="outlined" />
         <TextField
+          error={props.isError}
+          inputRef={fullNameRef}
+          required
+          sx={textFiledStyle}
+          label="Full Name"
+          variant="outlined"
+        />
+        <TextField
+          error={props.isError}
+          inputRef={emailRef}
+          required
+          sx={textFiledStyle}
+          label="Email"
+          variant="outlined"
+        />
+        <TextField
+          error={props.isError}
+          inputRef={usernameRef}
+          required
+          sx={textFiledStyle}
+          label="Username"
+          variant="outlined"
+        />
+        <TextField
+          error={props.isError}
           inputRef={passwordRef}
           required
           type="password"
@@ -71,6 +98,11 @@ const TeacherAuthModal: FC<TeacherAuthModalProps> = (props) => {
           label="Password"
           variant="outlined"
         />
+        {props.isError && (
+          <Typography component="p" variant="caption" sx={{ color: "red", mt: 1 }}>
+            Username or email already taken
+          </Typography>
+        )}
       </Box>
       <Box
         sx={{
@@ -143,8 +175,16 @@ const TeacherAuthModal: FC<TeacherAuthModalProps> = (props) => {
       </Box>
       <Divider sx={{ mt: 1 }} />
       <Box sx={modalContent}>
-        <TextField inputRef={emailRef} required sx={textFiledStyle} label="Email" variant="outlined" />
         <TextField
+          error={props.isError}
+          inputRef={emailRef}
+          required
+          sx={textFiledStyle}
+          label="Email"
+          variant="outlined"
+        />
+        <TextField
+          error={props.isError}
           inputRef={passwordRef}
           required
           type="password"
@@ -152,6 +192,11 @@ const TeacherAuthModal: FC<TeacherAuthModalProps> = (props) => {
           label="Password"
           variant="outlined"
         />
+        {props.isError && (
+          <Typography component="p" variant="caption" sx={{ color: "red", mt: 1 }}>
+            Username or email incorrect
+          </Typography>
+        )}
       </Box>
 
       <Box sx={modalContent}>
@@ -190,7 +235,7 @@ const modalSignUpContainer = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 415,
-  height: 650,
+  height: 670,
   bgcolor: "background.paper",
   border: "1px solid #000",
   boxShadow: 24,
@@ -202,7 +247,7 @@ const modalLogInContainer = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 415,
-  height: 320,
+  height: 340,
   bgcolor: "background.paper",
   border: "1px solid #000",
   boxShadow: 24,
