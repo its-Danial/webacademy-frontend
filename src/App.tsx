@@ -14,6 +14,11 @@ import LearnCoursePage from "./pages/student/LearnCoursePage";
 import TeacherLayout from "./components/layout/TeacherLayout";
 import ScrollRestoration from "./components/UI/ScrollRestoration";
 import TeacherInfoPage from "./pages/teacher/TeacherInfoPage";
+import TeacherCoursesHomePage from "./pages/teacher/TeacherCoursesHomePage";
+import TeacherCreateCoursePage from "./pages/teacher/TeacherCreateCoursePage";
+import TeacherCourseManageLayout from "./components/layout/TeacherCourseManageLayout";
+import TeacherManageInfoPage from "./pages/teacher/TeacherManageInfoPage";
+import TeacherManageLecturePage from "./pages/teacher/TeacherManageLecturePage";
 
 export default function App() {
   return (
@@ -35,13 +40,21 @@ export default function App() {
           <Route path="/courses/:categoryName" element={<SearchCoursesPage />} />
           <Route path="/topic/:topicName" element={<SearchTopicPage />} />
           {/* Lear about being a teacher page */}
-          <Route path="/teacher" element={<TeacherInfoPage />} />
+          <Route path="/teacher-info" element={<TeacherInfoPage />} />
         </Route>
         {/* Learning Page for watching videos */}
         <Route path="/course/:courseId/learn/lecture" element={<LearnCoursePage />} />
         {/* Note: Teacher */}
-        <Route path="/teacher/courses" element={<TeacherLayout />} />
-        <Route path="/teacher/performance" element={<TeacherLayout />} />
+        <Route path="/teacher" element={<TeacherLayout />}>
+          <Route path="/teacher/courses" element={<TeacherCoursesHomePage />} />
+          <Route path="/teacher/performance" element={<h1>performance</h1>} />
+        </Route>
+        <Route path="/teacher/course/create" element={<TeacherCreateCoursePage />} />
+        {/* Note: Manage */}
+        <Route path="/teacher/course/manage" element={<TeacherCourseManageLayout />}>
+          <Route path="/teacher/course/manage/:courseId/information" element={<TeacherManageInfoPage />} />
+          <Route path="/teacher/course/manage/:courseId/content" element={<TeacherManageLecturePage />} />
+        </Route>
       </Routes>
     </ScrollRestoration>
   );

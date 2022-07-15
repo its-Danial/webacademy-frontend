@@ -5,3 +5,9 @@ export type lectureType = {
   lectureUrl: string;
   lectureDuration: string;
 };
+export type createLectureType = {
+  title: string;
+  courseLectureDescription: string;
+  lectureUrl: string;
+  lectureDuration: string;
+};

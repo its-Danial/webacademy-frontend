@@ -11,3 +11,11 @@ export const loginTeacher = async (credentials: logInCredentials) => {
   const response = await axiosClient.post("/teacher/login", credentials);
   return response.data;
 };
+
+export const updateTeacherBioAndAvatar = async (
+  teacherId: number,
+  newInfo: { bioText: string; avatarPictureUrl: string }
+) => {
+  const response = await axiosClient.put(`/teacher/edit/${teacherId}`, newInfo);
+  return response.data;
+};
