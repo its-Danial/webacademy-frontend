@@ -12,14 +12,14 @@ type AddLectureCardProps = {
 
 const AddLectureCard: FC<AddLectureCardProps> = (props) => {
   return (
-    <div className="flex flex-row bg-gray-100 p-6  mb-3 border border-solid border-gray-300">
+    <div className="group flex flex-row bg-gray-100 p-6  mb-3 border border-solid border-gray-300">
       <div className="flex flex-col justify-between">
         <h3 className="mr-4 text-3xl ">{props.index + 1}.</h3>
         <Tooltip title="Delete">
           <IconButton
             onClick={() => props.onLectureDeleteHandler(props.index)}
             aria-label="delete-lecture"
-            className="bg-black text-white mr-3 w-5 h-5"
+            className="invisible group-hover:visible bg-black text-white mr-3 w-5 h-5"
           >
             <ClearIcon className="w-4 h-4" />
           </IconButton>

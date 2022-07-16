@@ -26,7 +26,7 @@ const LearnCoursePage: FC<LearnCoursePageProps> = (props) => {
     getCourseById(Number(courseId))
   );
   // fetch its lectures
-  const { data: lectures } = useQuery<lectureType[], Error>(["lecture", Number(courseId)], () =>
+  const { data: lectures } = useQuery<lectureType[], Error>(["lectures", Number(courseId)], () =>
     getLecturesByCourseId(Number(courseId))
   );
 
@@ -53,7 +53,6 @@ const LearnCoursePage: FC<LearnCoursePageProps> = (props) => {
         setSelectedLectureVideo(lecture.lectureUrl);
       }
     });
-    // TODO: apply progress updating mutation here
   };
 
   const onCompleteLectureHandler = () => {

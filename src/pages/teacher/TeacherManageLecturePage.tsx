@@ -1,13 +1,24 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { IconButton, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddLectureCard from "../../components/teacher-create-course/AddLectureCard";
-import { createLectureType } from "../../model/lecture";
+import { createLectureType, lectureType } from "../../model/lecture";
+import { useQuery, useQueryClient } from "react-query";
+import { useParams } from "react-router-dom";
+import { getLecturesByCourseId } from "../../network/api/lecture";
 
 type TeacherManageLecturePageProps = {};
 
 const TeacherManageLecturePage: FC<TeacherManageLecturePageProps> = (props) => {
-  const [lectureFields, setLectureFields] = useState<createLectureType[]>([
+  const { courseId } = useParams();
+  const queryClient = useQueryClient();
+
+  const { data: fetchedLectures, isLoading: lectureIsLoading } = useQuery<lectureType[], Error>(
+    ["lectures", Number(courseId)],
+    () => getLecturesByCourseId(Number(courseId))
+  );
+
+  const [lectureFields, setLectureFields] = useState<createLectureType[] | lectureType[]>([
     {
       title: "",
       courseLectureDescription: "",
@@ -15,6 +26,12 @@ const TeacherManageLecturePage: FC<TeacherManageLecturePageProps> = (props) => {
       lectureDuration: "",
     },
   ]);
+
+  useEffect(() => {
+    if (fetchedLectures && fetchedLectures?.length > 0) {
+      setLectureFields(fetchedLectures);
+    }
+  }, [fetchedLectures]);
 
   const lectureInputFormHandler = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
     let data: createLectureType[] = [...lectureFields];
@@ -50,14 +67,14 @@ const TeacherManageLecturePage: FC<TeacherManageLecturePageProps> = (props) => {
       style={{ boxShadow: "0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 16%)" }}
     >
       <div className="border-b-2 border-0 border-solid border-gray-200">
-        <h1 className="p-8 font-serif font-semibold text-2xl">Course Lectures</h1>
-      </div>
-      <form onSubmit={formSubmitHandler} className="mx-8 flex flex-col">
-        <div className="flex justify-end ">
-          <IconButton onClick={addAnotherLecture} aria-label="add-another-lecture" className="bg-black text-white my-4">
+        <div className="flex justify-between p-8">
+          <h1 className="font-serif font-semibold text-2xl">Course Lectures</h1>
+          <IconButton onClick={addAnotherLecture} aria-label="add-another-lecture" className="bg-black text-white mr-3">
             <AddIcon />
           </IconButton>
         </div>
+      </div>
+      <form onSubmit={formSubmitHandler} className="mx-8 mt-8 flex flex-col">
         {/* Note: Lectures here */}
         {lectureFields.map((lectureField, index) => (
           <AddLectureCard

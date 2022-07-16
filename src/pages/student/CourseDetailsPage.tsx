@@ -29,7 +29,7 @@ const CourseDetailsPage: FC<CourseDetailsPageProps> = (props) => {
   );
 
   const { data: lectures, isLoading: lectureIsLoading } = useQuery<lectureType[], Error>(
-    ["lecture", Number(courseId)],
+    ["lectures", Number(courseId)],
     () => getLecturesByCourseId(Number(courseId))
   );
 
