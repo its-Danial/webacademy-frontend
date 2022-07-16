@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Rating } from "@mui/material";
 import { courseType } from "../../model/course";
 import { useNavigate } from "react-router-dom";
+import notfoundSVG from "../../assets/not-found-svg.svg";
 
 type SearchCourseListProps = {
   course: courseType | undefined;
@@ -23,7 +24,8 @@ const SearchCourseList: FC<SearchCourseListProps> = (props) => {
     >
       <img
         className=" justify-start object-cover h-auto w-60"
-        src={props.course?.courseInformation.coverImageUrl}
+        src={props.course?.courseInformation?.coverImageUrl}
+        onError={(e) => (e.currentTarget.src = notfoundSVG)}
         alt=""
       />
 

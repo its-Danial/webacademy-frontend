@@ -11,7 +11,7 @@ module.exports = {
     extend: {
       colors: {
         black: "rgb(28 29 31)",
-        purple: "#5624d0",
+        purpleish: "#5624d0",
       },
       boxShadow: {
         "3xl": "0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%)",

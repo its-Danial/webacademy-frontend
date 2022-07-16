@@ -5,7 +5,6 @@ import SearchView from "../../components/searching/SearchView";
 import { Pagination } from "@mui/material";
 import { useQuery } from "react-query";
 import { getAllCoursesByCategory } from "../../network/api/course";
-
 import { courseType } from "../../model/course";
 
 type SearchCoursesPageProps = {};
@@ -13,9 +12,8 @@ type SearchCoursesPageProps = {};
 const SearchCoursesPage: FC<SearchCoursesPageProps> = (props) => {
   const { categoryName } = useParams<string>();
 
-  const { data: courses, isLoading } = useQuery<courseType[], Error>(
-    ["category-courses", categoryName],
-    () => getAllCoursesByCategory(categoryName)
+  const { data: courses, isLoading } = useQuery<courseType[], Error>(["category-courses", categoryName], () =>
+    getAllCoursesByCategory(categoryName)
   );
 
   // Todo: pass down search results

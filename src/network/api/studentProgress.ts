@@ -11,10 +11,10 @@ export const getSingleCourseProgress = async (studentId: number, courseId: numbe
   return response.data;
 };
 
-export const updateStudentSingleCourseProgress = async (queryParams: {
+export const updateStudentSingleCourseProgress = async (pathVariable: {
   studentId: number | undefined;
   courseId: number | undefined;
 }): Promise<progressType> => {
-  const response = await axiosClient.put(`/progress/completed-one/${queryParams.studentId}/${queryParams.courseId}`);
+  const response = await axiosClient.put(`/progress/completed-one/${pathVariable.studentId}/${pathVariable.courseId}`);
   return response.data;
 };

@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Card, CardContent, Rating, CardActionArea } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import notfoundSVG from "../../assets/not-found-svg.svg";
 
 // TODO: This should take in all the details that need to be fixed
 type CourseCardProps = {
@@ -28,7 +29,12 @@ const CourseCard: FC<CourseCardProps> = (props) => {
        dark:border-gray-600 dark:shadow-gray-900"
     >
       <CardActionArea>
-        <img src={props.img} alt="" className="w-60 h-36" />
+        <img
+          src={props.img ? props.img : notfoundSVG}
+          onError={(e) => (e.currentTarget.src = notfoundSVG)}
+          alt=""
+          className="w-60 h-36"
+        />
         {/* NOTE: Things under the video picture */}
         <CardContent className="p-1">
           <h5 className="text-base">{props.courseName}</h5>

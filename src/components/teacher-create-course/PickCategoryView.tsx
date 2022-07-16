@@ -3,13 +3,13 @@ import { v4 as uuidv4 } from "uuid";
 import { categories } from "../../helper/categoriesList";
 
 type PickCategoryViewProps = {
-  category: string;
-  onCategorySelect: (category: string) => void;
+  category: number | null;
+  onCategorySelect: (category: number) => void;
 };
 
 const PickCategoryView: FC<PickCategoryViewProps> = (props) => {
   const onCategorySelectHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    props.onCategorySelect(event.target.value);
+    props.onCategorySelect(Number(event.target.value));
   };
 
   return (
@@ -24,8 +24,8 @@ const PickCategoryView: FC<PickCategoryViewProps> = (props) => {
         className="h-12 w-[550px] mt-16 p-3  border border-gray-500 text-gray-500 focus:outline-none hover:bg-gray-100 text-base "
       >
         <option defaultChecked>Choose a category</option>
-        {categories.map((category) => (
-          <option key={uuidv4()} value={Object.keys(category)[0]}>
+        {categories.map((category, index) => (
+          <option key={uuidv4()} value={index + 1}>
             {Object.keys(category)[0]}
           </option>
         ))}

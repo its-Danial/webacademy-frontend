@@ -5,6 +5,7 @@ import { courseType } from "../../model/course";
 import { styled } from "@mui/material/styles";
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import { progressPerCourseType } from "../../helper/progressCalculator";
+import notfoundSVG from "../../assets/not-found-svg.svg";
 
 type MyCurrentCoursesProps = {
   authUserName: string;
@@ -37,7 +38,12 @@ const MyCurrentCourses: FC<MyCurrentCoursesProps> = (props) => {
              md:flex-row md:max-w-md md:max-h-36  hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 
              dark:hover:bg-gray-700 cursor-pointer mr-3"
           >
-            <img className="object-fill max-w-[12em] h-full " src={course.courseInformation.coverImageUrl} alt="" />
+            <img
+              className="object-fill max-w-[12em] h-full "
+              src={course.courseInformation?.coverImageUrl}
+              onError={(e) => (e.currentTarget.src = notfoundSVG)}
+              alt=""
+            />
             <div className="flex flex-col justify-between leading-normal h-full w-32">
               <p className="p-4 text-sm font-bold tracking-tight text-gray-500 dark:text-white">
                 {truncateString(course.title, 30)}

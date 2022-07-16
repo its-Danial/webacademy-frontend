@@ -6,7 +6,7 @@ type TeacherCoursesGuideSectionProps = {};
 const TeacherCoursesGuideSection: FC<TeacherCoursesGuideSectionProps> = (props) => {
   return (
     <>
-      <div>
+      <div className="mt-12">
         <div className="flex justify-center">
           <p className="text-gray-500">Based on your experience, we think these resources will be helpful.</p>
         </div>

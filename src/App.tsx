@@ -51,9 +51,9 @@ export default function App() {
         </Route>
         <Route path="/teacher/course/create" element={<TeacherCreateCoursePage />} />
         {/* Note: Manage */}
-        <Route path="/teacher/course/manage" element={<TeacherCourseManageLayout />}>
-          <Route path="/teacher/course/manage/:courseId/information" element={<TeacherManageInfoPage />} />
-          <Route path="/teacher/course/manage/:courseId/content" element={<TeacherManageLecturePage />} />
+        <Route path="/teacher/course/manage/" element={<TeacherCourseManageLayout />}>
+          <Route path="/teacher/course/manage/:courseTitle/:courseId/information" element={<TeacherManageInfoPage />} />
+          <Route path="/teacher/course/manage/:courseTitle/:courseId/content" element={<TeacherManageLecturePage />} />
         </Route>
       </Routes>
     </ScrollRestoration>

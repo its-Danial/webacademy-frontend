@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Box, Typography, Card, CardContent, CardMedia, CardActionArea, Divider } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
+import notfoundSVG from "../../../../assets/not-found-svg.svg";
 
 // Note: it will take in course information
 type MyCoursesProgressItemProps = {
@@ -33,6 +34,7 @@ const MyCoursesProgressItem: FC<MyCoursesProgressItemProps> = (props) => {
             padding: 1,
           }}
           image={props.img}
+          onError={(e: any) => (e.currentTarget.src = notfoundSVG)}
           alt={props.title}
         />
         <Box

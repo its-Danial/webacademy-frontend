@@ -34,7 +34,7 @@ const TeacherCreateNavBar: FC<TeacherCreateNavBarProps> = (props) => {
             Step {props.currentStep} of {props.totalSteps}
           </h4>
         </div>
-        <Button onClick={onExitClickHandler} color="inherit" className="text-purple normal-case mr-4 text-lg">
+        <Button onClick={onExitClickHandler} color="inherit" className="text-purpleish normal-case mr-4 text-lg">
           Exit
         </Button>
       </div>

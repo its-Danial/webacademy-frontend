@@ -8,11 +8,12 @@ import TeacherManageNavBar from "./TeacherManageNavBar";
 type TeacherCourseManageLayoutProps = {};
 
 const TeacherCourseManageLayout: FC<TeacherCourseManageLayoutProps> = (props) => {
-  const { courseId } = useParams();
+  const { courseId, courseTitle } = useParams();
+
   return (
     <div className="flex flex-col min-h-screen dark:bg-gray-800">
       {/* NavBar */}
-      <TeacherManageNavBar />
+      <TeacherManageNavBar courseTitle={courseTitle} />
       <main className="flex-grow w-[90%] mx-auto">
         <div className="flex flex-row w-[95%] mt-11 mx-auto">
           <div className="flex flex-col w-80">
@@ -24,7 +25,7 @@ const TeacherCourseManageLayout: FC<TeacherCourseManageLayoutProps> = (props) =>
                     ? "border-l-[5px] border-0 border-solid border-black no-underline py-2 text-gray-600"
                     : "border-l-[5px] border-0 border-solid border-transparent no-underline py-2 text-gray-600"
                 }
-                to={`/teacher/course/manage/${courseId}/information`}
+                to={`/teacher/course/manage/${encodeURI(String(courseTitle))}/${courseId}/information`}
               >
                 <div className="flex flex-row items-center justify-start ml-7">
                   <InfoOutlined />
@@ -39,7 +40,7 @@ const TeacherCourseManageLayout: FC<TeacherCourseManageLayoutProps> = (props) =>
                     ? "border-l-[5px] border-0 border-solid border-black no-underline py-2 text-gray-600"
                     : "border-l-[5px] border-0 border-solid border-transparent no-underline py-2 text-gray-600"
                 }
-                to={`/teacher/course/manage/${courseId}/content`}
+                to={`/teacher/course/manage/${encodeURI(String(courseTitle))}/${courseId}/content`}
               >
                 <div className="flex flex-row items-center justify-start ml-7">
                   <QueuePlayNext />

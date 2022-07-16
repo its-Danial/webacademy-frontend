@@ -1,13 +1,20 @@
 import { FC } from "react";
 import { Button } from "@mui/material";
 
-type TeacherCreateCourseCardProps = {};
+type TeacherCreateCourseCardProps = {
+  onCreateClick: () => void;
+};
 
 const TeacherCreateCourseCard: FC<TeacherCreateCourseCardProps> = (props) => {
+  const onCreateClickHandler = () => {
+    props.onCreateClick();
+  };
+
   return (
     <div className="flex justify-between items-center border-1 border-solid shadow-3xl border-gray-200 p-12 my-12">
       <p className="text-gray-500">Jump Into Course Creation</p>
       <Button
+        onClick={onCreateClickHandler}
         className="rounded-none bg-[#a435f0] normal-case py-3 px-16 text-base"
         variant="contained"
         disableElevation

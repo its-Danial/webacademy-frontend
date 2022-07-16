@@ -31,7 +31,7 @@ const HomeCarousel: FC<HomeCarouselProps> = (props) => {
         <CourseCard
           key={index}
           courseId={item.courseId}
-          img={item.courseInformation.coverImageUrl}
+          img={item.courseInformation?.coverImageUrl}
           courseName={item.title}
           teacherName={item.teacher.fullName}
           price={item.courseInformation.price}
