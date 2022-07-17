@@ -6,18 +6,6 @@ interface categoryItemsInterface extends Array<categoryItemInterface> {}
 
 const categories: categoryItemsInterface = [
   {
-    "Web Development": [
-      "Javascript",
-      "React",
-      "Angular",
-      "CSS",
-      "Node.Js",
-      "PHP",
-      "HTML5",
-      "Vue JS",
-    ],
-  },
-  {
     "Data Science": [
       "Python",
       "Machine Learning",
@@ -40,6 +28,9 @@ const categories: categoryItemsInterface = [
       "Spring Framework",
       "C (programming language)",
     ],
+  },
+  {
+    "Web Development": ["Javascript", "React", "Angular", "CSS", "Node.Js", "PHP", "HTML5", "Vue JS"],
   },
   {
     "Mobile Development": [

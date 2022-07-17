@@ -7,9 +7,12 @@ import { courseType } from "../../model/course";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { ThreeDots } from "react-loader-spinner";
 import { v4 as uuidv4 } from "uuid";
+
 type SearchViewProps = {
   searchParam: string | undefined;
   courses: courseType[] | undefined;
+  minRating: number;
+  setMinRating: React.Dispatch<React.SetStateAction<number>>;
   isLoading: boolean;
 };
 
@@ -33,7 +36,7 @@ const SearchView: FC<SearchViewProps> = (props) => {
       <div className="flex flex-row my-6">
         <div>
           <Collapse orientation="horizontal" in={showFilter}>
-            <FilterAccordion />
+            <FilterAccordion minRating={props.minRating} setMinRating={props.setMinRating} />
           </Collapse>
         </div>
         <div className="flex flex-col w-full">

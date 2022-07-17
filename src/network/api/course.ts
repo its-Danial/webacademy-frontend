@@ -47,3 +47,41 @@ export const updateCourseInformationByCourseId = async (data: {
   const response = await axiosClient.put(`/course/manage/${data.courseId}`, data.newCourseInformation);
   return response.data;
 };
+
+export const deleteCourseByCourseId = async (pathVariable: {
+  teacherId: number;
+  courseId: number;
+}): Promise<string> => {
+  const response = await axiosClient.delete(`/course/delete/${pathVariable.teacherId}/${pathVariable.courseId}`);
+  return response.data;
+};
+
+export const getPaginatedCoursesByCategorySearch = async (queryParams: {
+  categoryName: string;
+  pageNumber: number;
+}): Promise<courseType[]> => {
+  const response = await axiosClient.get(
+    `/course/filter?categoryName=${queryParams.categoryName}&page=${queryParams.pageNumber}`
+  );
+  return response.data;
+};
+export const getPaginatedCoursesByCategorySearchAndFilters = async (queryParams: {
+  categoryName: string;
+  pageNumber: number;
+  minRating: number;
+}): Promise<courseType[]> => {
+  const response = await axiosClient.get(
+    `/course/filter?categoryName=${queryParams.categoryName}&minRating=${queryParams.minRating}&maxRating=5.0&page=${queryParams.pageNumber}`
+  );
+  return response.data;
+};
+export const getPaginatedCoursesByTopicSearchAndFilters = async (queryParams: {
+  topicName: string;
+  pageNumber: number;
+  minRating: number;
+}): Promise<courseType[]> => {
+  const response = await axiosClient.get(
+    `/course/filter?topic=${queryParams.topicName}&minRating=${queryParams.minRating}&maxRating=5.0&page=${queryParams.pageNumber}`
+  );
+  return response.data;
+};

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
@@ -21,7 +21,7 @@ const TeacherCreateCoursePage: FC<TeacherCreateCoursePageProps> = (props) => {
   const { data: teacherProfile } = useQuery<teacherType, Error>(
     ["teacher-profile", Number(teacherAuthUser.id)],
     () => getTeacherByTeacherId(Number(teacherAuthUser.id)),
-    { enabled: !!teacherAuthUser.id, retry: 1 }
+    { enabled: !!teacherAuthUser.id }
   );
 
   const createCourseMutation = useMutation(addCourseByTeacherId, {
@@ -45,7 +45,7 @@ const TeacherCreateCoursePage: FC<TeacherCreateCoursePageProps> = (props) => {
     <PickCategoryView category={category} onCategorySelect={setCategory} />,
   ];
 
-  if (!teacherProfile?.avatarPictureUrl || !teacherProfile?.bioText) {
+  if (teacherProfile?.avatarPictureUrl === null || teacherProfile?.bioText === null) {
     views.unshift(
       <BioSettingsView
         bioText={bioText}

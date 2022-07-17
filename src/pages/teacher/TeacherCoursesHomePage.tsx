@@ -1,8 +1,8 @@
 import { FC } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getTeacherCoursesByTeacherId } from "../../network/api/course";
+import { getTeacherCoursesByTeacherId, deleteCourseByCourseId } from "../../network/api/course";
 import { courseType } from "../../model/course";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { ThreeDots } from "react-loader-spinner";
@@ -16,7 +16,7 @@ type TeacherCoursesHomePageProps = {};
 
 const TeacherCoursesHomePage: FC<TeacherCoursesHomePageProps> = (props) => {
   const navigate = useNavigate();
-
+  const queryClient = useQueryClient();
   const teacherAuthUserId: number = useSelector((state: any) => state.teacherAuth.id);
 
   const { data: teacherCourses, isLoading } = useQuery<courseType[], Error>(
@@ -25,8 +25,29 @@ const TeacherCoursesHomePage: FC<TeacherCoursesHomePageProps> = (props) => {
     { enabled: !!teacherAuthUserId, retry: 1 }
   );
 
+  const deleteCourseMutation = useMutation(deleteCourseByCourseId, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["teacher-courses", Number(teacherAuthUserId)]);
+    },
+  });
+
   const onCreateCourseClickHandler = () => {
     navigate("/teacher/course/create");
+  };
+
+  const onCourseDeleteClickHandler = (courseId: number) => {
+    if (!!teacherAuthUserId) {
+      deleteCourseMutation.mutate({
+        courseId: courseId,
+        teacherId: Number(teacherAuthUserId),
+      });
+    }
+  };
+
+  const onManageClickHandler = (courseId: number, courseTitle: string) => {
+    if (!!teacherAuthUserId) {
+      navigate(`/teacher/course/manage/${courseTitle}/${courseId}/information`);
+    }
   };
 
   return (
@@ -51,7 +72,12 @@ const TeacherCoursesHomePage: FC<TeacherCoursesHomePageProps> = (props) => {
             {/* TODO: page content goes from here to here */}
           </div>
           {teacherCourses.map((course) => (
-            <TeacherCurrentCourseCard key={uuidv4()} course={course} />
+            <TeacherCurrentCourseCard
+              onManageClick={onManageClickHandler}
+              onDeleteClick={onCourseDeleteClickHandler}
+              key={uuidv4()}
+              course={course}
+            />
           ))}
         </div>
       )}

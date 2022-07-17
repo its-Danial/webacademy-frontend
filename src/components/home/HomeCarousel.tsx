@@ -27,17 +27,21 @@ const HomeCarousel: FC<HomeCarouselProps> = (props) => {
         { width: 1750, itemsToShow: 6 },
       ]}
     >
-      {props.courses?.map((item, index) => (
-        <CourseCard
-          key={index}
-          courseId={item.courseId}
-          img={item.courseInformation?.coverImageUrl}
-          courseName={item.title}
-          teacherName={item.teacher.fullName}
-          price={item.courseInformation.price}
-          rating={item.courseRating}
-        />
-      ))}
+      {props.courses ? (
+        props.courses?.map((item, index) => (
+          <CourseCard
+            key={index}
+            courseId={item.courseId}
+            img={item.courseInformation?.coverImageUrl}
+            courseName={item.title}
+            teacherName={item.teacher.fullName}
+            price={item.courseInformation.price}
+            rating={item.courseRating}
+          />
+        ))
+      ) : (
+        <></>
+      )}
     </Carousel>
   );
 };
