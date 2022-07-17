@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import LinearProgress, { linearProgressClasses } from "@mui/material/LinearProgress";
 import { progressPerCourseType } from "../../helper/progressCalculator";
 import notfoundSVG from "../../assets/not-found-svg.svg";
+import { truncateString } from "../../helper/tuncateString";
 
 type MyCurrentCoursesProps = {
   authUserName: string;
@@ -15,14 +16,6 @@ type MyCurrentCoursesProps = {
 
 const MyCurrentCourses: FC<MyCurrentCoursesProps> = (props) => {
   const navigate = useNavigate();
-
-  function truncateString(str: string, num: number) {
-    if (str.length > num) {
-      return str.slice(0, num) + "...";
-    } else {
-      return str;
-    }
-  }
 
   return (
     <div className="px-8 mb-12">
