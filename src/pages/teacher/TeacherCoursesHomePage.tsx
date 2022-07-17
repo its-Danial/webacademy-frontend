@@ -32,7 +32,9 @@ const TeacherCoursesHomePage: FC<TeacherCoursesHomePageProps> = (props) => {
   });
 
   const onCreateCourseClickHandler = () => {
-    navigate("/teacher/course/create");
+    if (!!teacherAuthUserId) {
+      navigate("/teacher/course/create");
+    }
   };
 
   const onCourseDeleteClickHandler = (courseId: number) => {
@@ -58,7 +60,7 @@ const TeacherCoursesHomePage: FC<TeacherCoursesHomePageProps> = (props) => {
         </div>
       )}
       {/* Note: if teacher has courses */}
-      {!isLoading && teacherCourses && (
+      {!isLoading && teacherCourses && teacherCourses?.length > 0 && (
         <div className="mt-12">
           <div className="flex justify-end">
             <Button
@@ -83,7 +85,9 @@ const TeacherCoursesHomePage: FC<TeacherCoursesHomePageProps> = (props) => {
       )}
 
       {/* Note: if teacher doesnt have courses */}
-      {!isLoading && !teacherCourses && <TeacherCreateCourseCard onCreateClick={onCreateCourseClickHandler} />}
+      {!isLoading && (!teacherCourses || (teacherCourses && teacherCourses?.length === 0)) && (
+        <TeacherCreateCourseCard onCreateClick={onCreateCourseClickHandler} />
+      )}
       <TeacherCoursesGuideSection />
     </>
   );

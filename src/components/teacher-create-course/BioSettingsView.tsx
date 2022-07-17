@@ -48,6 +48,7 @@ const BioSettingsView: FC<BioSettingsViewProps> = (props) => {
 
           <div className="flex mt-3 h-9 flex-row">
             <input
+              autoComplete="on"
               type="text"
               onChange={onAvatarUrlEnter}
               value={props.avatarUrl}

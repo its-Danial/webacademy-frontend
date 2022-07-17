@@ -3,20 +3,31 @@ import { IconButton, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import AddLectureCard from "../../components/teacher-create-course/AddLectureCard";
 import { createLectureType, lectureType } from "../../model/lecture";
-import { useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
-import { getLecturesByCourseId } from "../../network/api/lecture";
+import { deleteLecture, getLecturesByCourseId, updateAllLectures } from "../../network/api/lecture";
+import { useSelector } from "react-redux";
+import TeacherCourseUpdateAlert from "../../components/UI/TeacherCourseUpdateAlert";
 
 type TeacherManageLecturePageProps = {};
 
 const TeacherManageLecturePage: FC<TeacherManageLecturePageProps> = (props) => {
   const { courseId } = useParams();
   const queryClient = useQueryClient();
+  const teacherAuthUserId = useSelector((state: any) => state.teacherAuth.id);
+
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
   const { data: fetchedLectures, isLoading: lectureIsLoading } = useQuery<lectureType[], Error>(
     ["lectures", Number(courseId)],
     () => getLecturesByCourseId(Number(courseId))
   );
+
+  const deleteLectureMutation = useMutation(deleteLecture);
+  const updateAndAddLectureMutation = useMutation(updateAllLectures, {
+    onSuccess: () => queryClient.invalidateQueries(["lectures", Number(courseId)]),
+  });
 
   const [lectureFields, setLectureFields] = useState<createLectureType[] | lectureType[]>([
     {
@@ -51,6 +62,18 @@ const TeacherManageLecturePage: FC<TeacherManageLecturePageProps> = (props) => {
   };
 
   const lectureDeleteHandler = (index: number) => {
+    // @ts-ignore
+    if (lectureFields.at(index)?.courseLectureId && !!teacherAuthUserId) {
+      deleteLectureMutation.mutate(
+        {
+          teacherId: Number(teacherAuthUserId),
+          courseId: Number(courseId),
+          // @ts-ignore
+          lectureId: Number(lectureFields.at(index)?.courseLectureId),
+        },
+        { onSuccess: () => setShowDeleteAlert(true) }
+      );
+    }
     let data: createLectureType[] = [...lectureFields];
     data.splice(index, 1);
     setLectureFields(data);
@@ -58,7 +81,14 @@ const TeacherManageLecturePage: FC<TeacherManageLecturePageProps> = (props) => {
 
   const formSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(lectureFields);
+    updateAndAddLectureMutation.mutate(
+      {
+        teacherId: Number(teacherAuthUserId),
+        courseId: Number(courseId),
+        updatedCourses: lectureFields,
+      },
+      { onSuccess: () => setShowSuccessAlert(true) }
+    );
   };
 
   return (
@@ -75,6 +105,21 @@ const TeacherManageLecturePage: FC<TeacherManageLecturePageProps> = (props) => {
         </div>
       </div>
       <form onSubmit={formSubmitHandler} className="mx-8 mt-8 flex flex-col">
+        {showSuccessAlert && (
+          <TeacherCourseUpdateAlert
+            variant="add"
+            showSuccessAlert={showSuccessAlert}
+            setShowSuccessAlert={setShowSuccessAlert}
+          />
+        )}
+        {showDeleteAlert && (
+          <TeacherCourseUpdateAlert
+            variant="delete"
+            showSuccessAlert={showDeleteAlert}
+            setShowSuccessAlert={setShowDeleteAlert}
+          />
+        )}
+
         {/* Note: Lectures here */}
         {lectureFields.map((lectureField, index) => (
           <AddLectureCard

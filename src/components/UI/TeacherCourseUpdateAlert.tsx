@@ -4,12 +4,17 @@ import IconButton from "@mui/material/IconButton";
 import Collapse from "@mui/material/Collapse";
 import CloseIcon from "@mui/icons-material/Close";
 
-type TeacherCourseUpdateAlertProps = { showSuccessAlert: boolean; setShowSuccessAlert: (newState: boolean) => void };
+type TeacherCourseUpdateAlertProps = {
+  variant: string;
+  showSuccessAlert: boolean;
+  setShowSuccessAlert: (newState: boolean) => void;
+};
 
 const TeacherCourseUpdateAlert: FC<TeacherCourseUpdateAlertProps> = (props) => {
   return (
     <Collapse in={props.showSuccessAlert}>
       <Alert
+        severity={props.variant === "add" ? "success" : "info"}
         action={
           <IconButton
             aria-label="close"
@@ -24,7 +29,7 @@ const TeacherCourseUpdateAlert: FC<TeacherCourseUpdateAlertProps> = (props) => {
         }
         sx={{ mb: 2 }}
       >
-        Course updated successfully
+        {props.variant === "add" ? "Successfully updated" : "Successfully deleted"}
       </Alert>
     </Collapse>
   );

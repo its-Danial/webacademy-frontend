@@ -63,7 +63,11 @@ const TeacherManageInfoPage: FC<TeacherManageInfoPageProps> = (props) => {
       </div>
       <form className="mx-8 mt-9 flex flex-col">
         {showSuccessAlert && (
-          <TeacherCourseUpdateAlert showSuccessAlert={showSuccessAlert} setShowSuccessAlert={setShowSuccessAlert} />
+          <TeacherCourseUpdateAlert
+            variant="add"
+            showSuccessAlert={showSuccessAlert}
+            setShowSuccessAlert={setShowSuccessAlert}
+          />
         )}
         <div>
           <label htmlFor="summary" className="text-base font-bold">
