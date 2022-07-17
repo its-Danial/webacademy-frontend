@@ -74,11 +74,15 @@ const LearnCoursePage: FC<LearnCoursePageProps> = (props) => {
             url={selectedLectureVideo}
             onEnded={onCompleteLectureHandler}
           />
-          <AboutCourseSection />
+          <AboutCourseSection course={course} totalLecture={lectures?.length} />
         </div>
         {/* h-[calc(100vh-5.75rem)] */}
         <div className="basis-1/3 h-screen sticky top-0 overflow-y-auto overscroll-contain">
-          <WatchLectureAccordion onWatchLecture={onWatchLectureClickHandler} lectures={lectures} />
+          <WatchLectureAccordion
+            numberOfCompletedLectures={studentSingleCourseProgress?.completedLectures}
+            onWatchLecture={onWatchLectureClickHandler}
+            lectures={lectures}
+          />
         </div>
       </main>
       <Footer />

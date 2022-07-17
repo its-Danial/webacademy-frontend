@@ -19,9 +19,8 @@ const TeacherManageLecturePage: FC<TeacherManageLecturePageProps> = (props) => {
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
 
-  const { data: fetchedLectures, isLoading: lectureIsLoading } = useQuery<lectureType[], Error>(
-    ["lectures", Number(courseId)],
-    () => getLecturesByCourseId(Number(courseId))
+  const { data: fetchedLectures } = useQuery<lectureType[], Error>(["lectures", Number(courseId)], () =>
+    getLecturesByCourseId(Number(courseId))
   );
 
   const deleteLectureMutation = useMutation(deleteLecture);

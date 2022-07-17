@@ -20,8 +20,10 @@ const PickCategoryView: FC<PickCategoryViewProps> = (props) => {
       <p className="text-base text-gray-500">If you're not sure about the right category, you can change it later.</p>
 
       <select
+        value={Number(props.category)}
         onChange={onCategorySelectHandler}
-        className="h-12 w-[550px] mt-16 p-3  border border-gray-500 text-gray-500 focus:outline-none hover:bg-gray-100 text-base "
+        className="h-12 w-[550px] mt-16 p-3 border border-gray-500 text-gray-500 focus:outline-none 
+        hover:bg-gray-100 text-base"
       >
         <option defaultChecked>Choose a category</option>
         {categories.map((category, index) => (

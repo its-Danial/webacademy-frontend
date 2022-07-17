@@ -9,6 +9,7 @@ import { lectureType } from "../../model/lecture";
 
 type LectureAccordionProps = {
   lectures: lectureType[] | undefined;
+  numberOfCompletedLectures: number | undefined;
   onWatchLecture: (courseId: number) => void;
 };
 
@@ -36,7 +37,7 @@ const LectureAccordion: FC<LectureAccordionProps> = (props) => {
                   readOnly
                   className="align-middle mr-3 relative accent-black w-4 h-4"
                   type="checkbox"
-                  checked={true}
+                  checked={index < Number(props.numberOfCompletedLectures) ? true : false}
                 />
                 <span
                   onClick={() => props.onWatchLecture(lecture.courseLectureId)}

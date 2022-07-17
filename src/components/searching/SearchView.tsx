@@ -19,13 +19,18 @@ type SearchViewProps = {
 const SearchView: FC<SearchViewProps> = (props) => {
   const [showFilter, setShowFilter] = useState<boolean>(true);
 
+  const onShowFiltersHandler = () => {
+    setShowFilter((prevState) => !prevState);
+    props.setMinRating(0);
+  };
+
   return (
     <>
       <h1 className="mb-8 font-serif text-4xl font-semibold text-gray-800 dark:text-gray-200">
         All {props.searchParam} courses
       </h1>
       <Button
-        onClick={() => setShowFilter((prevState) => !prevState)}
+        onClick={onShowFiltersHandler}
         className="border border-gray-900 text-black font-bold text-lg normal-case rounded-none hover:bg-gray-200"
         startIcon={<FilterListIcon />}
         variant="outlined"

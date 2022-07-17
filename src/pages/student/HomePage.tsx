@@ -54,7 +54,7 @@ const HomePage: FC<HomePageProps> = (props) => {
         />
       )}
       <CourseSelection />
-      <div className="px-8  mb-12">
+      <div className="px-8 mb-12">
         <h1 className="text-2xl text-gray-800 font-semibold dark:text-gray-100 mb-3">Students are viewing</h1>
         {/* This is the second carosuel */}
         <HomeCarousel courses={studentSectionCourses} />
