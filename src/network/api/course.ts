@@ -85,3 +85,19 @@ export const getPaginatedCoursesByTopicSearchAndFilters = async (queryParams: {
   );
   return response.data;
 };
+
+export const getTotalEarningForCourseByTeacherId = async (teacherId: number): Promise<number> => {
+  const response = await axiosClient.get(`/course/get-total-price-earned/${teacherId}`);
+  return response.data;
+};
+export const getEarningsPerCourseByTeacherId = async (
+  teacherId: number
+): Promise<
+  {
+    courseId: number;
+    totalEarnings: number;
+  }[]
+> => {
+  const response = await axiosClient.get(`/course/get-total-earning-per-course/${teacherId}`);
+  return response.data;
+};
