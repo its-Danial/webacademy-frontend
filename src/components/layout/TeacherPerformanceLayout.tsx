@@ -11,13 +11,13 @@ const TeacherPerformancePage: FC<TeacherPerformancePageProps> = (props) => {
         <div className="flex flex-col mr-16">
           <NavLink
             to={"/teacher/performance/overview"}
-            className={({ isActive }) => (isActive ? "text-black no-underline" : "no-underline text-gray-500")}
+            className={({ isActive }) => (isActive ? "text-black no-underline" : "no-underline text-gray-400")}
           >
             <h3 className="text-lg">Overview</h3>
           </NavLink>
           <NavLink
             to={"/teacher/performance/students"}
-            className={({ isActive }) => (isActive ? "text-black no-underline" : "no-underline text-gray-500")}
+            className={({ isActive }) => (isActive ? "text-black no-underline" : "no-underline text-gray-400")}
           >
             <h3 className="text-lg mt-6">Students</h3>
           </NavLink>

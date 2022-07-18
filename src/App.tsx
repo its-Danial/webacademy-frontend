@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
 import HomePage from "./pages/student/HomePage";
 import LogInPage from "./pages/student/LogInPage";
@@ -21,6 +21,7 @@ import TeacherManageInfoPage from "./pages/teacher/TeacherManageInfoPage";
 import TeacherManageLecturePage from "./pages/teacher/TeacherManageLecturePage";
 import TeacherPerformanceLayout from "./components/layout/TeacherPerformanceLayout";
 import TeacherPerformanceOverviewPage from "./pages/teacher/TeacherPerformanceOverviewPage";
+import TeacherPerformanceStudentPage from "./pages/teacher/TeacherPerformanceStudentPage";
 
 export default function App() {
   return (
@@ -49,9 +50,11 @@ export default function App() {
         {/* Note: Teacher */}
         <Route path="/teacher" element={<TeacherLayout />}>
           <Route path="/teacher/courses" element={<TeacherCoursesHomePage />} />
+          {/* performance page */}
           <Route path="/teacher/performance" element={<TeacherPerformanceLayout />}>
+            <Route path="/teacher/performance" element={<Navigate to="/teacher/performance/overview" replace />} />
             <Route path="/teacher/performance/overview" element={<TeacherPerformanceOverviewPage />} />
-            <Route path="/teacher/performance/students" element={<h1></h1>} />
+            <Route path="/teacher/performance/students" element={<TeacherPerformanceStudentPage />} />
           </Route>
         </Route>
         <Route path="/teacher/course/create" element={<TeacherCreateCoursePage />} />

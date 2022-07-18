@@ -41,7 +41,7 @@ const UserAvatar: FC<UserAvatarProps> = (props) => {
     props.onCartClick();
   };
 
-  const usernameFirstLetter = props.username.charAt(0);
+  const usernameFirstLetter = props.username.charAt(0).toUpperCase();
 
   return (
     <>

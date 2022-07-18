@@ -49,6 +49,11 @@ const TeacherPerformanceOverviewPage: FC<TeacherPerformanceOverviewPageProps> = 
           <h3 className="text-4xl font-normal mt-2">${teacherTotalEarning}.00</h3>
         </div>
         <div className="min-h-[400px]">
+          {(!teacherCourses || teacherCourses.length === 0) && (
+            <div className="flex justify-center mt-20">
+              <h1 className="text-lg text-gray-600 font-medium">No Data available</h1>
+            </div>
+          )}
           {teacherCourses?.map((course) => (
             <TeacherPerformanceCourseCard
               key={uuidv4()}

@@ -59,7 +59,7 @@ const TeacherLayout: FC<TeacherLayoutProps> = (props) => {
                 Logout
               </button>
               <Avatar className="bg-black text-white w-11 h-11 text-base font-light mr-1">
-                {teacherAuthInfo.user.fullName?.substring(0, 2)}
+                {teacherAuthInfo.user.fullName?.substring(0, 2).toUpperCase()}
               </Avatar>
             </Toolbar>
           </AppBar>
