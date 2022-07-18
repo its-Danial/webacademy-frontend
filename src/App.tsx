@@ -24,6 +24,9 @@ import TeacherPerformanceOverviewPage from "./pages/teacher/TeacherPerformanceOv
 import TeacherPerformanceStudentPage from "./pages/teacher/TeacherPerformanceStudentPage";
 import AdminLayout from "./components/layout/AdminLayout";
 import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
+import AdminStudentsPage from "./pages/admin/AdminStudentsPage";
+import AdminTeacherPage from "./pages/admin/AdminTeacherPage";
+import AdminStudentDetailsPage from "./pages/admin/AdminStudentDetailsPage";
 
 export default function App() {
   return (
@@ -68,8 +71,9 @@ export default function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-          <Route path="/admin/student" element={<h1>student</h1>} />
-          <Route path="/admin/teacher" element={<h1>teacher</h1>} />
+          <Route path="/admin/student" element={<AdminStudentsPage />} />
+          <Route path="/admin/student/details/:studentId" element={<AdminStudentDetailsPage />} />
+          <Route path="/admin/teacher" element={<AdminTeacherPage />} />
           <Route path="/admin/courses" element={<h1>course</h1>} />
         </Route>
       </Routes>

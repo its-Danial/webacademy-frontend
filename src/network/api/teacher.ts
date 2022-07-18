@@ -25,3 +25,8 @@ export const updateTeacherBioAndAvatar = async (newTeacherInfo: {
   const response = await axiosClient.put(`/teacher/edit/${newTeacherInfo.teacherId}`, newTeacherInfo.newInfo);
   return response.data;
 };
+
+export const getAllTeachers = async (): Promise<teacherType[]> => {
+  const response = await axiosClient.get("/teacher/get-all");
+  return response.data;
+};

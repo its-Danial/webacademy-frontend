@@ -13,12 +13,17 @@ export const loginStudent = async (credentials: logInCredentials): Promise<stude
   return response.data;
 };
 
-export const getAll = async (): Promise<student[]> => {
+export const getAllStudents = async (): Promise<student[]> => {
   const response = await axiosClient.get("/student/get-all");
   return response.data;
 };
 
 export const getStudentsByTeacherId = async (teacherId: number): Promise<student[]> => {
   const response = await axiosClient.get(`/student/get-all-by-teacher-id/${teacherId}`);
+  return response.data;
+};
+
+export const getStudentsByStudentId = async (studentId: number): Promise<student> => {
+  const response = await axiosClient.get(`/student/get-by-id/${studentId}`);
   return response.data;
 };
