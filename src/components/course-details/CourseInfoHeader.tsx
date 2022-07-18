@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, IconButton, Box, Modal, Skeleton, Avatar } from "@mui/material";
 import ReactPlayer from "react-player/youtube";
+import notfoundSVG from "../../assets/not-found-svg.svg";
 import {
   PlayArrow,
   FavoriteBorder,
@@ -100,7 +101,7 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
                   <p className="text-sm font-bold text-gray-300 underline underline-offset-4">ratings</p>
                 </div>
                 <div>
-                  <h2 className="text-2xl">63hr</h2>
+                  <h2 className="text-2xl">{props.course?.courseInformation.totalDuration}hr</h2>
                   <p className="text-sm font-bold text-gray-300">total content</p>
                 </div>
                 <div className="absolute right-0">
@@ -184,7 +185,8 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
           <img
             // Note: can also try object-fill
             className="object-fill w-full h-full"
-            src={props.course?.courseInformation.coverImageUrl}
+            src={props.course?.courseInformation?.coverImageUrl}
+            onError={(e) => (e.currentTarget.src = notfoundSVG)}
             alt=""
           />
         </div>

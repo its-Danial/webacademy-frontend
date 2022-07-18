@@ -9,7 +9,7 @@ const TeachDropDown: FC<TeachDropDownProps> = (props) => {
   const navigate = useNavigate();
 
   const onLearnMoreClickHandler = () => {
-    navigate("/teacher");
+    navigate("/teacher-info");
   };
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);

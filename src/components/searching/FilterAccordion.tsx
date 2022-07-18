@@ -2,41 +2,33 @@ import { FC, useState } from "react";
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
-import MuiAccordionSummary, {
-  AccordionSummaryProps,
-} from "@mui/material/AccordionSummary";
+import MuiAccordionSummary, { AccordionSummaryProps } from "@mui/material/AccordionSummary";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
-import {
-  Rating,
-  Box,
-  FormControl,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
-} from "@mui/material";
+import { Rating, Box, FormControl, FormControlLabel, RadioGroup, Radio } from "@mui/material";
 
-type FilterAccordionProps = {};
+type FilterAccordionProps = {
+  minRating: number;
+  setMinRating: React.Dispatch<React.SetStateAction<number>>;
+};
 
 const FilterAccordion: FC<FilterAccordionProps> = (props) => {
   // Note: for filter rating
-  const [filterValue, setFilterValue] = useState<number>(3.0);
+  // const [filterValue, setFilterValue] = useState<number>(3.0);
 
   //Note: for Accordion open
   const [expanded, setExpanded] = useState<string | false>("panel1");
-  const handleAccordionChange =
-    (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
-      setExpanded(newExpanded ? panel : false);
-    };
+  const handleAccordionChange = (panel: string) => (event: React.SyntheticEvent, newExpanded: boolean) => {
+    setExpanded(newExpanded ? panel : false);
+  };
 
-  const onFilterChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setFilterValue((prevState) => +(event.target as HTMLInputElement).value);
-    console.log(filterValue);
+  const onFilterChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.setMinRating((prevState) => +(event.target as HTMLInputElement).value);
+    console.log(props.minRating);
   };
 
   return (
     <Accordion
+      className="dark:bg-gray-700 dark:rounded dark:pl-4 dark:text-white"
       expanded={expanded === "panel1"}
       onChange={handleAccordionChange("panel1")}
     >
@@ -45,11 +37,7 @@ const FilterAccordion: FC<FilterAccordionProps> = (props) => {
       </AccordionSummary>
       <AccordionDetails>
         <FormControl>
-          <RadioGroup
-            value={filterValue}
-            onChange={onFilterChangeHandler}
-            name="radio-buttons-group"
-          >
+          <RadioGroup value={props.minRating} onChange={onFilterChangeHandler} name="radio-buttons-group">
             <FormControlLabel
               value={4.5}
               control={<Radio size="small" className="text-black" />}
@@ -60,13 +48,7 @@ const FilterAccordion: FC<FilterAccordionProps> = (props) => {
                     alignItems: "center",
                   }}
                 >
-                  <Rating
-                    name="size-small"
-                    defaultValue={4.5}
-                    precision={0.5}
-                    readOnly
-                    size="small"
-                  />
+                  <Rating name="size-small" defaultValue={4.5} precision={0.5} readOnly size="small" />
                   <p className="text-sm mt-1 font-light ml-2">4.5 & up</p>
                 </Box>
               }
@@ -81,13 +63,7 @@ const FilterAccordion: FC<FilterAccordionProps> = (props) => {
                     alignItems: "center",
                   }}
                 >
-                  <Rating
-                    name="size-small"
-                    defaultValue={4.0}
-                    precision={0.5}
-                    readOnly
-                    size="small"
-                  />
+                  <Rating name="size-small" defaultValue={4.0} precision={0.5} readOnly size="small" />
                   <p className="text-sm mt-1 font-light ml-2">4.0 & up</p>
                 </Box>
               }
@@ -102,13 +78,7 @@ const FilterAccordion: FC<FilterAccordionProps> = (props) => {
                     alignItems: "center",
                   }}
                 >
-                  <Rating
-                    name="size-small"
-                    defaultValue={3.5}
-                    precision={0.5}
-                    readOnly
-                    size="small"
-                  />
+                  <Rating name="size-small" defaultValue={3.5} precision={0.5} readOnly size="small" />
                   <p className="text-sm mt-1 font-light ml-2">3.5 & up</p>
                 </Box>
               }
@@ -123,13 +93,7 @@ const FilterAccordion: FC<FilterAccordionProps> = (props) => {
                     alignItems: "center",
                   }}
                 >
-                  <Rating
-                    name="size-small"
-                    defaultValue={3.0}
-                    precision={0.5}
-                    readOnly
-                    size="small"
-                  />
+                  <Rating name="size-small" defaultValue={3.0} precision={0.5} readOnly size="small" />
                   <p className="text-sm mt-1 font-light ml-2">3.0 & up</p>
                 </Box>
               }
@@ -144,24 +108,21 @@ export default FilterAccordion;
 
 // Note: styles
 
-const Accordion = styled((props: AccordionProps) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-  border: `2px solid ${theme.palette.divider}`,
-  borderLeft: 0,
-  borderRight: 0,
-  width: 250,
-  marginRight: 45,
-  "&:before": {
-    display: "none",
-  },
-}));
+const Accordion = styled((props: AccordionProps) => <MuiAccordion disableGutters elevation={0} square {...props} />)(
+  ({ theme }) => ({
+    border: `2px solid ${theme.palette.divider}`,
+    borderLeft: 0,
+    borderRight: 0,
+    width: 250,
+    marginRight: 45,
+    "&:before": {
+      display: "none",
+    },
+  })
+);
 
 const AccordionSummary = styled((props: AccordionSummaryProps) => (
-  <MuiAccordionSummary
-    expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />}
-    {...props}
-  />
+  <MuiAccordionSummary expandIcon={<ArrowForwardIosSharpIcon sx={{ fontSize: "0.9rem" }} />} {...props} />
 ))(({ theme }) => ({
   "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
     transform: "rotate(90deg)",

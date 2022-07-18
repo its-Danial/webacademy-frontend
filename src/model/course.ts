@@ -18,7 +18,18 @@ export type courseType = {
     description: string;
     coverImageUrl: string;
     previewVideoUrl: string;
+    totalDuration: number;
   };
   categories: categoryType[];
   teacher: teacherType;
+};
+
+export type newCourseInformation = {
+  price: number;
+  whatYouLearn: string;
+  summary: string;
+  description: string;
+  coverImageUrl: string;
+  previewVideoUrl: string;
+  totalDuration: number;
 };

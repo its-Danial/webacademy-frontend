@@ -1,4 +1,4 @@
-export type studentRegisterInfo = {
+export type accountRegisterInfo = {
   username: string | undefined;
   fullName: string | undefined;
   email: string | undefined;

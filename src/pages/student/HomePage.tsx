@@ -15,6 +15,7 @@ import { progressType } from "../../model/studentProgress";
 import { getProgressByStudentId } from "../../network/api/studentProgress";
 import { getStudentCoursesByStudentId } from "../../network/api/course";
 import { calculateProgress } from "../../helper/progressCalculator";
+import HomeImgBillboard from "../../components/UI/HomeImgBillboard";
 
 type HomePageProps = {};
 
@@ -43,7 +44,8 @@ const HomePage: FC<HomePageProps> = (props) => {
   return (
     <MainContainer>
       <Outlet /> {/* Note: This is the alert after purchase */}
-      <Billboard />
+      {/* <Billboard /> */}
+      <HomeImgBillboard />
       {!!authUserId && studentCourses && studentCourses.length > 0 && (
         <MyCurrentCourses
           studentCourses={studentCourses}
@@ -52,8 +54,8 @@ const HomePage: FC<HomePageProps> = (props) => {
         />
       )}
       <CourseSelection />
-      <div className="px-8  mb-12">
-        <h1 className="text-2xl text-gray-800 font-semibold dark:text-gray-100">Students are viewing</h1>
+      <div className="px-8 mb-12">
+        <h1 className="text-2xl text-gray-800 font-semibold dark:text-gray-100 mb-3">Students are viewing</h1>
         {/* This is the second carosuel */}
         <HomeCarousel courses={studentSectionCourses} />
       </div>

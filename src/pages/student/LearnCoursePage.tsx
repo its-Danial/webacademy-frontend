@@ -26,7 +26,7 @@ const LearnCoursePage: FC<LearnCoursePageProps> = (props) => {
     getCourseById(Number(courseId))
   );
   // fetch its lectures
-  const { data: lectures } = useQuery<lectureType[], Error>(["lecture", Number(courseId)], () =>
+  const { data: lectures } = useQuery<lectureType[], Error>(["lectures", Number(courseId)], () =>
     getLecturesByCourseId(Number(courseId))
   );
 
@@ -53,7 +53,6 @@ const LearnCoursePage: FC<LearnCoursePageProps> = (props) => {
         setSelectedLectureVideo(lecture.lectureUrl);
       }
     });
-    // TODO: apply progress updating mutation here
   };
 
   const onCompleteLectureHandler = () => {
@@ -75,11 +74,15 @@ const LearnCoursePage: FC<LearnCoursePageProps> = (props) => {
             url={selectedLectureVideo}
             onEnded={onCompleteLectureHandler}
           />
-          <AboutCourseSection />
+          <AboutCourseSection course={course} totalLecture={lectures?.length} />
         </div>
         {/* h-[calc(100vh-5.75rem)] */}
         <div className="basis-1/3 h-screen sticky top-0 overflow-y-auto overscroll-contain">
-          <WatchLectureAccordion onWatchLecture={onWatchLectureClickHandler} lectures={lectures} />
+          <WatchLectureAccordion
+            numberOfCompletedLectures={studentSingleCourseProgress?.completedLectures}
+            onWatchLecture={onWatchLectureClickHandler}
+            lectures={lectures}
+          />
         </div>
       </main>
       <Footer />

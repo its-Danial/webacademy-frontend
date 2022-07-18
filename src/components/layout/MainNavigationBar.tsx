@@ -17,10 +17,7 @@ const MainNavigationBar: FC<MainNavigationBarProps> = (props) => {
   };
 
   return (
-    <AppBar
-      className="bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-900"
-      position="sticky"
-    >
+    <AppBar className="bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-900" position="sticky">
       <Toolbar className="flex justify-between text-slate-900">
         {/* Logo  */}
         <Stack direction="row" spacing={2} className="items-center">
@@ -30,10 +27,7 @@ const MainNavigationBar: FC<MainNavigationBarProps> = (props) => {
             src={logo}
             alt="company logo"
           />
-          <Typography
-            variant="h6"
-            className="dark:text-slate-50 hidden sm:block"
-          >
+          <Typography variant="h6" className="dark:text-slate-50 hidden sm:block">
             WebAcademy
           </Typography>
 
@@ -43,11 +37,7 @@ const MainNavigationBar: FC<MainNavigationBarProps> = (props) => {
         {/* TODO: Implement search */}
         <SearchBar />
         {/* Right side */}
-        <Stack
-          direction="row"
-          spacing={2}
-          className="items-center text-white hidden sm:flex"
-        >
+        <Stack direction="row" spacing={2} className="items-center text-white hidden sm:flex">
           {/* Teach on WebAcademy */}
           <TeachDropDown />
           {/* Conditionally Rendered buttons based on account Login State */}

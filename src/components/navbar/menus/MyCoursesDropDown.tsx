@@ -45,7 +45,7 @@ const MyCoursesDropDown: FC<MyCoursesDropDownProps> = (props) => {
     <MyCoursesProgressItem
       courseId={course.courseId}
       key={uuidv4()}
-      img={course.courseInformation.coverImageUrl}
+      img={course.courseInformation?.coverImageUrl}
       title={course.title}
       progress={progressPerCourseList[index]?.progress}
       showDivider={index !== studentCourses.length - 1}

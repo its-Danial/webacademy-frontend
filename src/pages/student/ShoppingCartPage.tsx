@@ -60,7 +60,7 @@ const ShoppingCartPage: FC<ShoppingCartPageProps> = (props) => {
                     price={course.courseInformation.price}
                     teacherName={course.teacher.fullName}
                     courseId={course.courseId}
-                    imgUrl={course.courseInformation.coverImageUrl}
+                    imgUrl={course.courseInformation?.coverImageUrl}
                     onDelete={onDeleteCourseClickHandler}
                   />
                 ))}

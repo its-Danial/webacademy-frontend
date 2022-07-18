@@ -1,9 +1,9 @@
 import { FC, useRef } from "react";
 import { Link } from "react-router-dom";
-import { studentRegisterInfo } from "../../model/studentRegisterInfo";
+import { accountRegisterInfo } from "../../model/accountRegisterInfo";
 
 type SignUpFormProps = {
-  onSignUpSubmit: (userDetails: studentRegisterInfo) => void;
+  onSignUpSubmit: (userDetails: accountRegisterInfo) => void;
 };
 
 const SignUpForm: FC<SignUpFormProps> = (props) => {
