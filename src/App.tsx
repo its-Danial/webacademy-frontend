@@ -22,6 +22,8 @@ import TeacherManageLecturePage from "./pages/teacher/TeacherManageLecturePage";
 import TeacherPerformanceLayout from "./components/layout/TeacherPerformanceLayout";
 import TeacherPerformanceOverviewPage from "./pages/teacher/TeacherPerformanceOverviewPage";
 import TeacherPerformanceStudentPage from "./pages/teacher/TeacherPerformanceStudentPage";
+import AdminLayout from "./components/layout/AdminLayout";
+import AdminDashboardPage from "./pages/admin/AdminDashboardPage";
 
 export default function App() {
   return (
@@ -58,10 +60,17 @@ export default function App() {
           </Route>
         </Route>
         <Route path="/teacher/course/create" element={<TeacherCreateCoursePage />} />
-        {/* Note: Manage */}
+        {/* Note: Teacher Manage */}
         <Route path="/teacher/course/manage/" element={<TeacherCourseManageLayout />}>
           <Route path="/teacher/course/manage/:courseTitle/:courseId/information" element={<TeacherManageInfoPage />} />
           <Route path="/teacher/course/manage/:courseTitle/:courseId/content" element={<TeacherManageLecturePage />} />
+        </Route>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+          <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+          <Route path="/admin/student" element={<h1>student</h1>} />
+          <Route path="/admin/teacher" element={<h1>teacher</h1>} />
+          <Route path="/admin/courses" element={<h1>course</h1>} />
         </Route>
       </Routes>
     </ScrollRestoration>
