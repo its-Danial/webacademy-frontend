@@ -15,7 +15,7 @@ const AdminTeacherPage: FC<AdminTeacherPageProps> = (props) => {
   const { data: teachers, isLoading } = useQuery<teacherType[], Error>("teachers", getAllTeachers);
 
   const onUserCardClickHandler = (userId: number) => {
-    console.log(userId);
+    navigate(`/admin/teacher/details/${userId}`);
   };
 
   return (

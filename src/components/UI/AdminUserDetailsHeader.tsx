@@ -32,7 +32,7 @@ const AdminUserDetailsHeader: FC<AdminUserDetailsHeaderProps> = (props) => {
           </div>
         </div>
       </div>
-      <Button className="px-5 py-3 bg-red-700 rounded-none hover:bg-red-500" disableElevation variant="contained">
+      <Button className="px-5 py-3  bg-red-700  hover:bg-red-500" disableElevation variant="contained">
         Delete user
       </Button>
     </div>

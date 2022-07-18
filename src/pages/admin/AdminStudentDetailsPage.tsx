@@ -1,4 +1,4 @@
-import { Avatar, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { FC } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
