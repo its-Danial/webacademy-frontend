@@ -1,23 +1,10 @@
 import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import {
-  CssBaseline,
-  Box,
-  Toolbar,
-  List,
-  Typography,
-  Divider,
-  IconButton,
-  Badge,
-  Container,
-  Link,
-} from "@mui/material";
+import { CssBaseline, Box, Toolbar, List, Typography, Divider, IconButton, Container, Link } from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import { mainListItems } from "../admin-dashboard/listItems";
 
 import { Outlet } from "react-router-dom";
@@ -56,13 +43,8 @@ function DashboardContent() {
               <MenuIcon />
             </IconButton>
             <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-              Dashboard
+              Admin platform
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

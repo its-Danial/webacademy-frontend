@@ -3,7 +3,7 @@ import { FC } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { student } from "../../model/student";
-
+import { v4 as uuidv4 } from "uuid";
 import { getStudentsByStudentId } from "../../network/api/student";
 import AdminUserDetailsHeader from "../../components/UI/AdminUserDetailsHeader";
 import { courseType } from "../../model/course";
@@ -28,8 +28,6 @@ const AdminStudentDetailsPage: FC<AdminStudentDetailsPageProps> = (props) => {
     getProgressByStudentId(Number(studentId))
   );
 
-  console.log(studentProgresses);
-
   return (
     <div className="py-6">
       <h1 className="font-serif text-4xl">Student Details</h1>
@@ -42,7 +40,7 @@ const AdminStudentDetailsPage: FC<AdminStudentDetailsPageProps> = (props) => {
       />
       <h4 className="mt-12 text-2xl">Student courses</h4>
       {studentCourses?.map((course) => (
-        <div className="flex flex-col">
+        <div key={uuidv4()} className="flex flex-col">
           <div className="hover:bg-gray-100 flex group flex-row justify-between border-1 border-solid shadow-3xl border-gray-200 h-fit mt-3">
             <div className="flex flex-row">
               <img
@@ -65,7 +63,7 @@ const AdminStudentDetailsPage: FC<AdminStudentDetailsPageProps> = (props) => {
               <Button
                 disableElevation
                 variant="text"
-                className="invisible group-hover:visible hover:bg-red-50 text-red-500 cursor-pointer normal-case py-2"
+                className="invisible group-hover:visible hover:bg-red-100 text-red-500 cursor-pointer normal-case px-4 "
               >
                 Delete students course
               </Button>
