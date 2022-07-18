@@ -24,7 +24,7 @@ const CourseCard: FC<CourseCardProps> = (props) => {
   return (
     <Card
       onClick={onCourseCardClickHandler}
-      sx={{ maxWidth: 250, maxHeight: 300, margin: 0, height: 280, position: "relative" }}
+      sx={{ maxWidth: 250, maxHeight: 280, margin: 0, height: 280, position: "relative" }}
       className="shadow-none border-solid border-1 border-slate-200
        text-base dark:bg-gray-700 dark:text-gray-200
        dark:border-gray-600 dark:shadow-gray-900"
@@ -38,7 +38,7 @@ const CourseCard: FC<CourseCardProps> = (props) => {
         />
         {/* NOTE: Things under the video picture */}
         <CardContent className="p-1">
-          <h5 className="text-base">{truncateString(props.courseName, 50)}</h5>
+          <h5 className="text-base">{truncateString(props.courseName, 45)}</h5>
           <p className="text-xs text-gray-500 dark:text-gray-300">{props.teacherName}</p>
           <div className="my-2 flex items-center">
             <span className="text-amber-600 mr-1 font-bold">{props.rating}</span>

@@ -31,7 +31,7 @@ const SearchView: FC<SearchViewProps> = (props) => {
       </h1>
       <Button
         onClick={onShowFiltersHandler}
-        className="border border-gray-900 text-black font-bold text-lg normal-case rounded-none hover:bg-gray-200"
+        className="border border-gray-900 dark:bg-blue-600 dark:text-white text-black font-bold text-lg normal-case rounded-none hover:bg-gray-200"
         startIcon={<FilterListIcon />}
         variant="outlined"
         size="large"

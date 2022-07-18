@@ -19,6 +19,8 @@ import TeacherCreateCoursePage from "./pages/teacher/TeacherCreateCoursePage";
 import TeacherCourseManageLayout from "./components/layout/TeacherCourseManageLayout";
 import TeacherManageInfoPage from "./pages/teacher/TeacherManageInfoPage";
 import TeacherManageLecturePage from "./pages/teacher/TeacherManageLecturePage";
+import TeacherPerformanceLayout from "./components/layout/TeacherPerformanceLayout";
+import TeacherPerformanceOverviewPage from "./pages/teacher/TeacherPerformanceOverviewPage";
 
 export default function App() {
   return (
@@ -47,7 +49,10 @@ export default function App() {
         {/* Note: Teacher */}
         <Route path="/teacher" element={<TeacherLayout />}>
           <Route path="/teacher/courses" element={<TeacherCoursesHomePage />} />
-          <Route path="/teacher/performance" element={<h1>performance</h1>} />
+          <Route path="/teacher/performance" element={<TeacherPerformanceLayout />}>
+            <Route path="/teacher/performance/overview" element={<TeacherPerformanceOverviewPage />} />
+            <Route path="/teacher/performance/students" element={<h1></h1>} />
+          </Route>
         </Route>
         <Route path="/teacher/course/create" element={<TeacherCreateCoursePage />} />
         {/* Note: Manage */}

@@ -102,8 +102,8 @@ const TeacherLayout: FC<TeacherLayoutProps> = (props) => {
           </List>
         </Drawer>
         <Box component="main" sx={{ flexGrow: 1, p: 3, paddingX: "56px" }}>
-          <DrawerHeader />
           <div className="mb-12">
+            <DrawerHeader />
             {/* TODO: page content goes here */}
             <Outlet />
           </div>
@@ -120,7 +120,7 @@ const TeacherLayout: FC<TeacherLayoutProps> = (props) => {
 const drawerWidth = 230;
 
 const openedMixin = (theme: Theme): CSSObject => ({
-  height: "auto",
+  // height: "auto",
   backgroundColor: "#1c1d1f",
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -131,7 +131,7 @@ const openedMixin = (theme: Theme): CSSObject => ({
 });
 
 const closedMixin = (theme: Theme): CSSObject => ({
-  height: "auto",
+  // height: "auto",
   backgroundColor: "#1c1d1f",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,

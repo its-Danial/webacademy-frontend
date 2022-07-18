@@ -27,7 +27,11 @@ const FilterAccordion: FC<FilterAccordionProps> = (props) => {
   };
 
   return (
-    <Accordion expanded={expanded === "panel1"} onChange={handleAccordionChange("panel1")}>
+    <Accordion
+      className="dark:bg-gray-700 dark:rounded dark:pl-4 dark:text-white"
+      expanded={expanded === "panel1"}
+      onChange={handleAccordionChange("panel1")}
+    >
       <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
         <h2>Rating</h2>
       </AccordionSummary>
