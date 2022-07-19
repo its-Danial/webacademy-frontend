@@ -10,7 +10,8 @@ import { courseType } from "../../model/course";
 import { getStudentCoursesByStudentId } from "../../network/api/course";
 import { getProgressByStudentId } from "../../network/api/studentProgress";
 import { progressType } from "../../model/studentProgress";
-import { deleteStudentById } from "../../network/api/admin";
+import { deleteStudentById, deleteStudentsCourse } from "../../network/api/admin";
+import notfoundSVG from "../../assets/not-found-svg.svg";
 
 type AdminStudentDetailsPageProps = {};
 
@@ -31,16 +32,26 @@ const AdminStudentDetailsPage: FC<AdminStudentDetailsPageProps> = (props) => {
     getProgressByStudentId(Number(studentId))
   );
 
-  console.log(studentProgresses);
-
   const deleteUserMutation = useMutation(deleteStudentById, {
     onSuccess: () => {
       queryClient.invalidateQueries("students");
     },
   });
+  const deleteStudentCoursesMutation = useMutation(deleteStudentsCourse, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["student-courses", Number(studentId)]);
+    },
+  });
 
   const onUserDeleteClickHandler = (userId: number) => {
     deleteUserMutation.mutate(userId, { onSuccess: () => navigate("/admin/student/alert", { replace: true }) });
+  };
+
+  const onDeleteStudentsCourses = (courseId: number) => {
+    deleteStudentCoursesMutation.mutate({
+      studentId: Number(studentId),
+      courseId: courseId,
+    });
   };
 
   return (
@@ -63,7 +74,7 @@ const AdminStudentDetailsPage: FC<AdminStudentDetailsPageProps> = (props) => {
                 className="h-24 w-36"
                 src={course.courseInformation.coverImageUrl}
                 alt="{props.course?.title}"
-                //   onError={(e) => (e.currentTarget.src = notfoundSVG)}
+                onError={(e) => (e.currentTarget.src = notfoundSVG)}
               />
               <div className="flex flex-col justify-between p-4">
                 <h5 className="text-gray-800 text-sm">{course.title}</h5>
@@ -79,6 +90,7 @@ const AdminStudentDetailsPage: FC<AdminStudentDetailsPageProps> = (props) => {
                 </p>
               </div>
               <Button
+                onClick={() => onDeleteStudentsCourses(Number(course.courseId))}
                 disableElevation
                 variant="text"
                 className="invisible group-hover:visible hover:bg-red-100 text-red-500 cursor-pointer normal-case px-4 "
