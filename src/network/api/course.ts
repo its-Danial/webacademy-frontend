@@ -106,3 +106,11 @@ export const getCoursesByTitleSearchKey = async (searchKeyTitle: string): Promis
   const response = await axiosClient.get(`course/search?title=${searchKeyTitle}`);
   return response.data;
 };
+
+export const getCoursesByTitleSearchKeyAndPage = async (queryParams: {
+  title: string;
+  page: number;
+}): Promise<courseType[]> => {
+  const response = await axiosClient.get(`/course/search?title=${queryParams.title}&page=${queryParams.page}`);
+  return response.data;
+};
