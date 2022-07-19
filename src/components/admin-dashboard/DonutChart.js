@@ -1,12 +1,16 @@
 import React, { PureComponent } from "react";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
 import Title from "./Title";
-
+// Note: number of students that bought this course with these categories
+// Note: best selling courses by categories
 const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
+  // Web dev
+  { name: "Group A", value: 19 },
+  // programming languages
+  { name: "Group B", value: 14 },
+  //
+  { name: "Group C", value: 9 },
+  // { name: "Group D", value: 200 },
 ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];

@@ -65,7 +65,7 @@ function DashboardContent() {
             <Tooltip title="Navigate to main platform">
               <img
                 onClick={onLogoClickHandler}
-                className="w-10 cursor-pointer hover:bg-slate-200 rounded-full p-1 dark:hover:bg-slate-700"
+                className="w-10 cursor-pointer hover:bg-slate-600 rounded-full p-1 dark:hover:bg-slate-700"
                 src={logo}
                 alt="company logo"
               />

@@ -31,6 +31,7 @@ import AdminTeacherDetailsPage from "./pages/admin/AdminTeacherDetailsPage";
 import AdminDeleteAlert from "./components/UI/AdminDeleteAlert";
 import AdminCoursePage from "./pages/admin/AdminCoursePage";
 import SearchKeywordPage from "./pages/student/SearchKeywordPage";
+import AdminLogIn from "./pages/admin/AdminLoginPage";
 
 export default function App() {
   return (
@@ -75,6 +76,8 @@ export default function App() {
           <Route path="/teacher/course/manage/:courseTitle/:courseId/content" element={<TeacherManageLecturePage />} />
         </Route>
         {/* Note: Admin Platform */}
+
+        <Route path="/admin/login" element={<AdminLogIn />} />
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />

@@ -3,15 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, IconButton, Box, Modal, Skeleton, Avatar } from "@mui/material";
 import ReactPlayer from "react-player/youtube";
 import notfoundSVG from "../../assets/not-found-svg.svg";
-import {
-  PlayArrow,
-  FavoriteBorder,
-  Star,
-  AddShoppingCart,
-  ShoppingCartCheckout,
-  OndemandVideo,
-  Favorite,
-} from "@mui/icons-material";
+import { PlayArrow, Star, AddShoppingCart, ShoppingCartCheckout, OndemandVideo, Favorite } from "@mui/icons-material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { courseType } from "../../model/course";
 

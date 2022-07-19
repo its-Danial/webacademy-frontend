@@ -82,8 +82,8 @@ const Footer: FC<FooterProps> = (props) => {
         </span>
 
         <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
-          <Link to="/admin" className="no-underline  focus:text-blue-500 dark:text-white text-slate-300">
-            <span className=" ml-4 self-center text-sm">Navigate to the admin Platform</span>
+          <Link to="/admin/login" className="no-underline  focus:text-blue-500 dark:text-white text-slate-300">
+            <span className=" ml-4 self-center hover:text-gray-200 text-sm">Navigate to the admin Platform</span>
           </Link>
           <p className="text-slate-300 hover:text-gray-50 dark:hover:text-white">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
