@@ -12,9 +12,9 @@ import {
   getTotalEarningForCourseByTeacherId,
 } from "../../network/api/course";
 import { getTeacherByTeacherId } from "../../network/api/teacher";
-
 import AdminTeacherDetailsCourseCard from "../../components/UI/AdminTeacherDetailsCourseCard";
 import { deleteTeacherById } from "../../network/api/admin";
+import emptySearchSVG from "../../assets/empty-search.svg";
 
 type AdminTeacherDetailsPageProps = {};
 
@@ -52,16 +52,15 @@ const AdminTeacherDetailsPage: FC<AdminTeacherDetailsPageProps> = (props) => {
   const deleteCourseMutation = useMutation(deleteCourseByCourseId, {
     onSuccess: () => {
       queryClient.invalidateQueries(["teacher-courses", Number(teacherId)]);
+      queryClient.invalidateQueries(["teacher-total-earning", Number(teacherId)]);
     },
   });
 
-  // Bug: this does not work now, problem from backend
   const onUserDeleteClickHandler = (userId: number) => {
     deleteUserMutation.mutate(userId, { onSuccess: () => navigate("/admin/teacher/alert", { replace: true }) });
   };
 
   const onDeleteTeacherCourseHandler = (courseId: number) => {
-    // BUG: this does not work now, problem from backend
     deleteCourseMutation.mutate({
       teacherId: Number(teacherId),
       courseId: Number(courseId),
@@ -100,6 +99,12 @@ const AdminTeacherDetailsPage: FC<AdminTeacherDetailsPageProps> = (props) => {
           onDeleteClick={onDeleteTeacherCourseHandler}
         />
       ))}
+      {teacherCourses?.length === 0 && (
+        <div className="flex mx-auto flex-col justify-center text-center my-12">
+          <h2 className="text-gray-500">No courses</h2>
+          <img src={emptySearchSVG} alt="" className="w-1/3 h-1/3 mx-auto" />
+        </div>
+      )}
     </div>
   );
 };

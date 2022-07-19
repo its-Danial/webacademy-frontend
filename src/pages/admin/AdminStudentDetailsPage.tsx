@@ -12,6 +12,7 @@ import { getProgressByStudentId } from "../../network/api/studentProgress";
 import { progressType } from "../../model/studentProgress";
 import { deleteStudentById, deleteStudentsCourse } from "../../network/api/admin";
 import notfoundSVG from "../../assets/not-found-svg.svg";
+import emptySearchSVG from "../../assets/empty-search.svg";
 
 type AdminStudentDetailsPageProps = {};
 
@@ -101,6 +102,12 @@ const AdminStudentDetailsPage: FC<AdminStudentDetailsPageProps> = (props) => {
           </div>
         </div>
       ))}
+      {studentCourses?.length === 0 && (
+        <div className="flex mx-auto flex-col justify-center text-center my-12">
+          <h2 className="text-gray-500">No courses</h2>
+          <img src={emptySearchSVG} alt="" className="w-1/3 h-1/3 mx-auto" />
+        </div>
+      )}
     </div>
   );
 };
