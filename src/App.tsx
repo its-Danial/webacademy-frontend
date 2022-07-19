@@ -30,6 +30,7 @@ import AdminStudentDetailsPage from "./pages/admin/AdminStudentDetailsPage";
 import AdminTeacherDetailsPage from "./pages/admin/AdminTeacherDetailsPage";
 import AdminDeleteAlert from "./components/UI/AdminDeleteAlert";
 import AdminCoursePage from "./pages/admin/AdminCoursePage";
+import SearchKeywordPage from "./pages/student/SearchKeywordPage";
 
 export default function App() {
   return (
@@ -48,6 +49,8 @@ export default function App() {
           {/* Details page */}
           <Route path="/course/:courseId" element={<CourseDetailsPage />} />
           {/* Searching */}
+
+          <Route path="/search/" element={<SearchKeywordPage />} />
           <Route path="/courses/:categoryName" element={<SearchCoursesPage />} />
           <Route path="/topic/:topicName" element={<SearchTopicPage />} />
           {/* Lear about being a teacher page */}
