@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { ThreeDots } from "react-loader-spinner";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
@@ -34,6 +34,7 @@ const AdminStudentsPage: FC<AdminStudentsPageProps> = (props) => {
 
   return (
     <>
+      <Outlet />
       <AdminSearchHeader
         searchKeyWord={searchKeyWord}
         onSearchFieldChange={onSearchFieldChangeHandler}

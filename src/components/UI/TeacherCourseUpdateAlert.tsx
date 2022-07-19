@@ -12,7 +12,7 @@ type TeacherCourseUpdateAlertProps = {
 
 const TeacherCourseUpdateAlert: FC<TeacherCourseUpdateAlertProps> = (props) => {
   return (
-    <Collapse in={props.showSuccessAlert}>
+    <Collapse in={true}>
       <Alert
         severity={props.variant === "add" ? "success" : "info"}
         action={

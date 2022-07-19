@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import AdminUserDetailsHeader from "../../components/UI/AdminUserDetailsHeader";
 import { courseType } from "../../model/course";
@@ -13,11 +13,14 @@ import {
 import { getTeacherByTeacherId } from "../../network/api/teacher";
 
 import AdminTeacherDetailsCourseCard from "../../components/UI/AdminTeacherDetailsCourseCard";
+import { deleteTeacherById } from "../../network/api/admin";
 
 type AdminTeacherDetailsPageProps = {};
 
 const AdminTeacherDetailsPage: FC<AdminTeacherDetailsPageProps> = (props) => {
   const { teacherId } = useParams();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { data: teacher } = useQuery<teacherType, Error>(["teacher-profile", Number(teacherId)], () =>
     getTeacherByTeacherId(Number(teacherId))
@@ -40,10 +43,21 @@ const AdminTeacherDetailsPage: FC<AdminTeacherDetailsPageProps> = (props) => {
     Error
   >(["teacher-earnings-per-course", Number(teacherId)], () => getEarningsPerCourseByTeacherId(Number(teacherId)));
 
+  const deleteUserMutation = useMutation(deleteTeacherById, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("teachers");
+    },
+  });
+
+  const onUserDeleteClickHandler = (userId: number) => {
+    deleteUserMutation.mutate(userId, { onSuccess: () => navigate("/admin/teacher/alert", { replace: true }) });
+  };
+
   return (
     <div className="py-6">
       <h1 className="font-serif text-4xl">Teacher Details</h1>
       <AdminUserDetailsHeader
+        onUserDeleteClick={onUserDeleteClickHandler}
         userId={teacher ? teacher.teacherId : undefined}
         avatarPictureUrl={teacher?.avatarPictureUrl}
         email={teacher?.email}

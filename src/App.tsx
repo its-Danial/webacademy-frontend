@@ -28,6 +28,7 @@ import AdminStudentsPage from "./pages/admin/AdminStudentsPage";
 import AdminTeacherPage from "./pages/admin/AdminTeacherPage";
 import AdminStudentDetailsPage from "./pages/admin/AdminStudentDetailsPage";
 import AdminTeacherDetailsPage from "./pages/admin/AdminTeacherDetailsPage";
+import AdminDeleteAlert from "./components/UI/AdminDeleteAlert";
 
 export default function App() {
   return (
@@ -72,9 +73,13 @@ export default function App() {
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
           <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-          <Route path="/admin/student" element={<AdminStudentsPage />} />
+          <Route path="/admin/student" element={<AdminStudentsPage />}>
+            <Route path="alert" element={<AdminDeleteAlert />} />
+          </Route>
           <Route path="/admin/student/details/:studentId" element={<AdminStudentDetailsPage />} />
-          <Route path="/admin/teacher" element={<AdminTeacherPage />} />
+          <Route path="/admin/teacher" element={<AdminTeacherPage />}>
+            <Route path="alert" element={<AdminDeleteAlert />} />
+          </Route>
           <Route path="/admin/teacher/details/:teacherId" element={<AdminTeacherDetailsPage />} />
           <Route path="/admin/courses" element={<h1>course</h1>} />
         </Route>
