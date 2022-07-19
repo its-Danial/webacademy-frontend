@@ -23,8 +23,6 @@ const AdminTeacherPage: FC<AdminTeacherPageProps> = (props) => {
     searchTeacherByEmailKeyWord(searchKeyWord)
   );
 
-  console.log(searchedTeacher);
-
   const onUserCardClickHandler = (userId: number) => {
     navigate(`/admin/teacher/details/${userId}`);
   };

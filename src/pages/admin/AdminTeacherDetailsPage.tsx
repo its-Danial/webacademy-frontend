@@ -6,6 +6,7 @@ import AdminUserDetailsHeader from "../../components/UI/AdminUserDetailsHeader";
 import { courseType } from "../../model/course";
 import { teacherType } from "../../model/teacher";
 import {
+  deleteCourseByCourseId,
   getEarningsPerCourseByTeacherId,
   getTeacherCoursesByTeacherId,
   getTotalEarningForCourseByTeacherId,
@@ -26,9 +27,8 @@ const AdminTeacherDetailsPage: FC<AdminTeacherDetailsPageProps> = (props) => {
     getTeacherByTeacherId(Number(teacherId))
   );
 
-  const { data: teacherCourses, isLoading } = useQuery<courseType[], Error>(
-    ["teacher-courses", Number(teacherId)],
-    () => getTeacherCoursesByTeacherId(Number(teacherId))
+  const { data: teacherCourses } = useQuery<courseType[], Error>(["teacher-courses", Number(teacherId)], () =>
+    getTeacherCoursesByTeacherId(Number(teacherId))
   );
 
   const { data: teacherTotalEarning } = useQuery<number, Error>(["teacher-total-earning", Number(teacherId)], () =>
@@ -49,8 +49,23 @@ const AdminTeacherDetailsPage: FC<AdminTeacherDetailsPageProps> = (props) => {
     },
   });
 
+  const deleteCourseMutation = useMutation(deleteCourseByCourseId, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["teacher-courses", Number(teacherId)]);
+    },
+  });
+
+  // Bug: this does not work now, problem from backend
   const onUserDeleteClickHandler = (userId: number) => {
     deleteUserMutation.mutate(userId, { onSuccess: () => navigate("/admin/teacher/alert", { replace: true }) });
+  };
+
+  const onDeleteTeacherCourseHandler = (courseId: number) => {
+    // BUG: this does not work now, problem from backend
+    deleteCourseMutation.mutate({
+      teacherId: Number(teacherId),
+      courseId: Number(courseId),
+    });
   };
 
   return (
@@ -76,11 +91,13 @@ const AdminTeacherDetailsPage: FC<AdminTeacherDetailsPageProps> = (props) => {
       {teacherCourses?.map((course) => (
         <AdminTeacherDetailsCourseCard
           key={uuidv4()}
+          courseId={course.courseId}
           img={course.courseInformation.coverImageUrl}
           title={course.title}
           createdAt={course.createdAt}
           rating={course.courseRating}
           courseEarnings={teacherEarningPerCourseList?.find((element) => element.courseId === course.courseId)}
+          onDeleteClick={onDeleteTeacherCourseHandler}
         />
       ))}
     </div>
