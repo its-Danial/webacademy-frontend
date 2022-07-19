@@ -36,6 +36,7 @@ const AdminStudentsPage: FC<AdminStudentsPageProps> = (props) => {
     <>
       <Outlet />
       <AdminSearchHeader
+        placeholder="Search by email"
         searchKeyWord={searchKeyWord}
         onSearchFieldChange={onSearchFieldChangeHandler}
         title="All Students"

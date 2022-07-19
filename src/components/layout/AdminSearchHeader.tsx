@@ -3,6 +3,7 @@ import { FC } from "react";
 type AdminSearchHeaderProps = {
   title: string;
   searchKeyWord: string;
+  placeholder: string;
   onSearchFieldChange: (newKeyWord: string) => void;
 };
 
@@ -23,7 +24,7 @@ const AdminSearchHeader: FC<AdminSearchHeaderProps> = (props) => {
           type="search"
           id="search"
           className="w-full p-2.5 text-sm text-gray-900 bg-gray-50 border-gray-400"
-          placeholder="Search by email"
+          placeholder={props.placeholder}
           required
         />
         <button

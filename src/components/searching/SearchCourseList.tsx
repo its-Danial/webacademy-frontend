@@ -41,10 +41,12 @@ const SearchCourseList: FC<SearchCourseListProps> = (props) => {
           <span className="text-amber-600 mr-1 font-bold">{props.course?.courseRating}</span>
           <Rating value={props.course?.courseRating} precision={0.5} size="small" readOnly />
         </div>
-        <p className="text-xs font-normal text-gray-700 dark:text-gray-400">2.5 total hours - 84 lectures</p>
+        <p className="text-xs font-normal text-gray-700 dark:text-gray-400">
+          {props.course?.courseInformation.totalDuration} total hours - lectures
+        </p>
       </div>
 
-      <h5 className="absolute right-2 top-1 text-xl dark:text-gray-100 text-violet-600">
+      <h5 className="absolute right-5 top-2 text-xl dark:text-gray-100 text-violet-600">
         ${props.course?.courseInformation.price}
       </h5>
     </div>

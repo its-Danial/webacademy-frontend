@@ -34,6 +34,7 @@ const AdminTeacherPage: FC<AdminTeacherPageProps> = (props) => {
   return (
     <>
       <AdminSearchHeader
+        placeholder="Search by email"
         onSearchFieldChange={onSearchFieldChangeHandler}
         searchKeyWord={searchKeyWord}
         title="All Teachers"
