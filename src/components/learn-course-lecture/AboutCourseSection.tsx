@@ -19,7 +19,6 @@ const AboutCourseSection: FC<AboutCourseSectionProps> = (props) => {
         <div className="basis-1/3">By the numbers</div>
         <div className="basis-1/3">
           <div>Skill level: Beginner Level</div>
-          <div>Students: 281347</div>
           <div>Languages: English</div>
           <div>Captions: Yes</div>
         </div>

@@ -14,6 +14,8 @@ import { lectureType } from "../../model/lecture";
 import { shoppingCartType } from "../../model/shoppingCart";
 import { getStudentCoursesByStudentId } from "../../network/api/course";
 import { getCartByStudentId, addCourseToCart } from "../../network/api/shoppingCart";
+import { progressType } from "../../model/studentProgress";
+import { getSingleCourseProgress, likeStudentCourse, unlikeStudentCourse } from "../../network/api/studentProgress";
 
 type CourseDetailsPageProps = {};
 
@@ -21,6 +23,9 @@ const CourseDetailsPage: FC<CourseDetailsPageProps> = (props) => {
   const { courseId } = useParams();
   const [headerDisplayButton, setHeaderDisplayButton] = useState<string>("add-to-cart");
   const [showLoginAlter, setShowLoginAlter] = useState<boolean>(false);
+  const [showPurchaseAlter, setShowPurchaseAlter] = useState<boolean>(false);
+
+  const [studentHasLikedCourse, setStudentHasLikedCourse] = useState(false);
   const queryClient = useQueryClient();
   const authUserId: number = useSelector((state: any) => state.auth.id);
 
@@ -47,6 +52,13 @@ const CourseDetailsPage: FC<CourseDetailsPageProps> = (props) => {
     { enabled: !!authUserId }
   );
 
+  // fetch student progress for the current course
+  const { data: studentSingleCourseProgress } = useQuery<progressType, Error>(
+    ["student-course-progress", authUserId],
+    () => getSingleCourseProgress(authUserId, Number(courseId)),
+    { enabled: !!authUserId }
+  );
+
   useEffect(() => {
     // too see if student already owns the course
     studentCourses?.forEach((course) => {
@@ -62,12 +74,33 @@ const CourseDetailsPage: FC<CourseDetailsPageProps> = (props) => {
     });
   }, [studentCourses, cartItems, courseId]);
 
+  //to check if the student has liked the course or not
+  useEffect(() => {
+    if (!!authUserId && studentSingleCourseProgress) {
+      setStudentHasLikedCourse(studentSingleCourseProgress.liked);
+    } else {
+      setStudentHasLikedCourse(false);
+    }
+  }, [studentSingleCourseProgress, authUserId]);
+
+  const likeCourseMutation = useMutation(likeStudentCourse, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["student-course-progress", authUserId]);
+    },
+  });
+  const unlikeCourseMutation = useMutation(unlikeStudentCourse, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["student-course-progress", authUserId]);
+    },
+  });
+
   // Note: send mutation request to add course to students shoppingcart
   const addCourseToCartMutation = useMutation(addCourseToCart, {
     onSuccess: () => {
       queryClient.invalidateQueries(["cart-items", authUserId]);
     },
   });
+
   const onAddToCartClickHandler = () => {
     if (!!authUserId) {
       setShowLoginAlter(false);
@@ -80,14 +113,39 @@ const CourseDetailsPage: FC<CourseDetailsPageProps> = (props) => {
     }
   };
 
+  const onLikedClickHandler = () => {
+    if (!!authUserId) {
+      if (studentSingleCourseProgress && headerDisplayButton === "go-to-course") {
+        if (studentSingleCourseProgress.liked) {
+          unlikeCourseMutation.mutate(
+            { studentId: authUserId, courseId: Number(courseId) },
+            { onSuccess: () => setStudentHasLikedCourse(false) }
+          );
+        } else {
+          likeCourseMutation.mutate(
+            { studentId: authUserId, courseId: Number(courseId) },
+            { onSuccess: () => setStudentHasLikedCourse(true) }
+          );
+        }
+      } else {
+        setShowPurchaseAlter(true);
+      }
+    } else {
+      setShowLoginAlter(true);
+    }
+  };
+
   return (
     <>
       <CourseInfoHeader
         authUserId={authUserId}
+        studentHasLikedCourse={studentHasLikedCourse}
         firstLectureId={lectures?.at(0)?.courseLectureId}
         showLoginAlter={showLoginAlter}
+        showPurchaseAlter={showPurchaseAlter}
         mutationIsLoading={addCourseToCartMutation.isLoading}
         onAddToCartClick={onAddToCartClickHandler}
+        onLikeClick={onLikedClickHandler}
         headerButtonType={headerDisplayButton}
         isLoading={isLoading}
         course={course}

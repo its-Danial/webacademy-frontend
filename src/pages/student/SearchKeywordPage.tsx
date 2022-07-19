@@ -1,6 +1,6 @@
 import { Button, Divider, Pagination } from "@mui/material";
 import { FC, Fragment, useEffect, useState } from "react";
-import { useSearchParams, useParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import MainContainer from "../../components/layout/MainContainer";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { ThreeDots } from "react-loader-spinner";
