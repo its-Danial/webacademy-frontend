@@ -1,22 +1,39 @@
 import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import { CssBaseline, Box, Toolbar, List, Typography, Divider, IconButton, Container, Link } from "@mui/material";
+import {
+  CssBaseline,
+  Box,
+  Toolbar,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  Container,
+  Link,
+  Tooltip,
+} from "@mui/material";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import { mainListItems } from "../admin-dashboard/listItems";
+import logo from "../../assets/companyLogo.png";
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
 function DashboardContent() {
+  const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const onLogoClickHandler = () => {
+    navigate("/");
   };
 
   return (
@@ -45,6 +62,14 @@ function DashboardContent() {
             <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
               Admin platform
             </Typography>
+            <Tooltip title="Navigate to main platform">
+              <img
+                onClick={onLogoClickHandler}
+                className="w-10 cursor-pointer hover:bg-slate-200 rounded-full p-1 dark:hover:bg-slate-700"
+                src={logo}
+                alt="company logo"
+              />
+            </Tooltip>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -69,8 +94,6 @@ function DashboardContent() {
         <Box
           component="main"
           sx={{
-            // backgroundColor: (theme) =>
-            //   theme.palette.mode === "light" ? theme.palette.grey[100] : theme.palette.grey[900],
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",
