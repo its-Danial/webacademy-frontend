@@ -5,6 +5,8 @@ import notfoundSVG from "../../assets/not-found-svg.svg";
 type AdminTeacherDetailsCourseCardProps = {
   img: string | undefined;
   title: string | undefined;
+  courseId: number;
+  onDeleteClick: (courseId: number) => void;
   createdAt: string | undefined;
   rating: number;
   courseEarnings:
@@ -16,6 +18,9 @@ type AdminTeacherDetailsCourseCardProps = {
 };
 
 const AdminTeacherDetailsCourseCard: FC<AdminTeacherDetailsCourseCardProps> = (props) => {
+  const onDeleteClickHandler = () => {
+    props.onDeleteClick(props.courseId);
+  };
   return (
     <div className="group bg-white hover:bg-gray-100 flex flex-row justify-between order-1 border-solid shadow-3xl border-gray-200 h-fit mt-3">
       <div className="flex flex-row">
@@ -52,6 +57,7 @@ const AdminTeacherDetailsCourseCard: FC<AdminTeacherDetailsCourseCardProps> = (p
           </div>
         </div>
         <Button
+          onClick={onDeleteClickHandler}
           disableElevation
           variant="text"
           className="invisible group-hover:visible basis-1/4  hover:bg-red-100 text-red-500 cursor-pointer normal-case py-2"

@@ -8,7 +8,7 @@ const PurchasedAlert: FC<PurchasedAlertProps> = (props) => {
   const navigate = useNavigate();
 
   const onClickHandler = () => {
-    navigate("/");
+    navigate("/", { replace: true });
   };
 
   return (

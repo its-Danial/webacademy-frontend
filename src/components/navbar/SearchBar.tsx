@@ -1,7 +1,22 @@
 import { FC } from "react";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+
 type SearchBarProps = {};
 
 const SearchBar: FC<SearchBarProps> = (props) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const onSearchKeywordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (pathname !== "/search") {
+      navigate("/search");
+    } else {
+      setSearchParams({ title: event.target.value });
+    }
+  };
+
   return (
     <form className="sm:w-6/12 w-full sm:ml-0 ml-2">
       <div className="relative">
@@ -23,6 +38,7 @@ const SearchBar: FC<SearchBarProps> = (props) => {
         </div>
         {/* TODO: will make a fetch request to for search input*/}
         <input
+          onChange={onSearchKeywordHandler}
           type="search"
           className="block p-3 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border
            border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700

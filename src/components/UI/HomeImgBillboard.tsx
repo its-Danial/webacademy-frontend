@@ -2,6 +2,7 @@ import { FC, useRef } from "react";
 import billboardImgGuy from "../../assets/billboard-guy.jpg";
 import billboardImgGirl from "../../assets/billboard-girl.jpeg";
 import billboardImgGirl2 from "../../assets/billboard-girl2.jpg";
+import billboardImgGirl3 from "../../assets/billboard-girl3.jpg";
 
 import Carousel from "react-elastic-carousel";
 import { v4 as uuidv4 } from "uuid";
@@ -25,6 +26,11 @@ const HomeImgBillboard: FC<HomeImgBillboardProps> = (props) => {
       title: "Learning that gets you",
       subTitle: "Skills for your present (and your future). Get started with us.",
     },
+    {
+      img: billboardImgGirl3,
+      title: "Log in for savings",
+      subTitle: "We have special savings for logged-in visitors. See how much you can save.",
+    },
   ];
 
   const carouselRef = useRef(null);
@@ -38,34 +44,19 @@ const HomeImgBillboard: FC<HomeImgBillboardProps> = (props) => {
         pagination={false}
         enableAutoPlay={true}
         showArrows={false}
-        autoPlaySpeed={3000}
+        autoPlaySpeed={3500}
         isRTL={false}
         transitionMs={900}
         itemsToShow={1}
         onNextEnd={({ index }) => {
-          if (index === 2) {
+          if (index === 3) {
             clearTimeout(resetTimeout);
             resetTimeout = setTimeout(() => {
               // @ts-ignore
               carouselRef?.current?.goTo(0);
-            }, 3000);
+            }, 3500);
           }
         }}
-        // onNextEnd={({ index }) => {
-        //   clearTimeout(resetTimeout);
-        //   if (index + 1 === HomeImgBillboard.length) {
-        //     // @ts-ignore
-        //     if (carouselRef?.current?.goTo) {
-        //       resetTimeout = setTimeout(() => {
-        //         // @ts-ignore
-        //         if (carouselRef?.current?.goTo) {
-        //           // @ts-ignore
-        //           carouselRef.current.goTo(0);
-        //         }
-        //       }, 3000);
-        //     }
-        //   }
-        // }}
       >
         {billboardItems.map((item) => (
           <div className="relative" key={uuidv4()}>

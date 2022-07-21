@@ -3,14 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, IconButton, Box, Modal, Skeleton, Avatar } from "@mui/material";
 import ReactPlayer from "react-player/youtube";
 import notfoundSVG from "../../assets/not-found-svg.svg";
-import {
-  PlayArrow,
-  FavoriteBorder,
-  Star,
-  AddShoppingCart,
-  ShoppingCartCheckout,
-  OndemandVideo,
-} from "@mui/icons-material";
+import { PlayArrow, Star, AddShoppingCart, ShoppingCartCheckout, OndemandVideo, Favorite } from "@mui/icons-material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { courseType } from "../../model/course";
 
@@ -20,9 +13,12 @@ type CourseInfoHeaderProps = {
   mutationIsLoading: boolean;
   headerButtonType: string;
   showLoginAlter: boolean;
+  showPurchaseAlter: boolean;
   authUserId: number;
   firstLectureId: number | undefined;
+  studentHasLikedCourse: boolean | undefined;
   onAddToCartClick: () => void;
+  onLikeClick: () => void;
 };
 
 const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
@@ -41,6 +37,10 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
   };
   const onGoToCourseClickHandler = () => {
     navigate(`/course/${props.course?.courseId}/learn/lecture/`);
+  };
+
+  const onLikedClickHandler = () => {
+    props.onLikeClick();
   };
 
   return (
@@ -106,12 +106,15 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
                 </div>
                 <div className="absolute right-0">
                   <IconButton
-                    className="border-solid border-2 border-gray-200 "
+                    onClick={onLikedClickHandler}
+                    className={`border-solid border-2 hover:bg-gray-600 ${
+                      props.studentHasLikedCourse ? "border-red-500" : "border-gray-200"
+                    }`}
                     color="primary"
                     aria-label="heart"
                     size="small"
                   >
-                    <FavoriteBorder className="text-gray-200" />
+                    <Favorite className={`${props.studentHasLikedCourse ? "text-red-500" : "text-gray-200"}`} />
                   </IconButton>
                 </div>
               </div>
@@ -177,6 +180,11 @@ const CourseInfoHeader: FC<CourseInfoHeaderProps> = (props) => {
             {props.showLoginAlter && (
               <div className="flex justify-end">
                 <p className="text-red-500 text-xs mt-2">Please register or login to an existing account</p>
+              </div>
+            )}
+            {props.showPurchaseAlter && (
+              <div className="flex justify-end">
+                <p className="text-red-500 text-xs mt-2">Please purchase the course first</p>
               </div>
             )}
           </div>

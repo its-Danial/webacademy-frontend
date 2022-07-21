@@ -1,31 +1,34 @@
 import { FC } from "react";
-import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import AdminUserDetailsHeader from "../../components/UI/AdminUserDetailsHeader";
 import { courseType } from "../../model/course";
 import { teacherType } from "../../model/teacher";
 import {
+  deleteCourseByCourseId,
   getEarningsPerCourseByTeacherId,
   getTeacherCoursesByTeacherId,
   getTotalEarningForCourseByTeacherId,
 } from "../../network/api/course";
 import { getTeacherByTeacherId } from "../../network/api/teacher";
-
 import AdminTeacherDetailsCourseCard from "../../components/UI/AdminTeacherDetailsCourseCard";
+import { deleteTeacherById } from "../../network/api/admin";
+import emptySearchSVG from "../../assets/empty-search.svg";
 
 type AdminTeacherDetailsPageProps = {};
 
 const AdminTeacherDetailsPage: FC<AdminTeacherDetailsPageProps> = (props) => {
   const { teacherId } = useParams();
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { data: teacher } = useQuery<teacherType, Error>(["teacher-profile", Number(teacherId)], () =>
     getTeacherByTeacherId(Number(teacherId))
   );
 
-  const { data: teacherCourses, isLoading } = useQuery<courseType[], Error>(
-    ["teacher-courses", Number(teacherId)],
-    () => getTeacherCoursesByTeacherId(Number(teacherId))
+  const { data: teacherCourses } = useQuery<courseType[], Error>(["teacher-courses", Number(teacherId)], () =>
+    getTeacherCoursesByTeacherId(Number(teacherId))
   );
 
   const { data: teacherTotalEarning } = useQuery<number, Error>(["teacher-total-earning", Number(teacherId)], () =>
@@ -40,10 +43,35 @@ const AdminTeacherDetailsPage: FC<AdminTeacherDetailsPageProps> = (props) => {
     Error
   >(["teacher-earnings-per-course", Number(teacherId)], () => getEarningsPerCourseByTeacherId(Number(teacherId)));
 
+  const deleteUserMutation = useMutation(deleteTeacherById, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("teachers");
+    },
+  });
+
+  const deleteCourseMutation = useMutation(deleteCourseByCourseId, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["teacher-courses", Number(teacherId)]);
+      queryClient.invalidateQueries(["teacher-total-earning", Number(teacherId)]);
+    },
+  });
+
+  const onUserDeleteClickHandler = (userId: number) => {
+    deleteUserMutation.mutate(userId, { onSuccess: () => navigate("/admin/teacher/alert", { replace: true }) });
+  };
+
+  const onDeleteTeacherCourseHandler = (courseId: number) => {
+    deleteCourseMutation.mutate({
+      teacherId: Number(teacherId),
+      courseId: Number(courseId),
+    });
+  };
+
   return (
     <div className="py-6">
       <h1 className="font-serif text-4xl">Teacher Details</h1>
       <AdminUserDetailsHeader
+        onUserDeleteClick={onUserDeleteClickHandler}
         userId={teacher ? teacher.teacherId : undefined}
         avatarPictureUrl={teacher?.avatarPictureUrl}
         email={teacher?.email}
@@ -62,13 +90,21 @@ const AdminTeacherDetailsPage: FC<AdminTeacherDetailsPageProps> = (props) => {
       {teacherCourses?.map((course) => (
         <AdminTeacherDetailsCourseCard
           key={uuidv4()}
+          courseId={course.courseId}
           img={course.courseInformation.coverImageUrl}
           title={course.title}
           createdAt={course.createdAt}
           rating={course.courseRating}
           courseEarnings={teacherEarningPerCourseList?.find((element) => element.courseId === course.courseId)}
+          onDeleteClick={onDeleteTeacherCourseHandler}
         />
       ))}
+      {teacherCourses?.length === 0 && (
+        <div className="flex mx-auto flex-col justify-center text-center my-12">
+          <h2 className="text-gray-500">No courses</h2>
+          <img src={emptySearchSVG} alt="" className="w-1/3 h-1/3 mx-auto" />
+        </div>
+      )}
     </div>
   );
 };

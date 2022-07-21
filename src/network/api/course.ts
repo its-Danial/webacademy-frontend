@@ -101,3 +101,16 @@ export const getEarningsPerCourseByTeacherId = async (
   const response = await axiosClient.get(`/course/get-total-earning-per-course/${teacherId}`);
   return response.data;
 };
+
+export const getCoursesByTitleSearchKey = async (searchKeyTitle: string): Promise<courseType[]> => {
+  const response = await axiosClient.get(`course/search?title=${searchKeyTitle}`);
+  return response.data;
+};
+
+export const getCoursesByTitleSearchKeyAndPage = async (queryParams: {
+  title: string;
+  page: number;
+}): Promise<courseType[]> => {
+  const response = await axiosClient.get(`/course/search?title=${queryParams.title}&page=${queryParams.page}`);
+  return response.data;
+};

@@ -7,9 +7,14 @@ type AdminUserDetailsHeaderProps = {
   email: string | undefined;
   username: string | undefined;
   avatarPictureUrl: string | undefined;
+  onUserDeleteClick: (userId: number) => void;
 };
 
 const AdminUserDetailsHeader: FC<AdminUserDetailsHeaderProps> = (props) => {
+  const onDeleteClickHandler = () => {
+    props.onUserDeleteClick(Number(props.userId));
+  };
+
   return (
     <div className="flex flex-row justify-between mt-12 items-center">
       <div className="flex flex-row">
@@ -32,7 +37,12 @@ const AdminUserDetailsHeader: FC<AdminUserDetailsHeaderProps> = (props) => {
           </div>
         </div>
       </div>
-      <Button className="px-5 py-3  bg-red-700  hover:bg-red-500" disableElevation variant="contained">
+      <Button
+        onClick={onDeleteClickHandler}
+        className="px-5 py-3  bg-red-700  hover:bg-red-500"
+        disableElevation
+        variant="contained"
+      >
         Delete user
       </Button>
     </div>

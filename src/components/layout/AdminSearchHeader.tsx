@@ -2,18 +2,29 @@ import { FC } from "react";
 
 type AdminSearchHeaderProps = {
   title: string;
+  searchKeyWord: string;
+  placeholder: string;
+  onSearchFieldChange: (newKeyWord: string) => void;
 };
 
 const AdminSearchHeader: FC<AdminSearchHeaderProps> = (props) => {
+  const onTextChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.onSearchFieldChange(event.target.value);
+    // console.log(event.target.value);
+  };
+
   return (
     <div className="flex py-6 flex-row justify-between">
       <h1 className="font-serif text-4xl">{props.title}</h1>
       <div className="flex flex-row basis-1/4 relative w-full justify-end items-center">
         <input
+          value={props.searchKeyWord}
+          onChange={onTextChangeHandler}
+          // name="search"
           type="search"
           id="search"
           className="w-full p-2.5 text-sm text-gray-900 bg-gray-50 border-gray-400"
-          placeholder="Search by email"
+          placeholder={props.placeholder}
           required
         />
         <button

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { AppBar, Toolbar, Typography, Stack } from "@mui/material";
 import logo from "../../assets/companyLogo.png";
 import SearchBar from "../navbar/SearchBar";
