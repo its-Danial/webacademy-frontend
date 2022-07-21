@@ -49,7 +49,7 @@ const LogInForm: FC<LogInFormProps> = (props) => {
         />
         {props.isError && (
           <div className="flex justify-center">
-            <p className="text-red-500 mt-4 text-sm">Invalid Username or password, try again</p>
+            <p className="text-red-500 mt-4 text-sm">Invalid email or password, try again</p>
           </div>
         )}
         <button

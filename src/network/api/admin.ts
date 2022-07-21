@@ -29,3 +29,8 @@ export const deleteStudentsCourse = async (pathVariable: { studentId: number; co
   );
   return response.data;
 };
+
+export const getPlatformEarnings = async (): Promise<number> => {
+  const response = await axiosClient.get("/course/get-total-earned-in-platform");
+  return response.data;
+};

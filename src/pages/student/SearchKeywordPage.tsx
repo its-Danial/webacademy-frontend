@@ -15,6 +15,7 @@ type SearchKeywordPageProps = {};
 
 const SearchKeywordPage: FC<SearchKeywordPageProps> = (props) => {
   const navigate = useNavigate();
+  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchPageNumber, setSearchPageNumber] = useState(1);
 

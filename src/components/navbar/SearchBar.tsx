@@ -6,7 +6,7 @@ type SearchBarProps = {};
 const SearchBar: FC<SearchBarProps> = (props) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
+  // eslint-disable-next-line
   const [searchParams, setSearchParams] = useSearchParams();
 
   const onSearchKeywordHandler = (event: React.ChangeEvent<HTMLInputElement>) => {

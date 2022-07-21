@@ -58,7 +58,7 @@ const AddLectureCard: FC<AddLectureCardProps> = (props) => {
             </div>
             <div className="flex flex-col">
               <label htmlFor="lectureDuration" className="text-base font-bold">
-                Lecture duration
+                Lecture duration <span className="text-xs text-gray-400">hh:mm:ss</span>
               </label>
               <input
                 type="text"

@@ -4,6 +4,7 @@ import { accountRegisterInfo } from "../../model/accountRegisterInfo";
 
 type SignUpFormProps = {
   onSignUpSubmit: (userDetails: accountRegisterInfo) => void;
+  isError: boolean;
 };
 
 const SignUpForm: FC<SignUpFormProps> = (props) => {
@@ -68,6 +69,11 @@ const SignUpForm: FC<SignUpFormProps> = (props) => {
           ref={passwordRef}
           required
         />
+        {props.isError && (
+          <div className="flex justify-center">
+            <p className="text-red-500 mt-4 text-sm">Username or email already taken, please try again</p>
+          </div>
+        )}
         <button
           type="submit"
           className="mt-4 px-4 py-3  leading-6 text-base rounded-md border border-transparent  text-slate-100

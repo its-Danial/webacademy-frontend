@@ -19,10 +19,10 @@ const LogInPage: FC<LogInPageProps> = (props) => {
   const onLoginSubmitHandler = async (credentials: logInCredentials) => {
     try {
       const userData = await loginStudent(credentials);
+      setIsError(false);
       dispatch(authSliceActions.setUserId(userData.studentId));
       dispatch(authSliceActions.setUser(userData));
       dispatch(authSliceActions.setSignIn());
-      setIsError(false);
       navigate("/");
     } catch (error) {
       setIsError(true);

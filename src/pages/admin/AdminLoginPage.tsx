@@ -1,12 +1,8 @@
 import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -30,6 +26,8 @@ function Copyright(props: any) {
 export default function AdminLogIn() {
   const navigate = useNavigate();
 
+  const [showError, setShowError] = React.useState(false);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -37,6 +35,17 @@ export default function AdminLogIn() {
       username: data.get("username"),
       password: data.get("password"),
     });
+    const credentials = {
+      username: data.get("username"),
+      password: data.get("password"),
+    };
+
+    if (credentials.username === "admin" && credentials.password === "admin") {
+      navigate("/admin");
+      setShowError(false);
+    } else {
+      setShowError(true);
+    }
   };
 
   return (
@@ -78,6 +87,7 @@ export default function AdminLogIn() {
               name="username"
               autoComplete="username"
               autoFocus
+              error={showError}
             />
             <TextField
               sx={textFiledStyle}
@@ -89,6 +99,7 @@ export default function AdminLogIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={showError}
             />
             <Button
               className="hover:bg-gray-700"

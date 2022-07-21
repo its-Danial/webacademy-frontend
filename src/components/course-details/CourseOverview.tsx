@@ -31,8 +31,6 @@ const CourseOverview: FC<CourseOverviewProps> = (props) => {
         <div className="flex flex-row justify-between my-5">
           <div className="flex flex-col basis-1/2">
             <div className="flex flex-col">
-              {/* TODO: This will need to be mapped out */}
-
               {whatToLearn?.map((item) => (
                 <CourseOverViewItem key={item} title={item} />
               ))}
@@ -54,7 +52,7 @@ const CourseOverview: FC<CourseOverviewProps> = (props) => {
                 <div className="flex flex-row mb-3">
                   <OndemandVideo className="w-12 h-10" fontSize="large" />
                   <div className="flex items-center ml-4">
-                    <h4 className="text-base">63.5 hours of video</h4>
+                    <h4 className="text-base">{props.course?.courseInformation.totalDuration} hours of video</h4>
                   </div>
                 </div>
                 <div className="flex flex-row">
