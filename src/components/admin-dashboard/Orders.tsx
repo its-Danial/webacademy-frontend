@@ -7,16 +7,16 @@ import TableRow from "@mui/material/TableRow";
 import Title from "./Title";
 
 // Generate Order Data
-function createData(id: number, date: string, name: string, shipTo: string, paymentMethod: string, amount: number) {
-  return { id, date, name, shipTo, paymentMethod, amount };
+function createData(id: number, date: string, name: string, paymentMethod: string, amount: number) {
+  return { id, date, name, paymentMethod, amount };
 }
 
 const rows = [
-  createData(0, "16 Mar, 2019", "Elvis Presley", "Tupelo, MS", "VISA ⠀•••• 3719", 20.0),
-  createData(1, "16 Mar, 2019", "Paul McCartney", "London, UK", "VISA ⠀•••• 2574", 99.0),
-  createData(2, "16 Mar, 2019", "Tom Scholz", "Boston, MA", "MC ⠀•••• 1253", 50.0),
-  createData(3, "16 Mar, 2019", "Michael Jackson", "Gary, IN", "AMEX ⠀•••• 2000", 100.0),
-  createData(4, "15 Mar, 2019", "Bruce Springsteen", "Long Branch, NJ", "VISA ⠀•••• 5919", 30.0),
+  createData(0, "21 Jul, 2022", "Malik Danial", "VISA ⠀•••• 3719", 50.0),
+  createData(1, "18 Jul, 2022", "Paul McCartney", "VISA ⠀•••• 2574", 99.0),
+  createData(2, "17 Jul, 2022", "Tom Scholz", "MC ⠀•••• 1253", 50.0),
+  createData(3, "17 Jul, 2022", "Michael Jackson", "AMEX ⠀•••• 2000", 100.0),
+  createData(4, "16 Jul, 2022", "Bruce Springsteen", "VISA ⠀•••• 5919", 30.0),
 ];
 
 export default function Orders() {
