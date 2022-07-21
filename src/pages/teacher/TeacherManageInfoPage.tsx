@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { LoadingButton } from "@mui/lab";
-import { useQuery, useMutation, useQueryClient } from "react-query";
+import { useQuery, useMutation } from "react-query";
 import { useParams } from "react-router-dom";
 import { newCourseInformation } from "../../model/course";
 import { getCourseById, updateCourseInformationByCourseId } from "../../network/api/course";
@@ -11,7 +11,6 @@ type TeacherManageInfoPageProps = {};
 
 const TeacherManageInfoPage: FC<TeacherManageInfoPageProps> = (props) => {
   const { courseId } = useParams();
-  const queryClient = useQueryClient();
 
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [courseInfoData, setCourseInfoData] = useState<newCourseInformation>({
@@ -144,7 +143,7 @@ const TeacherManageInfoPage: FC<TeacherManageInfoPageProps> = (props) => {
           <div className="basis-1/3 flex flex-row">
             <div>
               <label htmlFor="price" className="text-base font-bold">
-                Course price <span className="text-xs text-gray-400 ml-3">American dollar</span>
+                Course price <span className="text-xs text-gray-400 ml-2">American dollar</span>
               </label>
               <input
                 value={courseInfoData.price}
@@ -157,9 +156,11 @@ const TeacherManageInfoPage: FC<TeacherManageInfoPageProps> = (props) => {
               />
             </div>
             <div className="ml-10">
-              <label htmlFor="totalDuration" className="text-base font-bold">
-                Course duration <span className="text-xs text-gray-400 ml-3">Total duration</span>
-              </label>
+              <div className="w-full">
+                <label htmlFor="totalDuration" className="text-base font-bold w-full">
+                  Course duration <span className="text-xs text-gray-400 ml-2">Total duration hours</span>
+                </label>
+              </div>
               <input
                 value={courseInfoData.totalDuration}
                 onChange={inputOnChangeHandler}

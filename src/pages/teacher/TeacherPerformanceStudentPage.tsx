@@ -32,8 +32,8 @@ const TeacherPerformanceStudentPage: FC<TeacherPerformanceStudentPageProps> = (p
             </h6>
           </div>
         ) : (
-          teachersStudents?.map((student) => (
-            <div className="flex flex-col p-10 shadow-3xl items-center h-48 w-44 mr-4 mb-4">
+          teachersStudents?.map((student, index) => (
+            <div key={index} className="flex flex-col p-10 shadow-3xl items-center h-48 w-44 mr-4 mb-4">
               <Avatar className="bg-black" alt="Name" sx={{ width: 76, height: 76 }}>
                 {student.fullName.slice(0, 2).toUpperCase()}
               </Avatar>

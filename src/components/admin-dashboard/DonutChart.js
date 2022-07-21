@@ -1,16 +1,15 @@
 import React, { PureComponent } from "react";
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-import Title from "./Title";
+import { PieChart, Pie, Legend, Cell, ResponsiveContainer } from "recharts";
+
 // Note: number of students that bought this course with these categories
 // Note: best selling courses by categories
 const data = [
   // Web dev
-  { name: "Group A", value: 19 },
+  { name: "Web dev", value: 19 },
   // programming languages
-  { name: "Group B", value: 14 },
-  //
-  { name: "Group C", value: 9 },
-  // { name: "Group D", value: 200 },
+  { name: "Languages", value: 14 },
+  // Data Sci
+  { name: "Data Science", value: 9 },
 ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
@@ -28,15 +27,19 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
+let renderLabel = function (entry) {
+  return entry.name;
+};
 export default class Example extends PureComponent {
   static demoUrl = "https://codesandbox.io/s/pie-chart-with-customized-label-dlhhj";
 
   render() {
     return (
       <React.Fragment>
-        <Title>Today</Title>
+        <h5 className="font-semibold text-base text-gray-600">Best selling courses by categories</h5>
         <ResponsiveContainer width="100%" height="100%">
           <PieChart width={400} height={400}>
+            <Legend layout="horizontal" verticalAlign="top" align="top" />
             <Pie
               data={data}
               cx="50%"
@@ -48,7 +51,7 @@ export default class Example extends PureComponent {
               dataKey="value"
             >
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell label={renderLabel} key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
           </PieChart>

@@ -1,14 +1,21 @@
 import { Grid, Paper } from "@mui/material";
 import { FC } from "react";
+import { useQuery } from "react-query";
 import BarChart from "../../components/admin-dashboard/BarChart";
 import Chart from "../../components/admin-dashboard/Chart";
-import Deposits from "../../components/admin-dashboard/Deposits";
+
 import DonutChart from "../../components/admin-dashboard/DonutChart";
 import Orders from "../../components/admin-dashboard/Orders";
+import PlatformEarnings from "../../components/admin-dashboard/PlatformEarnings";
+import { getPlatformEarnings } from "../../network/api/admin";
 
 type AdminDashboardPageProps = {};
 
 const AdminDashboardPage: FC<AdminDashboardPageProps> = (props) => {
+  const { data: platformTotalEarnings } = useQuery<number, Error>("platformTotalEarnings", getPlatformEarnings);
+
+  console.log(platformTotalEarnings);
+
   return (
     <Grid container spacing={3}>
       {/* Chart */}
@@ -38,7 +45,7 @@ const AdminDashboardPage: FC<AdminDashboardPageProps> = (props) => {
             height: 240,
           }}
         >
-          <Deposits />
+          <PlatformEarnings totalEarnings={platformTotalEarnings} />
         </Paper>
       </Grid>
 
@@ -48,13 +55,12 @@ const AdminDashboardPage: FC<AdminDashboardPageProps> = (props) => {
           aria-label="Todays activity Summary"
           title="Todays activity Summary"
           sx={{
-            p: 2,
+            p: 1,
             display: "flex",
             flexDirection: "column",
-            height: 240,
+            height: 260,
           }}
         >
-          {/* <Doughnut data={data} /> */}
           <DonutChart />
         </Paper>
       </Grid>
@@ -68,7 +74,7 @@ const AdminDashboardPage: FC<AdminDashboardPageProps> = (props) => {
             p: 2,
             display: "flex",
             flexDirection: "column",
-            height: 240,
+            height: 260,
           }}
         >
           <BarChart />

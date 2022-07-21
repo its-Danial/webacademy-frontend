@@ -24,7 +24,13 @@ const CheckoutForm: FC<CheckoutFormProps> = (props) => {
             <div className="mb-3 flex -mx-2">
               <div className="px-2">
                 <label htmlFor="type1" className="flex items-center cursor-pointer">
-                  <input type="radio" className="form-radio h-5 w-5 text-indigo-500" name="type" id="type1" checked />
+                  <input
+                    type="radio"
+                    className="form-radio h-5 w-5 text-indigo-500"
+                    name="type"
+                    id="type1"
+                    defaultChecked
+                  />
                   <img
                     src="https://leadershipmemphis.org/wp-content/uploads/2020/08/780370.png"
                     className="h-8 ml-3"
